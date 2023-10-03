@@ -5,7 +5,7 @@
 ### Projeto realizado em squad, formado pelos alunos desenvolvedores:
 - Carlos Hnerique Moreira Junior (Github - )
 - Debora Patricia Santos de Souza (Github - )
-- Rafael Zampieron (Github - )
+- Rafael Zampieron (Github - https://www.github.com/rafazamp )
 - Ricardo Werner Grosscklauss (Github - https://www.github.com/ricado-werner)
 
 #### Criação de sistema de Marketplace (E-Commerce):
