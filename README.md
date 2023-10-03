@@ -11,12 +11,11 @@
 #### Criação de sistema de Marketplace (E-Commerce):
 - Frontend - React.JS
 - Backend - Node.JS, Express, Sequelize em banco de dados PostgreSQL
+
 #### Nome do sistema: ???????
 
 ### 🔗 Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://github.com/ricardo-werner)
-
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/ricardo-werner)
+link das redes sociais dos participantes
 
 
 Status - Em Desenvolvimento
@@ -60,7 +59,7 @@ Estrutura geral do back-end do Gateway de Pagamento
 </p>
 
 ### O Desafio
-Neste projeto foi proposto criar um sistema completo, com frontend e backend,  para administrarmos um app de Marketplace(E-Commerce) de forma online, codificado em React.JS e Node.JS
+Neste projeto foi proposto criar um sistema completo, com front-end e back-end,  para administrarmos um app de Marketplace(E-Commerce) de forma online, codificado em React.JS e Node.JS
 
 ### Requisitos da Aplicação
 
@@ -90,59 +89,19 @@ Neste projeto foi proposto criar um sistema completo, com frontend e backend,  p
 | Extra                 | Pág. de cadastro de usuário.                                                       |
 | Extra                 | Pág. de FAQ                                                                        |
 
-### Back-end
-
-### Requisitos da Aplicação
-
-| Item | Descrição                                                                    |
-| ---- | ---------------------------------------------------------------------------- |
-| 1    | Ser uma API Rest desenvolvida em Node.JS com uso do Express.js.              |
-| 2    | Utilizar o banco de dados PostgreSQL.                                        |
-| 3    | Ser planejado utilizando o modelo Kanban na ferramenta Trello.               |
-| 4    | Ser versionado no GITHub, possuindo uma documentação detalhada no readme.md. |
-| 5    | Deverá ser gravado um vídeo de apreentação do sistema.                       |
-
-### Formato do Sistema
-
-| Item                                         | Descrição                                                                                            |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Carregamento de Dados Iniciais               | Deve ser utilizado como Sistema Gerenciador de BD o PostgreSQL (nome: pcsbd)                         |
-| Cadastro de Usuário                          | Serviço de cadastro de usuário com dados completos, definição de Endpoint com status                 |
-| Login do Usuário                             | Serviço para realizar o login, definição de Endpoint com status                                      |
-| Atualização dos Dados de Usuário             | Serviço para alterar/atualizar os dados do usuário, definição de Endpoint com status                 |
-| Atualização do Status do Usuário no Sistema  | Serviço para alterar/atualizar o status do usuário, definição de Endpoint com status                 |
-| Atualização de Senha do Usuário              | Serviço para alterar/atualizar a senha de determinado usuário, definição do Endpoint com status      |
-| Listagem de Usuário pelo indentificador      | Serviço de consulta de usuário pelo ID, definição de Endpoint com status                             |
-| Cadastro de Despósito                        | Serviço de cadastro de DEpósito com dados completos, definição de Endpoint com status                |
-| Atualização dos dados de Despósito           | Serviço para alterar/atualizar os dados de determinado depósito , definção de Endpoint com status    |
-| Atualização do Status do Depósito no Sistema | Serviço apra alterar/atualizar o status do depósito no sistema, definição de Endpoint com status     |
-| Listagem de Depósitos                        | Serviço de listagem de depósitos cadastrados, definição do Endpoint com status                       |
-| Listagem de Depósito pelo identificador      | Serviço de consulta de depósito pelo ID, definição de Endpoint com status                            |
-| Exclusão de Depósitos                        | Serviço para excluir um depósito pelo ID, definição de Endpoint com status                           |
-| Cadastro de Medicamentos                     | Serviço de cadastro de Medicamentos com dados completos, definição de Endpoint com status            |
-| Atualização dos dados de Medicamentos        | Serviço para alterar/atualizar os dados de determinado medicamento, definição de Endpoint com status |
-| Listagem de Medicamentos                     | Serviço de listagem de medicamentos cadastrados, definição de Endpoint com status                    |
-| Listagem de Medicamentos pelo indentificador | Serviço de listagem de medicamentos pelo ID, definição de Endpoint com status                        |
-| Exclusão de Medicamento                      | Serviço para excluir um medicamento pelo ID, definição de Endpoint com status                        |
-
 ### Plano do Projeto
 
 No desenvolvimento desta aplicação, colocamos em prática:
 
 | Item | Descrição  |
 | ---- | ---------- |
-| 1    | HTML       |
-| 2    | CSS        |
-| 3    | JavaScript |
+|  1   | HTML       |
+|  2   | CSS        |
+|  3   | JavaScript |
 | 3.1  | React.JS   |
-| 4    | Node.JS    |
-| 5    | Express.JS |
-| 6    | Sequelize  |
-| 7    | PostgreSQL |
-| 8    | Swagger    |
-| 8    | Deploy     |
-| 9    | Skills     |
-| 10   | Squad      |
+|  4   | Deploy     |
+|  5   | Skills     |
+|  6   | Squad      |
 
 ### Tecnologias utilizadas:
 
@@ -161,7 +120,7 @@ No desenvolvimento desta aplicação, colocamos em prática:
 
 Clone o projeto para a sua máquina
 ```bash
-
+git@github.com:FullStack-Itaguacu/M3P-FrontEnd-Squad2.git
 ```
 Obs: necessário configurar SSH [(veja como clicando aqui)](https://www.youtube.com/watch?v=n-H1eFSsugo)
 
