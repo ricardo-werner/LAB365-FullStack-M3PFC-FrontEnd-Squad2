@@ -1,7 +1,7 @@
 # M3P-FrontEnd-Squad2
-﻿# LAB365-FullStack-M03-ProjFinal-Marketplace
+# LAB365-FullStack-M03-ProjFinal-Marketplace
 ## Projeto Avaliativo do Módulo3
-### LAB365- FullStack - Itaguaçu
+## LAB365- FullStack - Itaguaçu
 ### Projeto realizado em squad, formado pelos alunos desenvolvedores:
 - Carlos Hnerique Moreira Junior (Github - )
 - Debora Patricia Santos de Souza (Github - )
