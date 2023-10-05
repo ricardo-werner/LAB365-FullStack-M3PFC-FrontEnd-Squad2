@@ -12,7 +12,10 @@
 - Frontend - React.JS
 - Backend - Node.JS, Express, Sequelize em banco de dados PostgreSQL
 
-#### Nome do sistema: ???????
+#### Nome do sistema: PharmaSellticos
+<p align="center">
+  <!--img width="480" src="src/assets/to_readme/logoInst.jpg"-->
+</p>
 
 ### 🔗 Links
 link das redes sociais dos participantes
