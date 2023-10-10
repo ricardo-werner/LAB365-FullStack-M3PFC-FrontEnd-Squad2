@@ -1,15 +1,11 @@
 import './App.css';
-import AppRouter from './Router';
-
 
 function App() {
 
   return (
-    <div className='App'>
-
-      <AppRouter />
-
-    </div>
+    <>
+      <h1>Hello Word!!!!!</h1>
+    </>
   )
 }
 
