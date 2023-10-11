@@ -1,20 +1,17 @@
-//import React, { useState } from 'react';
 import './App.css';
-import AppRouter from './Router';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
+//import AppRouter from './Router';
+import FinalizarCompraCard from '../src/components/FinalizarCompra/FinalizarCompraCard';
 
 
 function App() {
-  //const [count, setCount] = useState(0)
 
   return (
     <div className='App'>
-      <Box m={10}>
-        <Button />
-      </Box>
+      <div>
+        <FinalizarCompraCard />
+      </div>
 
-      <AppRouter />
+      {/*<AppRouter />*/}
 
     </div>
   )
