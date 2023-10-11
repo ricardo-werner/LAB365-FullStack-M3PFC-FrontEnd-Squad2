@@ -1,10 +1,12 @@
 import './App.css';
 
+import Medicamentos from './pages/Medicamentos/Medicamentos';
+
 function App() {
 
   return (
     <>
-      <h1>Hello Word!!!!!</h1>
+      <Medicamentos />
     </>
   )
 }
