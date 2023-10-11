@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { CartContext } from "../../contexts/carrinhoCompras";
-import Cart from "./Carrinho.jsx";
+import Cart from "../Carrinho/Carrinho.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
