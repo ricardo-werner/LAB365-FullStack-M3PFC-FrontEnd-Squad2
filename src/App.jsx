@@ -1,12 +1,12 @@
-import './App.css';
+import { Outlet, Router } from "react-router-dom";
+import "./App.css";
 
 function App() {
-
   return (
-    <>
-      <h1>Hello Word!!!!!</h1>
-    </>
-  )
+    <div className="App">
+      <Outlet />
+    </div>
+  );
 }
 
-export default App
+export default App;
