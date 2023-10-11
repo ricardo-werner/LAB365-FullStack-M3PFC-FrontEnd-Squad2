@@ -1,5 +1,4 @@
 import './App.css';
-//import AppRouter from './Router';
 import FinalizarCompraCard from '../src/components/FinalizarCompra/FinalizarCompraCard';
 
 
