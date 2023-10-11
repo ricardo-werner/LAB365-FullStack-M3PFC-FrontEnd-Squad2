@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
-import { navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -15,15 +16,28 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  const login = (email, password) => {
+  const login = async (email, senha) => {
     // <--- aqui é onde você configura o login do usuário
-    const usuarioLogado = { id: 1, nome: "Fulano" };
+    const res = await axios.post("http://localhost:3333/api/usuario/login", {
+      email,
+      senha,
+    });
+    const usuarioLogado = res.data;
+    const token = res.data.token;
     localStorage.setItem("usuario", JSON.stringify(usuarioLogado));
+    localStorage.setItem("token", token);
+
+    //Configurar token no headers do axios
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    setUser(usuarioLogado);
+    navigate("/Dashboard");
   };
   const logout = () => {
     // <--- aqui é onde você configura o logout do usuário
     setUser(null);
-    localStorage.removeItem("usuario");
+    localStorage.removeItem("usuario"); 
+    localStorage.removeItem("token");
+    axios.defaults.headers.common["Authorization"] = null;
     navigate("/");
   };
   return (

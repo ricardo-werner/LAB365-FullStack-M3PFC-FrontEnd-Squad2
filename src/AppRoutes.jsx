@@ -2,6 +2,7 @@ import { Login } from "./pages/Login";
 import { DashboardAdmin } from "./pages/Dashboard";
 import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./contexts/auth";
+import { useContext } from "react";
 
 const AppRoutes = () => {
   const Private = ({ children }) => {

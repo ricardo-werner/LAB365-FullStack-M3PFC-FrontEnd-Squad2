@@ -1,5 +1,6 @@
-import axios from "axios";
 import "./Login.css";
+import { useContext, useState } from "react";
+import { AuthContext } from "../contexts/auth";
 
 export const Login = () => {
   const { authenticated, login } = useContext(AuthContext);
@@ -10,15 +11,6 @@ export const Login = () => {
     e.preventDefault();
 
     login(email, senha);
-
-    //Configurar cabeçalho das requisições
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-
-    navigate("/Dashboard");
-
-    if (response.status === 401) {
-      alert("Login ou senha inválidos!!!!");
-    }
   };
 
   return (
