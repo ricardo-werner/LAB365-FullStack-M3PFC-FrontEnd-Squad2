@@ -1,19 +1,18 @@
 import './App.css';
-import FinalizarCompraCard from '../src/components/FinalizarCompra/FinalizarCompraCard';
-
-
-import Medicamentos from './pages/Medicamentos/Medicamentos';
+//import FinalizarCompraCard from '../src/components/FinalizarCompra/FinalizarCompraCard';
+//import Medicamentos from './pages/Medicamentos/Medicamentos';
+import AppRouter from './Router';
 
 function App() {
 
   return (
     <div className='App'>
-      <div>
+      {/*<div>
         <Medicamentos />
         <FinalizarCompraCard />
-      </div>
+  </div>*/}
 
-      {/*<AppRouter />*/}
+      <AppRouter />
 
     </div>
   )
