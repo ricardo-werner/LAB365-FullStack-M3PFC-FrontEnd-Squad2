@@ -1,4 +1,6 @@
 import './App.css';
+import FinalizarCompraCard from '../src/components/FinalizarCompra/FinalizarCompraCard';
+
 
 import Medicamentos from './pages/Medicamentos/Medicamentos';
 import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
@@ -6,9 +8,18 @@ import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
 function App() {
 
   return (
-    <>
-      <MedicamentoCreate />
-    </>
+
+    <div className='App'>
+      <div>
+        <Medicamentos />
+        <FinalizarCompraCard />
+        <MedicamentoCreate />
+      </div>
+
+      {/*<AppRouter />*/}
+
+    </div>
+
   )
 }
 
