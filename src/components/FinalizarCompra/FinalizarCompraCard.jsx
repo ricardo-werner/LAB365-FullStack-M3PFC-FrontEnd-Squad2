@@ -1,4 +1,5 @@
-import Passos from './Passos/index';
+import { Passos } from './Passos/PassosIndex';
+import './FinalizarCompraCard.css';
 
 function FinalizarCompraCard() {
     return (
