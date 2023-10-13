@@ -7,6 +7,10 @@ import {
 import FinalizarCompraPage from "./pages/FinalizarCompra/FinalizarCompraPage";
 import Medicamentos from "./pages/Medicamentos/Medicamentos";
 import MedicamentoCreate from "./pages/Medicamentos/MedicamentoCreate";
+import { Login } from "./pages/Login";
+import { DashboardAdmin } from "./pages/Dashboard";
+import { AuthProvider, AuthContext } from "./contexts/auth";
+import { useContext } from "react";
 
 const AppRouter = () => {
   const Private = ({ children }) => {
@@ -34,7 +38,6 @@ const AppRouter = () => {
               </Private>
             }
           />
-          <Route path="/Dashboard" element={<DashboardAdmin />} />
           <Route path="/medicamentos" element={<Medicamentos />} />
           <Route path="/medicamentos/create" element={<MedicamentoCreate />} />
           <Route path="/finalizar" element={<FinalizarCompraPage />} />

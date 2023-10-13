@@ -22,20 +22,25 @@ export const AuthProvider = ({ children }) => {
       email,
       senha,
     });
-    const usuarioLogado = res.data;
-    const token = res.data.token;
+    const usuarioLogado = res.data; //Pega resposta do backend
+    const tipoUsuario = usuarioLogado.tipoUsuario; //Pega o tipo de usuário
+    const token = res.data.token; //Pega o token
     localStorage.setItem("usuario", JSON.stringify(usuarioLogado));
-    localStorage.setItem("token", token);
+    localStorage.setItem("token", token); //Salva o token no localstorage
 
     //Configurar token no headers do axios
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setUser(usuarioLogado);
-    navigate("/Dashboard");
+    if (tipoUsuario === "Administrador") {
+      navigate("/DashBoard");
+    } else if (tipoUsuario === "Comprador") {
+      navigate("/medicamentos");
+    }
   };
   const logout = () => {
     // <--- aqui é onde você configura o logout do usuário
     setUser(null);
-    localStorage.removeItem("usuario"); 
+    localStorage.removeItem("usuario");
     localStorage.removeItem("token");
     axios.defaults.headers.common["Authorization"] = null;
     navigate("/");
