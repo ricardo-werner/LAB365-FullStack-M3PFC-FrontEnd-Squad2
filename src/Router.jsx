@@ -1,20 +1,50 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
 import FinalizarCompraPage from "./pages/FinalizarCompra/FinalizarCompraPage";
-import Medicamentos from './pages/Medicamentos/Medicamentos';
-import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
+import Medicamentos from "./pages/Medicamentos/Medicamentos";
+import MedicamentoCreate from "./pages/Medicamentos/MedicamentoCreate";
+import { Login } from "./pages/Login";
+import { DashboardAdmin } from "./pages/Dashboard";
+import { AuthProvider, AuthContext } from "./contexts/auth";
+import { useContext } from "react";
 
 const AppRouter = () => {
-
-    return (
-        <Router>
-            <Routes>
-                <Route path="/" element={<Navigate to="#" />} />
-                <Route path="/medicamentos" element={<Medicamentos />} />
-                <Route path="/medicamentos/create" element={<MedicamentoCreate />} />
-                <Route path="/finalizar" element={<FinalizarCompraPage />} />
-            </Routes>
-        </Router>
-    );
+  const Private = ({ children }) => {
+    const { authenticated, loading } = useContext(AuthContext);
+    if (loading) {
+      return <div className="loading">Carregando...</div>;
+    }
+    if (!authenticated) {
+      return <Navigate to="/" />;
+    }
+    return children; //Se estiver autenticado, retorna o children
+  };
+  // <--- aqui é onde você configura as rotas da sua aplicação
+  return (
+    <Router>
+      <AuthProvider>
+        <Routes>
+          <Route exact path="/" element={<Login />} />
+          <Route
+            exact
+            path="/DashBoard"
+            element={
+              <Private>
+                <DashboardAdmin />
+              </Private>
+            }
+          />
+          <Route path="/medicamentos" element={<Medicamentos />} />
+          <Route path="/medicamentos/create" element={<MedicamentoCreate />} />
+          <Route path="/finalizar" element={<FinalizarCompraPage />} />
+        </Routes>
+      </AuthProvider>
+    </Router>
+  );
 };
 
 export default AppRouter;
