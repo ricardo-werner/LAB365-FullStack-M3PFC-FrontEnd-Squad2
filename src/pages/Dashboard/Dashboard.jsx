@@ -1,16 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 import { TbPigMoney } from 'react-icons/tb';
 import { BsFillBarChartFill } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
 import { api } from '../../service/api';
+import { AuthContext } from '../../contexts/auth';
 
-
-export default function AdminDashboard() {
+export const AdminDashboard = () => {
   const [totalVendas, setTotalVendas] = useState(0);
   const [totalQuantidadeVendida, setTotalQuantidadeVendida] = useState(0);
   const [produtosEmEstoque, setProdutosEmEstoque] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,9 +39,9 @@ export default function AdminDashboard() {
     fetchData();
   }, []);
 
+  const { logout } = useContext(AuthContext); // Recupera o logout do contexto
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
+    logout();
   };
 
   return (
@@ -119,4 +117,4 @@ export default function AdminDashboard() {
       </div>
     </section>
   );
-}
+};

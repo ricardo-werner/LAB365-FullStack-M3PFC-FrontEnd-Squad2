@@ -1,0 +1,37 @@
+#login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 20px;
+}
+
+#login .formLogin {
+  background-color: #f1f1f1;
+  width: 100%;
+  max-width: 480px;
+  padding: 20px;
+}
+
+#login label {
+  display: block;
+}
+
+#login input {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#login button {
+  background-color: #014004;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
