@@ -8,7 +8,7 @@ import FinalizarCompraPage from './pages/FinalizarCompra/FinalizarCompraPage';
 import Medicamentos from './pages/Medicamentos/Medicamentos';
 import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
 import { Login } from './pages/Login';
-import {AdminDashboard} from './pages/Dashboard/Dashboard';
+import { AdminDashboard } from './pages/Dashboard/Dashboard';
 import { AuthProvider, AuthContext } from './contexts/auth';
 import { useContext } from 'react';
 
