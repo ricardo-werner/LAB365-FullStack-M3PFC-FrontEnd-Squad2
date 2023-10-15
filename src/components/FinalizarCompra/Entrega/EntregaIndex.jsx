@@ -1,17 +1,20 @@
-import "./Entrega.css";
+import React from 'react';
+import Box from '@mui/material/Box';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { Typography } from '@mui/material';
 
 export function Endereco() {
     return (
-        <div className="form-floating">
-            <select className="form-select " id="floatingSelect">
-                <option selected></option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
-        <label className="labelAdress"  htmlFor="floatingSelect">Selecione o Endereço</label>
-</div>
-        
+        <Box p={4}>
+            <Typography variant="body1" p={2}>
+                Endereço de Entrega
+            </Typography>
+            <Select label="Selecione o Endereço de Entrega">
+                <MenuItem value={10}>Endereço1</MenuItem>
+                <MenuItem value={20}>Endereço2</MenuItem>
+            </Select>
+        </Box>
     );
 }
 
