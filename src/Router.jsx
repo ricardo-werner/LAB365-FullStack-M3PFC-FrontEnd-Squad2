@@ -8,9 +8,10 @@ import FinalizarCompraPage from './pages/FinalizarCompra/FinalizarCompraPage';
 import Medicamentos from './pages/Medicamentos/Medicamentos';
 import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
 import { Login } from './pages/Login';
-import {AdminDashboard} from './pages/Dashboard/Dashboard';
+import { AdminDashboard } from './pages/Dashboard/Dashboard';
 import { AuthProvider, AuthContext } from './contexts/auth';
 import { useContext } from 'react';
+import CadastroUsuario from './pages/CadastrarUsuario/cadastroUsuario';
 
 const AppRouter = () => {
   const Private = ({ children }) => {
@@ -35,6 +36,15 @@ const AppRouter = () => {
             element={
               <Private>
                 <AdminDashboard />
+                <CadastroUsuario />
+              </Private>
+            }
+          />
+          <Route
+            path="/admin/cadastro/usuario"
+            element={
+              <Private>
+                <CadastroUsuario />
               </Private>
             }
           />
