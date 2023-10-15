@@ -1,28 +1,58 @@
-import React from 'react';
+import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
-import {
-    CssBaseline,
-    Drawer as MuiDrawer,
-    Box,
-    AppBar as MuiAppBar,
-    Toolbar,
-    List,
-    Typography,
-    IconButton,
-    Divider,
-    Container
-} from '@mui/material';
-import { MdMenu } from 'react-icons/md';
-import { MdChevronLeft } from 'react-icons/md';
-import { mainListItems, secondaryListItems } from './NavegacaoItem'; // Importa as opções do menu
-import { Routes, Route } from 'react-router-dom'; // Importa componentes para gerenciar rotas
-import PaginaNaoEncontrada from './404'
+import Box from '@mui/material/Box';
+import MuiDrawer from '@mui/material/Drawer';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import CssBaseline from '@mui/material/CssBaseline';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 import logo from '../../assets/imagens/logo.png';
 
-// Largura da Gaveta
 const drawerWidth = 240;
+       
 
-// Define características de estilo para AppBar e também controla animação de abertura e fechamento.
+const openedMixin = (theme) => ({
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+    }),
+    overflowX: 'hidden',
+});
+
+const closedMixin = (theme) => ({
+    transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: `calc(${theme.spacing(7)} + 1px)`,
+    [theme.breakpoints.up('sm')]: {
+        width: `calc(${theme.spacing(8)} + 1px)`,
+    },
+});
+
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+}));
+
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -41,152 +71,134 @@ const AppBar = styled(MuiAppBar, {
     }),
 }));
 
-// Personaliza o Drawer tornando responsivo durante a abertura e fechamento.
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
-        '& .MuiDrawer-paper': {
-            position: 'relative',
-            whiteSpace: 'nowrap',
-            width: drawerWidth,
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            boxSizing: 'border-box',
-            ...(!open && {
-                overflowX: 'hidden',
-                transition: theme.transitions.create('width', {
-                    easing: theme.transitions.easing.sharp,
-                    duration: theme.transitions.duration.leavingScreen,
-                }),
-                width: theme.spacing(7),
-                [theme.breakpoints.up('sm')]: {
-                    width: theme.spacing(7),
-                },
-            }),
-        },
+        width: drawerWidth,
+        flexShrink: 0,
+        whiteSpace: 'nowrap',
+        boxSizing: 'border-box',
+        ...(open && {
+            ...openedMixin(theme),
+            '& .MuiDrawer-paper': openedMixin(theme),
+        }),
+        ...(!open && {
+            ...closedMixin(theme),
+            '& .MuiDrawer-paper': closedMixin(theme),
+        }),
     }),
 );
 
 export default function Navegacao() {
-
     const theme = useTheme();
-
-    // Estado para controlar a abertura e fechamento do Drawer
     const [open, setOpen] = React.useState(false);
 
-    // Função para alternar o estado do Drawer (abrir/fechar)
-    const toggleDrawer = () => {
-        setOpen(!open);
+    const handleDrawerOpen = () => {
+        setOpen(true);
     };
 
+    const handleDrawerClose = () => {
+        setOpen(false);
+    };
+
+                
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-
-            {/* AppBar: Barra superior */}
-            <AppBar position="absolute" open={open}>
-                <Toolbar
-                    sx={{
-                        pr: '24px', // Mantém o padding da direita quando o Drawer está fechado.
-                    }}
-                >
-                    {/* Ícone para abrir o Drawer */}
+            <AppBar position="fixed" open={open}>
+                <Toolbar>
                     <IconButton
-                        edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={toggleDrawer}
+                        onClick={handleDrawerOpen}
+                        edge="start"
                         sx={{
-                            marginRight: '36px',
+                            marginRight: 5,
                             ...(open && { display: 'none' }),
                         }}
                     >
-                        <MdMenu />
+                        <MenuIcon />
                     </IconButton>
-                    {/* Logo na barra superior */}
+                    {/*Logo da barra horizontal*/}
                     <img
                         style={{}}
-                        alt="Logo"
                         src={logo}
-                        width="50"
-                        height="50"
+                        alt='logo'
+                        width='50'
+                        height='50'
                     />
-                    {/* Título da aplicação */}
-                    <Typography
-                        component="p"
-                        variant="p"
-                        color="inherit"
-                        fontWeight="bold"
-                        noWrap
-                        sx={{
-                            flexGrow: 1,
-                            ml: 1
-                        }}
-                    >
-                        PharmaSellticos Marcketplace
+                    <Typography variant="h6" noWrap component="div" ml={3}>
+                        PharmaSellticos Marketplace
                     </Typography>
                 </Toolbar>
             </AppBar>
-
-            {/* Drawer: Menu lateral */}
             <Drawer variant="permanent" open={open}>
-                <Toolbar
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        px: [1],
-                    }}
-                >
-                    {/* Ícone para fechar o Drawer */}
-                    <IconButton onClick={toggleDrawer}>
-                        <MdChevronLeft />
+                <DrawerHeader>
+                    <IconButton onClick={handleDrawerClose}>
+                        {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
                     </IconButton>
-                    {/* Logo no menu lateral */}
-                    <img
-                        style={{ padding: '5px' }}
-                        alt="Logo"
-                        src={logo}
-                        width="180"
-                        height="45"
-                    />
-                </Toolbar>
+                </DrawerHeader>
                 <Divider />
-                <List component="nav">
-                    {mainListItems} {/* Renderiza a lista de opções principais do menu */}
-                    <Divider sx={{ my: 1 }} />
-                    {secondaryListItems} {/* Renderiza a lista secundária de opções do menu */}
+                <List>
+                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
+                </List>
+                <Divider />
+                <List>
+                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+                            <ListItemButton
+                                sx={{
+                                    minHeight: 48,
+                                    justifyContent: open ? 'initial' : 'center',
+                                    px: 2.5,
+                                }}
+                            >
+                                <ListItemIcon
+                                    sx={{
+                                        minWidth: 0,
+                                        mr: open ? 3 : 'auto',
+                                        justifyContent: 'center',
+                                    }}
+                                >
+                                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                                </ListItemIcon>
+                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                            </ListItemButton>
+                        </ListItem>
+                    ))}
                 </List>
             </Drawer>
-
-            {/* Conteúdo principal */}
-            <Box
-                component="main"
-                sx={{
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
-                            ? theme.palette.grey[100]
-                            : theme.palette.grey[900],
-                    flexGrow: 1,
-                    height: '100vh',
-                    overflow: 'auto',
-                }}
-            >
-                <Toolbar />
-                <Container maxWidth="xl">
-                    {/* Rotas internas para as opções do menu */}
-                    <Routes>
-                        <Route path="/" element={<login />} />
-                        {/*<Route path="/dashboard" element={<Dashboard />} />
-                        <Route path="/medicamentos" element={<Medicamentos />} />
-                        <Route path="/medicamentocreate" element={<MedicamentoCreate />} />
-                        <Route path="/finalizar" element={<FinalizarCompraPage />} />
-                        <Route path='/*' element={<PaginaNaoEncontrada />} />*/}
-                    </Routes>
-                </Container>
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                <DrawerHeader />
+                <Typography paragraph>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua.
+                </Typography>
+                <Typography paragraph>
+                    Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
+                    eget nulla facilisi etiam dignissim diam.
+                </Typography>
             </Box>
         </Box>
     );
 }
-
