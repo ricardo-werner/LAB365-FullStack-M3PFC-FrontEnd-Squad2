@@ -3,14 +3,14 @@ import {
   Route,
   Routes,
   Navigate,
-} from "react-router-dom";
-import FinalizarCompraPage from "./pages/FinalizarCompra/FinalizarCompraPage";
-import Medicamentos from "./pages/Medicamentos/Medicamentos";
-import MedicamentoCreate from "./pages/Medicamentos/MedicamentoCreate";
-import { Login } from "./pages/Login";
-import { DashboardAdmin } from "./pages/Dashboard";
-import { AuthProvider, AuthContext } from "./contexts/auth";
-import { useContext } from "react";
+} from 'react-router-dom';
+import FinalizarCompraPage from './pages/FinalizarCompra/FinalizarCompraPage';
+import Medicamentos from './pages/Medicamentos/Medicamentos';
+import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
+import { Login } from './pages/Login';
+import {AdminDashboard} from './pages/Dashboard/Dashboard';
+import { AuthProvider, AuthContext } from './contexts/auth';
+import { useContext } from 'react';
 
 const AppRouter = () => {
   const Private = ({ children }) => {
@@ -31,10 +31,10 @@ const AppRouter = () => {
           <Route exact path="/" element={<Login />} />
           <Route
             exact
-            path="/DashBoard"
+            path="/dashboard"
             element={
               <Private>
-                <DashboardAdmin />
+                <AdminDashboard />
               </Private>
             }
           />

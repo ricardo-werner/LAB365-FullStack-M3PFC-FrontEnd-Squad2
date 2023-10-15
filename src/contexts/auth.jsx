@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setUser(usuarioLogado);
     if (tipoUsuario === "Administrador") {
-      navigate("/DashBoard");
+      navigate("/dashboard");
     } else if (tipoUsuario === "Comprador") {
       navigate("/medicamentos");
     }

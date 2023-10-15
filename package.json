@@ -14,8 +14,11 @@
     "@emotion/styled": "^11.11.0",
     "axios": "^1.5.1",
     "bootstrap": "^5.3.2",
+    "dotenv": "^16.3.1",
+    "jwt-decode": "^3.1.2",
     "m3p-frontend-squad2": "file:",
     "moment": "^2.29.4",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.0",
     "react-dom": "^18.2.0",
@@ -39,8 +42,8 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "react-stepper-horizontal": "^1.0.11",
     "postcss": "^8.4.31",
+    "react-stepper-horizontal": "^1.0.11",
     "tailwindcss": "^3.3.3",
     "vite": "^4.4.5"
   }
