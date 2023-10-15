@@ -36,7 +36,6 @@ const AppRouter = () => {
             element={
               <Private>
                 <AdminDashboard />
-                <CadastroUsuario />
               </Private>
             }
           />

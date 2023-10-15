@@ -71,7 +71,7 @@ export const ListaUsuarios = () => {
   };
 
   return (
-    <div className="lista-usuarios">
+    <section className="lista-usuarios pb-20 px-20">
       <h3 className="text-lg font-semibold text-slate-700 mb-4">
         Usuários Cadastrados
       </h3>
@@ -116,17 +116,19 @@ export const ListaUsuarios = () => {
         </tbody>
       </table>
 
-      <div className="pagination">
+      <div className="pagination flex justify-between mt-4 ">
         <button
+          className="py-[9px] pl-10 pr-10 hover:border hover:border-green-500 rounded"
           onClick={() => setPaginaAtual(paginaAtual - 1)}
-          disabled={paginaAtual <= 1} // Desabilita o botão Anterior se estiver na primeira página
+          disabled={paginaAtual <= 1}
         >
           Anterior
         </button>
         <span>{paginaAtual}</span>
         <button
+          className="py-[9px] pr-10 pl-10 hover:border hover:border-green-500 rounded"
           onClick={() => setPaginaAtual(paginaAtual + 1)}
-          disabled={paginaAtual  >= totalUsuarios} 
+          disabled={paginaAtual >= totalUsuarios}
         >
           Próximo
         </button>
@@ -151,6 +153,6 @@ export const ListaUsuarios = () => {
           <button onClick={handleCloseModal}>FECHAR</button>
         </div>
       )}
-    </div>
+    </section>
   );
 };
