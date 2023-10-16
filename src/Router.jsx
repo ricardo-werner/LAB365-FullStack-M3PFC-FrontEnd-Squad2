@@ -27,9 +27,9 @@ const AppRouter = () => {
   // <--- aqui é onde você configura as rotas da sua aplicação
   return (
     <Router>
+      <Navegacao />
       <AuthProvider>
         <Routes>
-          <Route path="/navegacao" element={<Navegacao />} />
           <Route exact path="/" element={<Login />} />
           <Route
             exact
