@@ -1,5 +1,4 @@
 import FinalizarCompraCard from '../../components/FinalizarCompra/FinalizarCompraCard';
-import './FinalizarCompra.css';
 
 const FinalizarCompraPage = () => {
 
