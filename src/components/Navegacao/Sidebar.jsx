@@ -1,18 +1,30 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LiveHelpIcon from '@mui/icons-material/LiveHelp';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import MedicationIcon from '@mui/icons-material/Medication';
+
 
 export default function Sidebar({ state, setState, toggleDrawer }) {
-    
+    const menuItems = [
+        { text: 'Produtos', icon: <MedicationIcon />, route: 'medicamentos' },
+        { text: 'Vendas', icon: <MonetizationOnIcon />, route: 'medicamentos' },
+        { text: 'Resultados de Vendas', icon: <AdminPanelSettingsIcon />, route: 'dashboard' },
+        { text: 'Usuários', icon: <AccountCircleIcon />, route: '/' },
+        { text: 'FAQ', icon: <LiveHelpIcon />, route: 'faq' },
+        { text: 'Sair', icon: <LogoutIcon />, route: '/' },
+    ];
+
     const list = (anchor) => (
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -21,29 +33,15 @@ export default function Sidebar({ state, setState, toggleDrawer }) {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Produtos', 'Vendas', 'Resultados de Vendas', 'Usuários'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton href={`${text.toLowerCase()}`}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
+                {menuItems.map((item, index) => (
+                    <ListItem key={item.text} disablePadding>
+                        <ListItemButton href={item.route}>
+                            <ListItemIcon>{item.icon}</ListItemIcon>
+                            <ListItemText primary={item.text} />
                         </ListItemButton>
                     </ListItem>
                 ))}
-            </List>
-            <Divider />
-            <List>
-                {['FAQ', 'Sair'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                <Divider />
             </List>
         </Box>
     );
