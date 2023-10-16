@@ -11,6 +11,7 @@ import { Login } from './pages/Login';
 import { AdminDashboard } from './pages/Dashboard/Dashboard';
 import { AuthProvider, AuthContext } from './contexts/auth';
 import { useContext } from 'react';
+import Navegacao from './pages/SideBar/Navegacao';
 
 const AppRouter = () => {
   const Private = ({ children }) => {
@@ -28,6 +29,7 @@ const AppRouter = () => {
     <Router>
       <AuthProvider>
         <Routes>
+          <Route path="/navegacao" element={<Navegacao />} />
           <Route exact path="/" element={<Login />} />
           <Route
             exact
