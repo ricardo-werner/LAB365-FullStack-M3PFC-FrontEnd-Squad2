@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Button, Typography } from '@mui/material';
 
-export default function PaginaNaoEncontrada() {
+export default function PageNotFound() {
   const handleGoBack = () => {
     window.history.back(); // Volta para a página anterior
   };
