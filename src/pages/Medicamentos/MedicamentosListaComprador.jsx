@@ -3,25 +3,45 @@ import { CartContext } from "../../contexts/carrinhoCompras";
 import Cart from "../Carrinho/Carrinho.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { api } from "../../service/api";
 
-export default function Medicamentos() {
+export default function MedicamentosListaComprador() {
   const [mostraModal, setMostraModal] = useState(false);
   const [products, setMedicamentos] = useState([]);
   const { itensCarrinho, adicionarAoCarrinho, removerDoCarrinho } = useContext(CartContext);
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const [itensPorPagina] = useState(20);
+  const [pesquisar, setPesquisar] = useState("");
+  const [totalMedicamentos, setTotalMedicmentos] = useState(0);
 
   const toggle = () => {
     setMostraModal(!mostraModal);
   };
 
-  async function getMedicamentos() {
-    const response = await fetch("http://localhost:3333/api/produto/todos");
-    const data = await response.json();
-    setMedicamentos(data.produto);
-  }
-
   useEffect(() => {
+    // Função para buscar usuários do banco de dados com filtro e paginação
+    const getMedicamentos = async () => {
+      const offset = (paginaAtual - 1) * itensPorPagina;
+
+      try {
+        const response = await api.get(
+          `http://localhost:3333/api/produto/${offset}/${itensPorPagina}`,
+          { params: { nomeProduto: pesquisar } }
+        );
+
+        if (Array.isArray(response.data.resultados)) {
+          setMedicamentos(response.data.resultados);
+          setTotalMedicmentos(response.data.contar);
+        } else {
+          console.log("Dados da Api não são um array", response.data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar medicamentos:", error);
+      }
+    };
+
     getMedicamentos();
-  }, []);
+  }, [paginaAtual, itensPorPagina, pesquisar]);
 
   const notificacaoAdicionadoCarrinho = (item) =>
     toast.success(`${item.nomeProduto} adicionado ao carrinho!`, {
@@ -58,6 +78,16 @@ export default function Medicamentos() {
     notificacaoRemovidoCarrinho(product);
   };
 
+  const handlePesquisar = (e) => {
+    setPesquisar(e.target.value);
+    setPaginaAtual(1);
+  };
+
+  const hasNextPage = () => {
+    const currentPageEnd = paginaAtual * itensPorPagina;
+    return currentPageEnd < totalMedicamentos;
+  };
+
   return (
     <div className="flex flex-col justify-center bg-gray-100">
       <ToastContainer />
@@ -73,6 +103,12 @@ export default function Medicamentos() {
             Carrinho de Compras ({itensCarrinho.length})
           </button>
         )}
+        <input
+          type="text"
+          placeholder="Filtrar por Nome do Medicamento"
+          value={pesquisar}
+          onChange={handlePesquisar}
+        />
       </div>
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
         {products.map((product) => (
@@ -135,6 +171,21 @@ export default function Medicamentos() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="pagination">
+        <button
+          onClick={() => setPaginaAtual(paginaAtual - 1)}
+          disabled={paginaAtual <= 1} // Desabilita o botão Anterior se estiver na primeira página
+        >
+          Anterior
+        </button>
+        <span>{paginaAtual}</span>
+        <button
+          onClick={() => setPaginaAtual(paginaAtual + 1)}
+          disabled={paginaAtual >= totalMedicamentos}
+        >
+          Próximo
+        </button>
       </div>
       <Cart mostraModal={mostraModal} toggle={toggle} />
     </div>
