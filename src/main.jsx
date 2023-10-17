@@ -1,11 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
-import "./global.css";
-import { CartProvider } from "./contexts/carrinhoCompras.jsx";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import App from './App.jsx';
+import './global.css';
+import { CartProvider } from './contexts/carrinhoCompras.jsx';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-    <CartProvider>
-      <App />
-    </CartProvider>
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <CartProvider>
+    <App />
+    <ToastContainer />
+  </CartProvider>
 );
