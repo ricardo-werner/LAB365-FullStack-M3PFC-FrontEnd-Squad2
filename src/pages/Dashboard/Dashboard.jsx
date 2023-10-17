@@ -39,7 +39,7 @@ export const AdminDashboard = () => {
     fetchData();
   }, []);
 
-  const { logout } = useContext(AuthContext); // Recupera o logout do contexto
+  const { logout } = useContext(AuthContext);
   const handleLogout = () => {
     logout();
   };
@@ -50,7 +50,7 @@ export const AdminDashboard = () => {
         <h3>Sidebar</h3>
         <button onClick={handleLogout}>Sair</button>
       </div>
-      <div className="mx-auto">
+      <div className="mx-auto max-w-4xl">
         <div className="results max-w-3xl pb-14 text-center">
           <h2 className="text-slate-700 text-3xl font-semibold mb-10">
             Resultado das suas Vendas
