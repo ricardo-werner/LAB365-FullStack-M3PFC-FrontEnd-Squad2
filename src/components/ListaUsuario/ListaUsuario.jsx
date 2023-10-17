@@ -151,8 +151,8 @@ export const ListaUsuarios = () => {
         <tbody>
           {usuarios.map((usuario) => (
             <tr key={usuario.id} className="border border-slate-300">
-              <td className="py-1 pl-5">{usuario.cpf}</td>
-              <td>{usuario.id}</td>
+              <td className="py-1 pl-5">{usuario.id}</td>
+              <td>{usuario.cpf}</td>
               <td>{usuario.nomeCompleto}</td>
               <td>{usuario.dataNascimento}</td>
               <td>{usuario.email}</td>
