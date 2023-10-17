@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export const AuthContext = createContext();
 import { toast } from "react-toastify";
+import { api } from "../service/api";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -18,28 +19,39 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, senha) => {
-    // <--- aqui é onde você configura o login do usuário
-    const res = await axios.post("http://localhost:3333/api/usuario/login", {
-      email,
-      senha,
-    });
-    const usuarioLogado = res.data; //Pega resposta do backend
-    const tipoUsuario = usuarioLogado.tipoUsuario; //Pega o tipo de usuário
-    const token = res.data.token; //Pega o token
-    localStorage.setItem("usuario", JSON.stringify(usuarioLogado));
-    localStorage.setItem("token", token); //Salva o token no localstorage
+    try {
+      // <--- aqui é onde você configura o login do usuário
+      const response = await api.post("/usuario/login", {
+        email,
+        senha,
+      });
+      if (response.status === 200) {
+        const usuarioLogado = response.data; //Pega resposta do backend
+        const tipoUsuario = usuarioLogado.tipoUsuario; //Pega o tipo de usuário
+        const token = response.data.token; //Pega o token
+        localStorage.setItem("usuario", JSON.stringify(usuarioLogado));
+        localStorage.setItem("token", token); //Salva o token no localstorage
 
-    //Configurar token no headers do axios
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    setUser(usuarioLogado);
-    if (tipoUsuario === "Administrador") {
-      toast.success("Administrador seu login foi efetuado com sucesso!");
-      navigate("/dashboard");
-    } else if (tipoUsuario === "Comprador") {
-      toast.success("Administrador seu login foi efetuado com sucesso!");
-      navigate("/medicamentos");
+        //Configurar token no headers do axios
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        setUser(usuarioLogado);
+        if (tipoUsuario === "Administrador") {
+          toast.success("Administrador seu login foi efetuado com sucesso!");
+          navigate("/dashboard");
+        } else if (tipoUsuario === "Comprador") {
+          toast.success("Administrador seu login foi efetuado com sucesso!");
+          navigate("/medicamentos");
+        }
+      }
+      if (response.status === 401) {
+        toast.error(response.data.message); // Exibe a mensagem de erro da API em outros casos
+        navigate("/login");
+      }
+    } catch (error) {
+      toast.error(error); // Exibe a mensagem de erro da API
     }
   };
+
   const logout = () => {
     // <--- aqui é onde você configura o logout do usuário
     setUser(null);
