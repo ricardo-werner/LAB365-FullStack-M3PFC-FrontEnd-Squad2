@@ -1,16 +1,11 @@
 import { Passos } from './Passos/PassosIndex';
-import './FinalizarCompraCard.css';
+import Box from '@mui/material/Box';
 
 function FinalizarCompraCard() {
     return (
-        <div className="finalizar-compra-card">
-            <div className="finalizar-compra-card__titulo">
-                <h2>Finalizar Compra</h2>
-            </div>
-            <div className="finalizar-compra-card__passos">
-                <Passos />
-            </div>
-        </div>
+        <Box m={10}>
+            <Passos />
+        </Box>
     );
 }
 

@@ -12,6 +12,7 @@ import { AdminDashboard } from './pages/Dashboard/Dashboard';
 import { AuthProvider, AuthContext } from './contexts/auth';
 import { useContext } from 'react';
 import CadastroUsuario from './pages/CadastrarUsuario/cadastroUsuario';
+import Navegacao from './pages/SideBar/Navegacao';
 
 const AppRouter = () => {
   const Private = ({ children }) => {
@@ -27,6 +28,7 @@ const AppRouter = () => {
   // <--- aqui é onde você configura as rotas da sua aplicação
   return (
     <Router>
+      <Navegacao />
       <AuthProvider>
         <Routes>
           <Route exact path="/" element={<Login />} />

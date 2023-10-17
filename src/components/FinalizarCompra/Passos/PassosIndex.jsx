@@ -1,104 +1,68 @@
-import { Component } from 'react';
-import Stepper from 'react-stepper-horizontal';
-import { PiNumberCircleOneBold, PiNumberCircleTwoBold, PiNumberCircleThreeBold } from 'react-icons/pi';
+import React, { useState } from 'react';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import { Produtos } from '../Produtos/ProdutosIndex';
 import { Endereco } from '../Entrega/EntregaIndex';
 import { Pagamento } from '../Pagamentos/PagamentoIndex';
 
-export class Passos extends Component {
-  constructor() {
-    super();
-    this.state = {
-      steps: [
-        {
-          title: 'Produto',
-          PiNumberCircleOneBold,
-          onClick: (e) => {
-            e.preventDefault();
-            console.log('onClick', 1);
-          }
-        },
-        {
-          title: 'Endereço',
-          PiNumberCircleTwoBold,
-          onClick: (e) => {
-            e.preventDefault();
-            console.log('onClick', 2);
-          }
-        },
-        {
-          title: 'Pagamento',
-          PiNumberCircleThreeBold,
-          onClick: (e) => {
-            e.preventDefault();
-            console.log('onClick', 3);
-          }
-        }
-      ],
-      currentStep: 0,
-      compraEfetuada: false,
-    };
+
+export function Passos() {
+  const [currentStep, setCurrentStep] = useState(0);
+  const [compraEfetuada, setCompraEfetuada] = useState(false);
+
+  function handleNext() {
+    setCurrentStep(currentStep + 1);
   }
 
-  handleCompraEfetuada = () => {
-    this.setState({
-      compraEfetuada: true,
-    });
-  };
-
-  onClickNext = () => {
-    const { currentStep } = this.state;
-    if (currentStep < 2) {
-      this.setState({
-        currentStep: currentStep + 1,
-      });
-    }
-  };
-
-  onClickPrevious = () => {
-    const { currentStep } = this.state;
-    if (currentStep > 0) {
-      this.setState({
-        currentStep: currentStep - 1,
-        compraEfetuada: false,
-      });
-    }
-  };
-
-  render() {
-    const { steps, currentStep, compraEfetuada } = this.state;
-
-    return (
-      <div>
-        <Stepper steps={steps} activeStep={currentStep} />
-        {currentStep === 0 && !compraEfetuada && <Produtos />}
-        {currentStep === 1 && !compraEfetuada && <Endereco />}
-        {currentStep === 2 && !compraEfetuada && <Pagamento />}
-
-        {compraEfetuada && (
-          <div className="alert alert-success" role="alert">
-            Compra efetuada com sucesso, verifique seu e-mail.
-          </div>
-        )}
-
-        <div className="d-flex justify-content-between p-5">
-          {currentStep > 0 && !compraEfetuada && (
-            <button type="button" className="btn btn-danger" onClick={this.onClickPrevious}>
-              Voltar
-            </button>
-          )}
-          {currentStep < 2 && !compraEfetuada && (
-            <button type="button" className="btn btn-primary" onClick={this.onClickNext}>
-              Próximo
-            </button>
-          )}
-          {currentStep === 2 && !compraEfetuada && (
-            <button type="button" className="btn btn-primary" onClick={this.handleCompraEfetuada}>
-              Finalizar
-            </button>
-          )}
-        </div>
-      </div>
-    );
+  function handleBack() {
+    setCurrentStep(currentStep - 1);
   }
+
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Stepper activeStep={currentStep}>
+        <Step>
+          <StepLabel>Produto</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Endereço</StepLabel>
+        </Step>
+        <Step>
+          <StepLabel>Pagamento</StepLabel>
+        </Step>
+      </Stepper>
+
+      {currentStep === 0 && !compraEfetuada && <Produtos />}
+      {currentStep === 1 && !compraEfetuada && <Endereco />}
+      {currentStep === 2 && !compraEfetuada && <Pagamento />}
+
+      {currentStep > 0 && !compraEfetuada && (
+        <Button onClick={handleBack}>
+          Voltar
+        </Button>
+      )}
+
+      {currentStep < 2 && !compraEfetuada && (
+        <Button onClick={handleNext}>
+          Próximo
+        </Button>
+      )}
+
+      {currentStep === 2 && !compraEfetuada && (
+        <Button onClick={() => setCompraEfetuada(true)}>
+          Finalizar
+        </Button>
+      )}
+
+      {compraEfetuada && (
+        <Alert severity="success">
+          Compra efetuada com sucesso! Confira seu e-mail para mais informações.
+        </Alert>
+      )}
+    </Box >
+  );
 }
