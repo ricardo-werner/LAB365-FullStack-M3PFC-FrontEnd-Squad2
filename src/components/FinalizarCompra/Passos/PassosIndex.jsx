@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import { Produtos } from '../Produtos/ProdutosIndex';
 import { Endereco } from '../Entrega/EntregaIndex';
 import { Pagamento } from '../Pagamentos/PagamentoIndex';
-import { Navigate } from 'react-router-dom';
 
 
 export function Passos() {
@@ -22,11 +21,6 @@ export function Passos() {
   function handleBack() {
     setCurrentStep(currentStep - 1);
   }
-
-  /*function handleNovaCompra() {
-    history.push('/medicamentos');
-  }*/
-
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -65,9 +59,9 @@ export function Passos() {
       )}
 
       {compraEfetuada && (
-          <Alert severity="success">
-            Compra efetuada com sucesso! Confira seu e-mail para mais informações.
-          </Alert>
+        <Alert severity="success">
+          Compra efetuada com sucesso! Confira seu e-mail para mais informações.
+        </Alert>
       )}
     </Box >
   );
