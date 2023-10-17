@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { api } from '../../service/api';
@@ -12,6 +12,7 @@ import {
   formataDataNascimento,
   formataTelefone,
 } from '../../utils/validacoes';
+import { AuthContext } from '../../contexts/auth';
 
 const formDadosIniciais = {
   cpf: '',
@@ -156,14 +157,27 @@ const FormCadastrarUsuario = () => {
     }
   };
 
+  const { logout } = useContext(AuthContext);
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <section className=" flex py-20 px-20">
       <form onSubmit={handleSubmit} className="mx-auto w-full">
-        <h2 className="text-slate-700 text-3xl font-semibold mb-10  text-center">
-          Cadastrar Usuário
-        </h2>
+        <div className="flex justify-between mb-10">
+          <h2 className="text-slate-700 text-3xl font-semibold ">
+            Cadastrar Usuário
+          </h2>
+          <button
+            onClick={handleLogout}
+            className="text-lg text-red-700 font-semibold px-5 py-2 rounded"
+          >
+            Sair
+          </button>
+        </div>
         <div>
-          <h3 className="text-lg font-semibold text-slate-500 mb-4">
+          <h3 className="text-xl font-semibold text-slate-500 mb-4">
             Dados do Usuário
           </h3>
           <div className="usuario-section grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3">
@@ -209,7 +223,7 @@ const FormCadastrarUsuario = () => {
                     value={formData[campo.name]}
                     onChange={handleChange}
                     onBlur={campo.name === 'cep' ? handleCepBlur : null}
-                    className="py-2 px-3 rounded border flex w-full"
+                    className="py-[12px] px-3 rounded border flex w-full"
                   />
                 )}
               </div>
@@ -218,7 +232,7 @@ const FormCadastrarUsuario = () => {
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold text-slate-500 mt-10 mb-4">
+          <h3 className="text-xl font-semibold text-slate-500 mt-10 mb-4">
             Dados de Endereço
           </h3>
           <div className="endereco-section grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3">
@@ -232,7 +246,7 @@ const FormCadastrarUsuario = () => {
                     value={formData[campo.name]}
                     onChange={handleChange}
                     onBlur={campo.name === 'cep' ? handleCepBlur : null}
-                    className="py-2 px-3 rounded border flex w-full"
+                    className="py-[12px] px-3 rounded border flex w-full"
                   />
                 </div>
               </div>
@@ -242,7 +256,7 @@ const FormCadastrarUsuario = () => {
 
         <button
           type="submit"
-          className="text-green-800 font-bold mt-10 bg-[#25D296] py-[9px] px-20 rounded w-full lg:w-auto"
+          className="text-green-800 font-semibold mt-10 bg-[#25D296] hover:bg-[#12b97f]  py-[12px] px-20 rounded w-full lg:w-auto"
         >
           CADASTRAR
         </button>

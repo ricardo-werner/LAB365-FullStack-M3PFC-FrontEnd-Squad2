@@ -13,11 +13,27 @@ export const formataDataNascimento = (data) => {
 };
 
 export const formataTelefone = (telefone) => {
-  const mascara = telefone.replace(/\D/g, '');
-  const match = mascara.match(/^(\d{2})(\d{0,5})(\d{0,4})$/);
+  const mascara = telefone.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+  const match = mascara.match(/^(\d{0,2})(\d{0,5})(\d{0,4})$/); // Permite dígitos opcionais
+
   if (match) {
-    return `(${match[1]}) ${match[2]}` + (match[3] ? `-${match[3]}` : '');
+    let numeroFormatado = '';
+
+    if (match[1]) {
+      numeroFormatado += `(${match[1]}`;
+    }
+
+    if (match[2]) {
+      numeroFormatado += `) ${match[2]}`;
+    }
+
+    if (match[3]) {
+      numeroFormatado += `-${match[3]}`;
+    }
+
+    return numeroFormatado;
   }
+
   return telefone;
 };
 
