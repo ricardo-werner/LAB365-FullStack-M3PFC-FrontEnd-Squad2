@@ -45,16 +45,20 @@ export const AdminDashboard = () => {
   };
 
   return (
-    <section className="admin-dashboard w-full h-screen flex pt-20 px-20">
-      <div className="sideBar">
-        <h3>Sidebar</h3>
-        <button onClick={handleLogout}>Sair</button>
-      </div>
+    <section className="admin-dashboard w-full h-screen flex pt-10 px-20">
       <div className="mx-auto max-w-4xl">
         <div className="results max-w-3xl pb-14 text-center">
-          <h2 className="text-slate-700 text-3xl font-semibold mb-10">
-            Resultado das suas Vendas
-          </h2>
+          <div className="flex justify-between mb-10">
+            <h2 className="text-slate-700 text-3xl font-semibold ">
+              Resultado das suas Vendas
+            </h2>
+            <button
+              onClick={handleLogout}
+              className="text-lg text-red-700 font-semibold px-5 py-2 rounded "
+            >
+              Sair
+            </button>
+          </div>
           <div className="flex justify-around m-auto columns-2 gap-8 max-w-3xl">
             <div className="flex items-center gap-3 border-2 p-4 rounded w-[23rem] text-center ">
               <div className="p-3  rounded-full bg-[#8754ec]  max-h-[68px]">
@@ -102,10 +106,10 @@ export const AdminDashboard = () => {
               <tbody className="">
                 {produtosEmEstoque.produtos.map((produto) => (
                   <tr key={produto.id} className="border border-slate-300">
-                    <td>{produto.id}</td>
-                    <td>{produto.nomeProduto}</td>
-                    <td>{produto.precoUnitario}</td>
-                    <td>{produto.totalEstoque}</td>
+                    <td className='py-1'>{produto.id}</td>
+                    <td className='py-1'>{produto.nomeProduto}</td>
+                    <td className='py-1'>{produto.precoUnitario}</td>
+                    <td className='py-1'>{produto.totalEstoque}</td>
                   </tr>
                 ))}
               </tbody>
