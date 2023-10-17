@@ -99,7 +99,7 @@ const FormCadastrarUsuario = () => {
       try {
         const enderecoData = await pegarDetalheEndereco(soNumeroCEP);
         const latLongData = await pegarLatLongPeloCEP(soNumeroCEP);
-        console.log(formData, 'enderecoData');
+        
 
         if (enderecoData) {
           // Preencha os campos de endereço independentemente dos dados de latLongData

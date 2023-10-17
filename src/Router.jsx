@@ -11,8 +11,8 @@ import { Login } from './pages/Login';
 import { AdminDashboard } from './pages/Dashboard/Dashboard';
 import { AuthProvider, AuthContext } from './contexts/auth';
 import { useContext } from 'react';
-import Navegacao from './pages/SideBar/Navegacao';
 import CadastroUsuario from './pages/CadastrarUsuario/cadastroUsuario';
+import Navegacao from './pages/SideBar/Navegacao';
 
 const AppRouter = () => {
   const Private = ({ children }) => {
