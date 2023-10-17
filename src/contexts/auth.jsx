@@ -2,6 +2,7 @@ import React, { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export const AuthContext = createContext();
+import { toast } from "react-toastify";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -32,8 +33,10 @@ export const AuthProvider = ({ children }) => {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setUser(usuarioLogado);
     if (tipoUsuario === "Administrador") {
+      toast.success("Administrador seu login foi efetuado com sucesso!");
       navigate("/dashboard");
     } else if (tipoUsuario === "Comprador") {
+      toast.success("Administrador seu login foi efetuado com sucesso!");
       navigate("/medicamentos");
     }
   };
