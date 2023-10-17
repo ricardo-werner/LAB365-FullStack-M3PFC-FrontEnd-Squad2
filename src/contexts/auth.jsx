@@ -43,12 +43,9 @@ export const AuthProvider = ({ children }) => {
           navigate("/medicamentos");
         }
       }
-      if (response.status === 401) {
-        toast.error(response.data.message); // Exibe a mensagem de erro da API em outros casos
-        navigate("/login");
-      }
     } catch (error) {
-      toast.error(error); // Exibe a mensagem de erro da API
+      toast.error(error.response.data.message); // Exibe a mensagem de erro da API
+      navigate("/");
     }
   };
 
