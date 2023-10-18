@@ -5,7 +5,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import FinalizarCompraPage from "./pages/FinalizarCompra/FinalizarCompraPage";
-import Medicamentos from "./pages/Medicamentos/Medicamentos";
+import MedicamentosListaComprador from "./pages/Medicamentos/MedicamentosListaComprador";
 import MedicamentoCreate from "./pages/Medicamentos/MedicamentoCreate";
 import { Login } from "./pages/Login/Login";
 import { AdminDashboard } from "./pages/Dashboard/Dashboard";
@@ -77,7 +77,7 @@ const AppRouter = () => {
             path="/medicamentosCompradores"
             element={
               <PrivateComprador>
-                <MedicamentosListaComprador /
+                <MedicamentosListaComprador />
               </PrivateComprador>
             }
           />
