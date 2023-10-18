@@ -13,12 +13,14 @@ import { AuthProvider, AuthContext } from "./contexts/auth";
 import { useContext } from "react";
 import CadastroUsuario from "./pages/CadastrarUsuario/cadastroUsuario";
 import Navegacao from "./pages/SideBar/Navegacao";
+import { toast } from "react-toastify";
 
 const AppRouter = () => {
   const PrivateAdmin = ({ children }) => {
     //Verifica se o usuário está autenticado e se é admin
     const { authenticated, user } = useContext(AuthContext);
     if (!authenticated || user.tipoUsuario !== "Administrador") {
+      toast.error("Acesso negado para esse tipo de usuário.");
       return <Navigate to="/" />;
     }
     return children; //Se estiver autenticado, retorna o children
