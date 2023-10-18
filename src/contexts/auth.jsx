@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem("usuario");
     if (usuarioRecuperado) {
-      setUser(JSON.parse(usuarioRecuperado));
+      setUser(JSON.parse(usuarioRecuperado)); //Muda o valor do UseState User
     }
     setLoading(false);
   }, []);
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
           toast.success("Administrador seu login foi efetuado com sucesso!");
           navigate("/dashboard");
         } else if (tipoUsuario === "Comprador") {
-          toast.success("Administrador seu login foi efetuado com sucesso!");
+          toast.success("Comprador seu login foi efetuado com sucesso!");
           navigate("/medicamentos");
         }
       }
