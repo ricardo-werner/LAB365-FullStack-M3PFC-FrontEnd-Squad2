@@ -3,24 +3,32 @@ import {
   Route,
   Routes,
   Navigate,
-} from 'react-router-dom';
-import FinalizarCompraPage from './pages/FinalizarCompra/FinalizarCompraPage';
-import MedicamentosListaComprador from './pages/Medicamentos/MedicamentosListaComprador';
-import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
-import { Login } from './pages/Login';
-import { AdminDashboard } from './pages/Dashboard/Dashboard';
-import { AuthProvider, AuthContext } from './contexts/auth';
-import { useContext } from 'react';
-import CadastroUsuario from './pages/CadastrarUsuario/cadastroUsuario';
-import Navegacao from './pages/SideBar/Navegacao';
+} from "react-router-dom";
+import FinalizarCompraPage from "./pages/FinalizarCompra/FinalizarCompraPage";
+import MedicamentosListaComprador from "./pages/Medicamentos/MedicamentosListaComprador";
+import MedicamentoCreate from "./pages/Medicamentos/MedicamentoCreate";
+import { Login } from "./pages/Login/Login";
+import { AdminDashboard } from "./pages/Dashboard/Dashboard";
+import { AuthProvider, AuthContext } from "./contexts/auth";
+import { useContext } from "react";
+import CadastroUsuario from "./pages/CadastrarUsuario/CadastroUsuario";
+import Navegacao from "./pages/SideBar/Navegacao";
+import { toast } from "react-toastify";
 
 const AppRouter = () => {
-  const Private = ({ children }) => {
-    const { authenticated, loading } = useContext(AuthContext);
-    if (loading) {
-      return <div className="loading">Carregando...</div>;
+  const PrivateAdmin = ({ children }) => {
+    //Verifica se o usuário está autenticado e se é admin
+    const { authenticated, user } = useContext(AuthContext);
+    if (!authenticated || user.tipoUsuario !== "Administrador") {
+      toast.error("Acesso negado para esse tipo de usuário.");
+      return <Navigate to="/" />;
     }
-    if (!authenticated) {
+    return children; //Se estiver autenticado, retorna o children
+  };
+  const PrivateComprador = ({ children }) => {
+    //Verifica se o usuário é um comprador
+    const { authenticated, user } = useContext(AuthContext);
+    if (!authenticated || user.tipoUsuario !== "Comprador") {
       return <Navigate to="/" />;
     }
     return children; //Se estiver autenticado, retorna o children
@@ -36,25 +44,51 @@ const AppRouter = () => {
             exact
             path="/dashboard"
             element={
-              <Private>
+              <PrivateAdmin>
                 <AdminDashboard />
-              </Private>
+              </PrivateAdmin>
             }
           />
           <Route
             path="/admin/cadastro/usuario"
             element={
-              <Private>
+              <PrivateAdmin>
                 <CadastroUsuario />
-              </Private>
+              </PrivateAdmin>
+            }
+          />
+          <Route
+            path="/medicamentos"
+            element={
+              <PrivateComprador>
+                <Medicamentos />
+              </PrivateComprador>
+            }
+          />
+          <Route
+            path="/medicamentos/create"
+            element={
+              <PrivateAdmin>
+                <MedicamentoCreate />
+              </PrivateAdmin>
             }
           />
           <Route
             path="/medicamentosCompradores"
-            element={<MedicamentosListaComprador />}
+            element={
+              <PrivateComprador>
+                <MedicamentosListaComprador />
+              </PrivateComprador>
+            }
           />
-          <Route path="/medicamentos/create" element={<MedicamentoCreate />} />
-          <Route path="/finalizar" element={<FinalizarCompraPage />} />
+          <Route
+            path="/finalizar"
+            element={
+              <PrivateComprador>
+                <FinalizarCompraPage />
+              </PrivateComprador>
+            }
+          />
         </Routes>
       </AuthProvider>
     </Router>

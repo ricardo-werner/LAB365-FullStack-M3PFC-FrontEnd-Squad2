@@ -1,6 +1,6 @@
-import "./Login.css";
+import "./login.css";
 import { useContext, useState } from "react";
-import { AuthContext } from "../contexts/auth";
+import { AuthContext } from "../../contexts/auth";
 
 export const Login = () => {
   const { authenticated, login } = useContext(AuthContext);
