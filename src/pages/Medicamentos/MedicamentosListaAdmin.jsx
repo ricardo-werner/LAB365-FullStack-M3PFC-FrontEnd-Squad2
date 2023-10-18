@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
 
-export const MedicamentosListaAdmin = () => {
+export default MedicamentosListaAdmin = () => {
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [itensPorPagina] = useState(20);
