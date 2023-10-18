@@ -74,6 +74,14 @@ const AppRouter = () => {
             }
           />
           <Route
+            path="/medicamentosCompradores"
+            element={
+              <PrivateComprador>
+                <MedicamentosListaComprador /
+              </PrivateComprador>
+            }
+          />
+          <Route
             path="/finalizar"
             element={
               <PrivateComprador>
