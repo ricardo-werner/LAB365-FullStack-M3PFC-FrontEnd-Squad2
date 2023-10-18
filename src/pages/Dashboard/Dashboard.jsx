@@ -16,52 +16,60 @@ export const AdminDashboard = () => {
   const [quantidadeTotalProdutos, setQuantidadeTotalProdutos] = useState();
   const [produtosFiltrados, setProdutosFiltrados] = useState([]);
 
+  const fetchDashboardData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      };
+
+      const dashboardResponse = await api.get(
+        `/vendas/admin/dashboard`,
+        config
+      );
+      setTotalVendas(dashboardResponse.data.totalVendas.toFixed(2) || '0.00');
+      setTotalQuantidadeVendida(
+        dashboardResponse.data.totalQuantidadeVendida || 0
+      );
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  // Função para buscar os produtos em estoque do usuário
+  const fetchProdutosEmEstoque = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      };
+
+      const offset = (paginaAtual - 1) * itensPorPagina;
+      const produtosResponse = await api.get(
+        `produto/${offset}/${itensPorPagina}`,
+        config
+      );
+
+      const produtosFiltrados = produtosResponse.data.resultado.filter(
+        (produto) => produto.usuarioId === user.id
+      );
+
+      setProdutosFiltrados(produtosFiltrados);
+      setQuantidadeTotalProdutos(produtosFiltrados.length);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const config = {
-          headers: {
-            Authorization: `${token}`,
-          },
-        };
+    fetchDashboardData();
+    fetchProdutosEmEstoque();
+  }, [paginaAtual, itensPorPagina, user]);
 
-        const offset = (paginaAtual - 1) * itensPorPagina;
-        // Faz a chamada assíncrona para buscar os dados do Dashboard
-
-        const dashboardResponse = await api.get(
-          `/vendas/admin/dashboard`,
-          config
-        );
-        const produtosResponse = await api.get(
-          `produto/${offset}/${itensPorPagina}`,
-          config
-        );
-
-        setProdutosEmEstoque(produtosResponse.data);
-        setTotalVendas(dashboardResponse.data.totalVendas.toFixed(2) || '0.00');
-        setTotalQuantidadeVendida(
-          dashboardResponse.data.totalQuantidadeVendida || 0
-        );
-
-        // Atualize a variável produtosFiltrados
-        const filtrados =
-          produtosEmEstoque.resultado &&
-          produtosEmEstoque.resultado.filter((produto) => {
-            return produto.usuarioId === user.id;
-          });
-
-        setProdutosFiltrados(filtrados);
-
-        // Atualize a quantidade total de produtos
-        setQuantidadeTotalProdutos(filtrados.length);
-      } catch (error) {
-        toast.error(error.response.data.message);
-      }
-    };
-
-    fetchData();
-  }, [paginaAtual, itensPorPagina, user, produtosEmEstoque.resultado]);
   const { logout } = useContext(AuthContext);
   const handleLogout = () => {
     logout();
