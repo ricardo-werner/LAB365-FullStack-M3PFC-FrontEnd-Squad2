@@ -25,13 +25,14 @@ export default function MedicamentosListaComprador() {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
-        const response = await api.get(
-          `http://localhost:3333/api/produto/${offset}/${itensPorPagina}`,
-          { params: { nomeProduto: pesquisar } }
-        );
+        const response = await api.get(`produto/${offset}/${itensPorPagina}`, {
+          params: { nomeProduto: pesquisar },
+        });
 
-        if (Array.isArray(response.data.resultados)) {
-          setMedicamentos(response.data.resultados);
+        console.log(response, "response");
+
+        if (Array.isArray(response.data.resultado)) {
+          setMedicamentos(response.data.resultado);
           setTotalMedicmentos(response.data.contar);
         } else {
           console.log("Dados da Api não são um array", response.data);
@@ -44,6 +45,7 @@ export default function MedicamentosListaComprador() {
     getMedicamentos();
   }, [paginaAtual, itensPorPagina, pesquisar]);
 
+  console.log(totalMedicamentos, "wwww");
   const notificacaoAdicionadoCarrinho = (item) =>
     toast.success(`${item.nomeProduto} adicionado ao carrinho!`, {
       position: "top-center",
@@ -82,11 +84,6 @@ export default function MedicamentosListaComprador() {
   const handlePesquisar = (e) => {
     setPesquisar(e.target.value);
     setPaginaAtual(1);
-  };
-
-  const hasNextPage = () => {
-    const currentPageEnd = paginaAtual * itensPorPagina;
-    return currentPageEnd < totalMedicamentos;
   };
 
   return (
