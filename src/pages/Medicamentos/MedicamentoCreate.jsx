@@ -1,34 +1,23 @@
 import React, { useState } from "react";
-const apiUrl = process.env.REACT_APP_API_URL;
+import { api } from "../../service/api";
+import { toast } from "react-toastify";
 
 function MedicamentoCreate() {
-  const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
+  // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
   const [nomeProduto, setNomeProduto] = useState("");
   const [nomeLab, setNomeLab] = useState("");
   const [imagemProduto, setImagemProduto] = useState("");
   const [dosagem, setDosagem] = useState("");
-  const [tipoProduto, setTipoProduto] = useState("");
+  const [tipoProduto, setTipoProduto] = useState("Controlado");
   const [precoUnitario, setPrecoUnitario] = useState("");
   const [totalEstoque, setTotalEstoque] = useState(0);
   const [descricao, setDescricao] = useState("");
-  const [submitted, setSubmitted] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const cadastraMedicamento = async (event) => {
     event.preventDefault();
-    console.log([
-      usuarioId,
-      nomeProduto,
-      nomeLab,
-      imagemProduto,
-      dosagem,
-      tipoProduto,
-      precoUnitario,
-      totalEstoque,
-      descricao,
-    ]);
 
     const formData = new FormData();
-    formData.append("usuarioId", usuarioId);
     formData.append("nomeProduto", nomeProduto);
     formData.append("nomeLab", nomeLab);
     formData.append("imagemProduto", imagemProduto);
@@ -44,28 +33,19 @@ function MedicamentoCreate() {
     let formDataJsonString = JSON.stringify(formDataObject);
 
     try {
-      const response = await fetch(
-        `${apiUrl}/produtos/admin/`,
-
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: formDataJsonString,
-        }
-      );
+      console.log(formDataObject, "formDataObject");
+      console.log(formDataJsonString, "formDataJsonString");
+      const response = await api.post("/produtos/admin/", formDataObject); //precisa enviar para o banco o formDataObject que está no formato que o banco está esperando. O formDataJsonString está formatando os nomes dos campos como string ("tipoProduto") e não é isso que o banco espera
 
       if (response.ok) {
         setNomeProduto("");
         setNomeLab("");
         setSubmitted(true);
-      } else {
-        console.log("Falha cadastrando o medicamento");
       }
+      toast.success("Produto cadastrado com sucesso!");
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.error);
+      console.log(error.response.data, "repon");
     }
   };
 
@@ -85,7 +65,7 @@ function MedicamentoCreate() {
                 onSubmit={cadastraMedicamento}
                 noValidate
               >
-                <label for="nomeProduto" className="mb-2">
+                <label htmlFor="nomeProduto" className="mb-2">
                   <span>Nome do Medicamento</span>
                   <input
                     name="nomeProduto"
@@ -103,7 +83,7 @@ function MedicamentoCreate() {
                   </span>
                 </label>
 
-                <label for="nomeLab" className="mb-2">
+                <label htmlFor="nomeLab" className="mb-2">
                   <span>Nome do Laboratório</span>
                   <input
                     name="nomeLab"
@@ -121,7 +101,7 @@ function MedicamentoCreate() {
                   </span>
                 </label>
 
-                <label for="imagemProduto" className="mb-2">
+                <label htmlFor="imagemProduto" className="mb-2">
                   <span>Link da Imagem</span>
                   <input
                     name="imagemProduto"
@@ -139,7 +119,7 @@ function MedicamentoCreate() {
                   </span>
                 </label>
 
-                <label for="dosagem" className="mb-2">
+                <label htmlFor="dosagem" className="mb-2">
                   <span>Dosagem</span>
                   <input
                     name="dosagem"
@@ -157,25 +137,21 @@ function MedicamentoCreate() {
                   </span>
                 </label>
 
-                <label for="tipoProduto" className="mb-2">
+                <label htmlFor="tipoProduto" className="mb-2">
                   <span>Tipo de Medicamento</span>
-                  <input
+                  <select
                     name="tipoProduto"
                     id="tipoProduto"
-                    type="text"
-                    className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
+                    className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800"
                     value={tipoProduto}
                     onChange={(e) => setTipoProduto(e.target.value)}
-                    placeholder="Controlado / Não Controlado "
-                    required
-                    pattern="(Controlado|Não Controlado)"
-                  />
-                  <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                    O Tipo de Medicamento deve ser Controlado ou Não Controlado
-                  </span>
+                  >
+                    <option value="Controlado">Controlado</option>
+                    <option value="Não Controlado">Não Controlado</option>
+                  </select>
                 </label>
 
-                <label for="precoUnitario" className="mb-2">
+                <label htmlFor="precoUnitario" className="mb-2">
                   <span>Preço</span>
                   <input
                     name="precoUnitario"
@@ -195,7 +171,7 @@ function MedicamentoCreate() {
                   </span>
                 </label>
 
-                <label for="estoque" className="mb-2">
+                <label htmlFor="estoque" className="mb-2">
                   <span>Estoque</span>
                   <input
                     name="estoque"
@@ -212,7 +188,7 @@ function MedicamentoCreate() {
                   </span>
                 </label>
 
-                <label for="descricao">
+                <label htmlFor="descricao">
                   <span>Descrição</span>
                   <textarea
                     name="descricao"
@@ -226,7 +202,7 @@ function MedicamentoCreate() {
                 </label>
                 <button
                   type="submit"
-                  class="mt-2 bg-blue-500 py-3 rounded-md text-white group-invalid:pointer-events-none group-invalid:opacity-50"
+                  className="mt-2 bg-blue-500 py-3 rounded-md text-white group-invalid:pointer-events-none group-invalid:opacity-50"
                 >
                   Efetuar Cadastro
                 </button>
