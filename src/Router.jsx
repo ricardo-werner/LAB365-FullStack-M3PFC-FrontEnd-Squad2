@@ -13,6 +13,7 @@ import { AuthProvider, AuthContext } from './contexts/auth';
 import { useContext } from 'react';
 import CadastroUsuario from './pages/CadastrarUsuario/cadastroUsuario';
 import Navegacao from './pages/SideBar/Navegacao';
+import { ListarVendas } from './pages/ListarVendas/ListarVendas';
 
 const AppRouter = () => {
   const Private = ({ children }) => {
@@ -46,6 +47,14 @@ const AppRouter = () => {
             element={
               <Private>
                 <CadastroUsuario />
+              </Private>
+            }
+          />
+           <Route
+            path="/admin/vendas"
+            element={
+              <Private>
+                <ListarVendas />
               </Private>
             }
           />
