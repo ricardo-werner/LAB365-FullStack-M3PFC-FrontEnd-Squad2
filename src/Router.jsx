@@ -11,7 +11,7 @@ import { Login } from "./pages/Login/Login";
 import { AdminDashboard } from "./pages/Dashboard/Dashboard";
 import { AuthProvider, AuthContext } from "./contexts/auth";
 import { useContext } from "react";
-import CadastroUsuario from "./pages/CadastrarUsuario/cadastroUsuario";
+import CadastroUsuario from "./pages/CadastrarUsuario/CadastroUsuario";
 import Navegacao from "./pages/SideBar/Navegacao";
 import { toast } from "react-toastify";
 
