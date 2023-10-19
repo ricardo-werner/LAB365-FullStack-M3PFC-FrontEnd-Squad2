@@ -1,12 +1,13 @@
-import { defineConfig } from "vite"
-import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-export default defineConfig(async () => {
-  const mdx = await import("@mdx-js/rollup")
+// https://vitejs.dev/config/
+export default defineConfig(({  }) => {
   return {
     optimizeDeps: {
       include: ["react/jsx-runtime"],
     },
-    plugins: [react(), mdx.default({ remarkPlugins: [] })],
-  }
-})
+    plugins: [react()],
+  };
+});
+
