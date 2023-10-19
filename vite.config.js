@@ -8,6 +8,6 @@ export default defineConfig(({ mode }) => {
     define: {
       "process.env": env,
     },
-    plugins: [react()],
+    plugins: [react({ jsxImportSource: "@emotion/react" })],
   };
 });
