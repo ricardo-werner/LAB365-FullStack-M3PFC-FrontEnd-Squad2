@@ -9,6 +9,8 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null); // <--- aqui é onde você configura o estado do usuário
   const [loading, setLoading] = useState(true);
+  const [tipoUsuario, setTipoUsuario] = useState("");
+  const [nomeCompleto, setNomeCompleto] = useState("");
 
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem("usuario");
@@ -27,10 +29,12 @@ export const AuthProvider = ({ children }) => {
       });
       if (response.status === 200) {
         const usuarioLogado = response.data; //Pega resposta do backend
-        const tipoUsuario = usuarioLogado.tipoUsuario; //Pega o tipo de usuário
+        setTipoUsuario(usuarioLogado.tipoUsuario); //Muda o valor do UseState tipoUsuario
+        setNomeCompleto(usuarioLogado.nomeCompleto); //Muda o valor do UseState nomeCompleto
         const token = response.data.token; //Pega o token
         localStorage.setItem("usuario", JSON.stringify(usuarioLogado));
         localStorage.setItem("token", token); //Salva o token no localstorage
+        
 
         //Configurar token no headers do axios
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -59,7 +63,7 @@ export const AuthProvider = ({ children }) => {
   };
   return (
     <AuthContext.Provider
-      value={{ authenticated: !!user, user, loading, login, logout }}
+      value={{ authenticated: !!user, user, loading, login, logout, setTipoUsuario, setNomeCompleto, tipoUsuario, nomeCompleto}}
     >
       {children}
     </AuthContext.Provider>
