@@ -17,11 +17,12 @@ import MedicationIcon from '@mui/icons-material/Medication';
 
 export default function Sidebar({ state, setState, toggleDrawer }) {
     const menuItems = [
-        { text: 'Produtos', icon: <MedicationIcon />, route: 'medicamentos' },
-        { text: 'Vendas', icon: <MonetizationOnIcon />, route: 'medicamentos' },
-        { text: 'Resultados de Vendas', icon: <AdminPanelSettingsIcon />, route: 'dashboard' },
+        { text: 'Produtos', icon: <MedicationIcon />, route: '/medicamentos' },
+        { text: 'Cadastrar Produto', icon: <MedicationIcon />, route: '/medicamentos/create' },
+        { text: 'Vendas', icon: <MonetizationOnIcon />, route: '/medicamentos' },
+        { text: 'Resultados de Vendas', icon: <AdminPanelSettingsIcon />, route: '/dashboard' },
         { text: 'Usuários', icon: <AccountCircleIcon />, route: '/' },
-        { text: 'FAQ', icon: <LiveHelpIcon />, route: 'faq' },
+        { text: 'FAQ', icon: <LiveHelpIcon />, route: '/faq' },
         { text: 'Sair', icon: <LogoutIcon />, route: '/' },
     ];
 
