@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../contexts/auth";
 
 export default function  MedicamentosListaAdmin() {
+  // const { user } = useContext(AuthContext);
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [itensPorPagina] = useState(30);
@@ -49,8 +51,12 @@ export default function  MedicamentosListaAdmin() {
           }
         );
 
-        if (Array.isArray(response.data.resultados)) {
-          setMedicamentos(response.data.resultados);
+        if (Array.isArray(response.data.resultado)) {
+          // const produtosFiltrados = response.data.resultado.filter(
+          //   (produto) => produto.usuarioId === user.id
+          // );
+          
+          setMedicamentos(response.data.resultado);
           setTotalMedicamentos(response.data.contar);
         } else {
           console.log("Dados da Api não são um array", response.data);
@@ -132,6 +138,7 @@ export default function  MedicamentosListaAdmin() {
             <th>Tipo de Medicamento</th>
             <th>Preço Unitário</th>
             <th>Descrição</th>
+            <th>Estoque</th>
             <th>Ações</th>
           </tr>
         </thead>
