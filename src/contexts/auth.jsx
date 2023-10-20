@@ -7,7 +7,8 @@ import { api } from "../service/api";
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null); // <--- aqui é onde você configura o estado do usuário
+  const usuarioRecuperado = JSON.parse(localStorage.getItem("usuario")) || null;
+  const [user, setUser] = useState(usuarioRecuperado); // <--- aqui é onde você configura o estado do usuário
   const [loading, setLoading] = useState(true);
   const [tipoUsuario, setTipoUsuario] = useState("");
   const [nomeCompleto, setNomeCompleto] = useState("");
@@ -16,6 +17,8 @@ export const AuthProvider = ({ children }) => {
     const usuarioRecuperado = localStorage.getItem("usuario");
     if (usuarioRecuperado) {
       setUser(JSON.parse(usuarioRecuperado)); //Muda o valor do UseState User
+      setTipoUsuario(JSON.parse(usuarioRecuperado).tipoUsuario);
+      setNomeCompleto(JSON.parse(usuarioRecuperado).nomeCompleto);
     }
     setLoading(false);
   }, []);
@@ -34,15 +37,18 @@ export const AuthProvider = ({ children }) => {
         const token = response.data.token; //Pega o token
         localStorage.setItem("usuario", JSON.stringify(usuarioLogado));
         localStorage.setItem("token", token); //Salva o token no localstorage
-        
+
 
         //Configurar token no headers do axios
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         setUser(usuarioLogado);
-        if (tipoUsuario === "Administrador") {
+
+
+
+        if (usuarioLogado.tipoUsuario === "Administrador") {
           toast.success("Administrador seu login foi efetuado com sucesso!");
           navigate("/dashboard");
-        } else if (tipoUsuario === "Comprador") {
+        } else if (usuarioLogado.tipoUsuario === "Comprador") {
           toast.success("Comprador seu login foi efetuado com sucesso!");
           navigate("/medicamentos");
         }
@@ -63,7 +69,7 @@ export const AuthProvider = ({ children }) => {
   };
   return (
     <AuthContext.Provider
-      value={{ authenticated: !!user, user, loading, login, logout, setTipoUsuario, setNomeCompleto, tipoUsuario, nomeCompleto}}
+      value={{ authenticated: !!user, user, loading, login, logout, setTipoUsuario, setNomeCompleto, tipoUsuario, nomeCompleto }}
     >
       {children}
     </AuthContext.Provider>
