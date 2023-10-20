@@ -4,40 +4,71 @@ import { TbPigMoney } from 'react-icons/tb';
 import { BsFillBarChartFill } from 'react-icons/bs';
 import { api } from '../../service/api';
 import { AuthContext } from '../../contexts/auth';
+import { toast } from 'react-toastify';
 
 export const AdminDashboard = () => {
+  const { user } = useContext(AuthContext);
   const [totalVendas, setTotalVendas] = useState(0);
   const [totalQuantidadeVendida, setTotalQuantidadeVendida] = useState(0);
   const [produtosEmEstoque, setProdutosEmEstoque] = useState([]);
+  const [paginaAtual, setPaginaAtual] = useState(1);
+  const [itensPorPagina] = useState(20);
+  const [quantidadeTotalProdutos, setQuantidadeTotalProdutos] = useState();
+  const [produtosFiltrados, setProdutosFiltrados] = useState([]);
+
+  const fetchDashboardData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      };
+
+      const dashboardResponse = await api.get(
+        `/vendas/admin/dashboard`,
+        config
+      );
+      setTotalVendas(dashboardResponse.data.totalVendas.toFixed(2) || '0.00');
+      setTotalQuantidadeVendida(
+        dashboardResponse.data.totalQuantidadeVendida || 0
+      );
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
+
+  // Função para buscar os produtos em estoque do usuário
+  const fetchProdutosEmEstoque = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `${token}`,
+        },
+      };
+
+      const offset = (paginaAtual - 1) * itensPorPagina;
+      const produtosResponse = await api.get(
+        `produto/${offset}/${itensPorPagina}`,
+        config
+      );
+
+      const produtosFiltrados = produtosResponse.data.resultado.filter(
+        (produto) => produto.usuarioId === user.id
+      );
+
+      setProdutosFiltrados(produtosFiltrados);
+      setQuantidadeTotalProdutos(produtosFiltrados.length);
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const config = {
-          headers: {
-            Authorization: `${token}`,
-          },
-        };
-
-        // Faz a chamada assíncrona para buscar os dados do Dashboard
-        const [dashboardResponse, produtosResponse] = await Promise.all([
-          api.get(`/vendas/admin/dashboard`, config),
-          api.get(`/produtos/admin`, config),
-        ]);
-
-        setProdutosEmEstoque(produtosResponse.data);
-        setTotalVendas(dashboardResponse.data.totalVendas.toFixed(2) || '0.00');
-        setTotalQuantidadeVendida(
-          dashboardResponse.data.totalQuantidadeVendida || 0
-        );
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+    fetchDashboardData();
+    fetchProdutosEmEstoque();
+  }, [paginaAtual, itensPorPagina, user]);
 
   const { logout } = useContext(AuthContext);
   const handleLogout = () => {
@@ -92,8 +123,8 @@ export const AdminDashboard = () => {
           <h3 className="text-lg font-semibold text-slate-700 mb-4">
             Produtos em Estoque
           </h3>
-          {produtosEmEstoque.produtos &&
-          produtosEmEstoque.produtos.length > 0 ? (
+
+          {produtosFiltrados && produtosFiltrados.length > 0 ? (
             <table className="table-auto w-full">
               <thead className="">
                 <tr className="border-2 border-slate-300 text-slate-500">
@@ -104,12 +135,12 @@ export const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody className="">
-                {produtosEmEstoque.produtos.map((produto) => (
+                {produtosFiltrados.map((produto) => (
                   <tr key={produto.id} className="border border-slate-300">
-                    <td className='py-1'>{produto.id}</td>
-                    <td className='py-1'>{produto.nomeProduto}</td>
-                    <td className='py-1'>{produto.precoUnitario}</td>
-                    <td className='py-1'>{produto.totalEstoque}</td>
+                    <td className="py-1">{produto.id}</td>
+                    <td className="py-1">{produto.nomeProduto}</td>
+                    <td className="py-1">{produto.precoUnitario}</td>
+                    <td className="py-1">{produto.totalEstoque}</td>
                   </tr>
                 ))}
               </tbody>
@@ -117,6 +148,23 @@ export const AdminDashboard = () => {
           ) : (
             <p>Nenhum produto em estoque.</p>
           )}
+        </div>
+        <div className="pagination flex justify-between mt-4 ">
+          <button
+            className="py-[9px] pl-10 pr-10 hover:border hover:border-green-500 rounded"
+            onClick={() => setPaginaAtual(paginaAtual - 1)}
+            disabled={paginaAtual <= 1}
+          >
+            Anterior
+          </button>
+          <span>{paginaAtual}</span>
+          <button
+            className="py-[9px] pr-10 pl-10 hover:border hover:border-green-500 rounded"
+            onClick={() => setPaginaAtual(paginaAtual + 1)}
+            disabled={paginaAtual * itensPorPagina >= quantidadeTotalProdutos}
+          >
+            Próximo
+          </button>
         </div>
       </div>
     </section>
