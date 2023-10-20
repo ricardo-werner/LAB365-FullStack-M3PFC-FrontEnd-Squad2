@@ -46,7 +46,7 @@ const AppRouter = () => {
           <Route exact path="/*" element={<PageNotFound />} />
           <Route
             exact
-            path="/dashboard"
+            path="/admin/dashboard"
             element={
               <PrivateAdmin>
                 <AdminDashboard />
