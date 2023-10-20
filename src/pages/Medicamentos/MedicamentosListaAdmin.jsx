@@ -28,7 +28,7 @@ export default function  MedicamentosListaAdmin() {
     setSelecionarMedicamentoId(medicamentoId);
 
     try {
-      const response = await api.get(`/produto/admin/${medicamentoId}`);
+      const response = await api.get(`/produto/${medicamentoId}`);
       const infoMedicamento = response.data;
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
@@ -251,7 +251,7 @@ export default function  MedicamentosListaAdmin() {
                 className="py-2 px-3 rounded border flex w-full"
                 type="text"
                 id="tipoProduto"
-                placeholder="Tipo de Usuário"
+                placeholder="Tipo de Medicamento"
                 value={medicamentoEditado.tipoProduto}
                 onChange={(e) =>
                   setMedicamentoEditado({
@@ -263,7 +263,7 @@ export default function  MedicamentosListaAdmin() {
             </div>
             <div>
               <label htmlFor="descricao" className="text-slate-600 mb-2 mt-3">
-                Descricao:
+                Descrição:
               </label>
               <input
                 className="py-2 px-3 rounded border flex w-full"
