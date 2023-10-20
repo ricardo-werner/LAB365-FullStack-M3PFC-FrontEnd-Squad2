@@ -18,7 +18,7 @@ export default function Sidebar({ state, setState, toggleDrawer }) {
         { text: 'Produtos', icon: <MedicationIcon />, route: '#' },
         { text: 'Cadastrar Medicamento', icon: <MedicationIcon />, route: '/admin/medicamentos/create' },
         { text: 'Vendas', icon: <MonetizationOnIcon />, route: '#' },
-        { text: 'Resultados de Vendas', icon: <AdminPanelSettingsIcon />, route: '/dashboard' },
+        { text: 'Resultados de Vendas', icon: <AdminPanelSettingsIcon />, route: '/admin/dashboard' },
         { text: 'Usuários', icon: <AccountCircleIcon />, route: '/admin/cadastro/usuario' },
     ];
 
