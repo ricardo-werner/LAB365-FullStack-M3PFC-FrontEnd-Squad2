@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,6 +14,7 @@ import { ListItemText } from '@mui/material';
 import { UseAuth } from '../../Hooks/useAuth';
 
 export default function Navbar({ children }) {
+  const navigate = useNavigate();
   const { tipoUsuario, nomeCompleto, setTipoUsuario, setNomeCompleto } = UseAuth();
   const [nome, setNome] = useState("");
   const [drawerState, setDrawerState] = React.useState({
@@ -36,7 +37,7 @@ export default function Navbar({ children }) {
     localStorage.clear();
     setNomeCompleto("");
     setTipoUsuario("");
-    Navigate("/")
+    navigate("/")
 
   };
 
