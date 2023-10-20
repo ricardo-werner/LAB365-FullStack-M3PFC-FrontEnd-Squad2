@@ -4,11 +4,8 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import LogoutIcon from '@mui/icons-material/Logout';
-import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -18,13 +15,11 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar({ state, setState, toggleDrawer }) {
     const menuItems = [
-        { text: 'Produtos', icon: <MedicationIcon />, route: '/medicamentos' },
-        { text: 'Cadastrar Produto', icon: <MedicationIcon />, route: '/medicamentos/create' },
-        { text: 'Vendas', icon: <MonetizationOnIcon />, route: '/medicamentos' },
+        { text: 'Produtos', icon: <MedicationIcon />, route: '#' },
+        { text: 'Cadastrar Medicamento', icon: <MedicationIcon />, route: '/admin/medicamentos/create' },
+        { text: 'Vendas', icon: <MonetizationOnIcon />, route: '#' },
         { text: 'Resultados de Vendas', icon: <AdminPanelSettingsIcon />, route: '/dashboard' },
-        { text: 'Usuários', icon: <AccountCircleIcon />, route: '/' },
-        { text: 'FAQ', icon: <LiveHelpIcon />, route: '/faq' },
-        { text: 'Sair', icon: <LogoutIcon />, route: '/' },
+        { text: 'Usuários', icon: <AccountCircleIcon />, route: '/admin/cadastro/usuario' },
     ];
 
     const list = (anchor) => (
