@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,14 +14,16 @@ import { ListItemText } from '@mui/material';
 import { UseAuth } from '../../Hooks/useAuth';
 
 export default function Navbar({ children }) {
+  const navigate = useNavigate();
   const { tipoUsuario, nomeCompleto, setTipoUsuario, setNomeCompleto } = UseAuth();
-  const [nome, setNome] = useState("");
   const [drawerState, setDrawerState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -36,7 +38,7 @@ export default function Navbar({ children }) {
     localStorage.clear();
     setNomeCompleto("");
     setTipoUsuario("");
-    Navigate("/")
+    navigate("/")
 
   };
 
@@ -49,11 +51,15 @@ export default function Navbar({ children }) {
     }
   }, [tipoUsuario, nomeCompleto]);
 
+  const navbarStyles = {
+    backgroundColor: "rgb(32,193,148)",
+    color: "#000",
+  };
 
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" sx={navbarStyles}>
           <Toolbar>
             {tipoUsuario === "Administrador" && (
               <IconButton
@@ -77,15 +83,18 @@ export default function Navbar({ children }) {
             </Typography>
 
             <List className="d-flex flexdirection-row">
-              <ListItem onClick={toggleDrawer(false)} style={{ cursor: 'pointer' }}>
+              <ListItem component={Link} to="/minhasCompras" style={{ cursor: 'pointer' }}>
                 <ListItemText primary="Minhas Compras" />
               </ListItem>
-              <ListItem onClick={toggleDrawer(false)} style={{ cursor: 'pointer' }}>
-                <ListItemText primary="Medicamentos" />
+              <ListItem component={Link} to="/medicamentosCompradores" style={{ cursor: 'pointer' }}>
+                <ListItemText primary="Medicamentos Comprador" />
               </ListItem>
               <ListItem>
                 <Avatar />
                 <ListItemText primary={nomeCompleto} />
+              </ListItem>
+              <ListItem component={Link} to="/faq" style={{ cursor: 'pointer' }}>
+                <ListItemText primary="FAQ" />
               </ListItem>
               <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
                 <ListItemText primary="Sair" />

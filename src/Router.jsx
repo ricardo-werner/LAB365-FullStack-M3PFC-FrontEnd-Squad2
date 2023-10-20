@@ -14,6 +14,8 @@ import { useContext } from 'react';
 import CadastroUsuario from './pages/CadastrarUsuario/CadastroUsuario';
 import Navegacao from './pages/SideBar/Navegacao';
 import { toast } from 'react-toastify';
+import FAQ from './pages/Duvidas/Faq';
+import PageNotFound from './pages/SideBar/404';
 
 const AppRouter = () => {
   const PrivateAdmin = ({ children }) => {
@@ -37,9 +39,11 @@ const AppRouter = () => {
   return (
     <Router>
       <AuthProvider>
-      <Navegacao />
+        <Navegacao />
         <Routes>
           <Route exact path="/" element={<Login />} />
+          <Route exact path="/faq" element={<FAQ />} />
+          <Route exact path="/*" element={<PageNotFound />} />
           <Route
             exact
             path="/dashboard"
@@ -66,7 +70,7 @@ const AppRouter = () => {
             }
           />
           <Route
-            path="/medicamentos/create"
+            path="/admin/medicamentos/create"
             element={
               <PrivateAdmin>
                 <MedicamentoCreate />

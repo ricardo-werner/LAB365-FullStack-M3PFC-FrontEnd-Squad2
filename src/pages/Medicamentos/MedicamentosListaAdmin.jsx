@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../contexts/auth";
 
-export const MedicamentosListaAdmin = () => {
+export default function  MedicamentosListaAdmin() {
+  // const { user } = useContext(AuthContext);
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
-  const [itensPorPagina] = useState(20);
+  const [itensPorPagina] = useState(30);
   const [pesquisar, setPesquisar] = useState("");
   const [abrirModal, setAbrirModal] = useState(false);
   const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState("");
   const [totalMedicamentos, setTotalMedicamentos] = useState(0);
   const [medicamentoEditado, setMedicamentoEditado] = useState({
-    nomeCompleto: "",
-    email: "",
-    cpf: "",
-    telefone: "",
-    tipoUsuario: "",
+    id: "",
+    nomeProduto: "",
+    dosagem: "",
+    tipoProduto: "",
+    precoUnitario : "",
+    descricao: "",
+    totalEstoque: "",
   });
   const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
 
@@ -24,7 +28,7 @@ export const MedicamentosListaAdmin = () => {
     setSelecionarMedicamentoId(medicamentoId);
 
     try {
-      const response = await api.get(`/comprador/admin/${medicamentoId}`);
+      const response = await api.get(`/produto/${medicamentoId}`);
       const infoMedicamento = response.data;
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
@@ -40,18 +44,25 @@ export const MedicamentosListaAdmin = () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
-        const response = await api.get(`/produto/${offset}/${itensPorPagina}`, {
-          params: { nomeCompleto: pesquisar },
-        });
+        const response = await api.get(
+          `/produto/${offset}/${itensPorPagina}`,
+          {
+            params: { nomeMedicamento: pesquisar },
+          }
+        );
 
-        if (Array.isArray(response.data.resultados)) {
-          setMedicamentos(response.data.resultados);
+        if (Array.isArray(response.data.resultado)) {
+          // const produtosFiltrados = response.data.resultado.filter(
+          //   (produto) => produto.usuarioId === user.id
+          // );
+          
+          setMedicamentos(response.data.resultado);
           setTotalMedicamentos(response.data.contar);
         } else {
           console.log("Dados da Api não são um array", response.data);
         }
       } catch (error) {
-        console.error("Erro ao buscar usuários:", error);
+        console.error("Erro ao buscar medicamentos:", error);
       }
     };
 
@@ -69,7 +80,7 @@ export const MedicamentosListaAdmin = () => {
 
     try {
       const response = await api.patch(
-        `/comprador/admin/${selecionarMedicamentoId}`,
+        `/produto/admin/${selecionarMedicamentoId}`,
         dadosAlterados
       );
 
@@ -88,11 +99,13 @@ export const MedicamentosListaAdmin = () => {
   const handleFecharModal = () => {
     setAbrirModal(false);
     setMedicamentoEditado({
-      nomeCompleto: "",
-      email: "",
-      cpf: "",
-      telefone: "",
-      tipoUsuario: "",
+      id: "",
+      nomeProduto: "",
+      dosagem: "",
+      tipoProduto: "",
+      precoUnitario : "",
+      descricao: "",
+      totalEstoque: "",
     });
     setMedicamentoOriginal({});
   };
@@ -111,7 +124,7 @@ export const MedicamentosListaAdmin = () => {
       <input
         className="py-2 px-3 mb-4 border rounded w-80"
         type="text"
-        placeholder="Filtrar por Nome"
+        placeholder="Pesquisar Medicamento"
         value={pesquisar}
         onChange={handlePesquisar}
       />
@@ -120,27 +133,27 @@ export const MedicamentosListaAdmin = () => {
         <thead>
           <tr className="border-2 border-slate-300 text-slate-500">
             <th>ID</th>
-            <th>CPF</th>
-            <th>Nome Completo</th>
-            <th>Data Nascimento</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Tipo Usuário</th>
+            <th>Nome Medicamento</th>
+            <th>Dosagem</th>
+            <th>Tipo de Medicamento</th>
+            <th>Preço Unitário</th>
+            <th>Descrição</th>
+            <th>Estoque</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {medicamentos.map((usuario) => (
-            <tr key={usuario.id} className="border border-slate-300">
-              <td>{usuario.id}</td>
-              <td>{usuario.cpf}</td>
-              <td>{usuario.nomeCompleto}</td>
-              <td>{usuario.dataNascimento}</td>
-              <td>{usuario.email}</td>
-              <td>{usuario.telefone}</td>
-              <td>{usuario.tipoUsuario}</td>
+          {medicamentos.map((medicamento) => (
+            <tr key={medicamento.id} className="border border-slate-300">
+              <td>{medicamento.id}</td>
+              <td>{medicamento.nomeProduto}</td>
+              <td>{medicamento.dosagem}</td>
+              <td>{medicamento.tipoProduto}</td>
+              <td>{medicamento.precoUnitario}</td>
+              <td>{medicamento.descricao}</td>
+              <td>{medicamento.totalEstoque}</td>
               <td>
-                <button onClick={() => getInfoMedicamento(usuario.id)}>
+                <button onClick={() => getInfoMedicamento(medicamento.id)}>
                   Editar
                 </button>
               </td>
@@ -171,76 +184,115 @@ export const MedicamentosListaAdmin = () => {
         <div className="modal fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center z-50">
           <div className="bg-white p-5 rounded-md shadow w-7/12">
             <h3 className="text-lg font-semibold text-slate-500 mb-4">
-              Editar Usuário
+              Editar Medicamento
             </h3>
             <div>
-              <label htmlFor="email" className="text-slate-600 mb-2 mt-3">
-                Email:
+              <label htmlFor="nomeProduto" className="text-slate-600 mb-2 mt-3">
+                Nome do Medicamento:
               </label>
               <input
                 className="py-2 px-3 rounded border flex w-full"
                 type="text"
-                id="email"
-                placeholder="Email"
-                value={medicamentoEditado.email}
+                id="nomeProduto"
+                placeholder="Descrição"
+                value={medicamentoEditado.nomeProduto}
                 onChange={(e) =>
                   setMedicamentoEditado({
                     ...medicamentoEditado,
-                    email: e.target.value,
+                    nomeProduto: e.target.value,
                   })
                 }
               />
             </div>
             <div>
-              <label htmlFor="cpf" className="text-slate-600 mb-2 mt-3">
-                CPF:
+              <label htmlFor="dosagem" className="text-slate-600 mb-2 mt-3">
+                Dosagem:
               </label>
               <input
                 className="py-2 px-3 rounded border flex w-full"
                 type="text"
-                id="cpf"
-                placeholder="CPF"
-                value={medicamentoEditado.cpf}
+                id="dosagem"
+                placeholder="dosagem"
+                value={medicamentoEditado.dosagem}
                 onChange={(e) =>
                   setMedicamentoEditado({
                     ...medicamentoEditado,
-                    cpf: e.target.value,
+                    dosagem: e.target.value,
                   })
                 }
               />
             </div>
             <div>
-              <label htmlFor="telefone" className="text-slate-600 mb-2 mt-3">
-                Telefone:
+              <label
+                htmlFor="precoUnitario"
+                className="text-slate-600 mb-2 mt-3"
+              >
+                Preço Unitario:
               </label>
               <input
                 className="py-2 px-3 rounded border flex w-full"
                 type="text"
-                id="telefone"
-                placeholder="Telefone"
-                value={medicamentoEditado.telefone}
+                id="precoUnitario"
+                placeholder="precoUnitario"
+                value={medicamentoEditado.precoUnitario}
                 onChange={(e) =>
                   setMedicamentoEditado({
                     ...medicamentoEditado,
-                    telefone: e.target.value,
+                    precoUnitario: e.target.value,
                   })
                 }
               />
             </div>
             <div>
-              <label htmlFor="tipoUsuario" className="text-slate-600 mb-2 mt-3">
-                Tipo de Usuário:
+              <label htmlFor="tipoProduto" className="text-slate-600 mb-2 mt-3">
+                Tipo de Medicamento:
               </label>
               <input
                 className="py-2 px-3 rounded border flex w-full"
                 type="text"
-                id="tipoUsuario"
-                placeholder="Tipo de Usuário"
-                value={medicamentoEditado.tipoUsuario}
+                id="tipoProduto"
+                placeholder="Tipo de Medicamento"
+                value={medicamentoEditado.tipoProduto}
                 onChange={(e) =>
                   setMedicamentoEditado({
                     ...medicamentoEditado,
-                    tipoUsuario: e.target.value,
+                    tipoProduto: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="descricao" className="text-slate-600 mb-2 mt-3">
+                Descrição:
+              </label>
+              <input
+                className="py-2 px-3 rounded border flex w-full"
+                type="text"
+                id="descricao"
+                placeholder="descricao"
+                value={medicamentoEditado.descricao}
+                onChange={(e) =>
+                  setMedicamentoEditado({
+                    ...medicamentoEditado,
+                    descricao: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="totalEstoque" className="text-slate-600 mb-2 mt-3">
+                Estoque:
+              </label>
+              <input
+                className="py-2 px-3 rounded border flex w-full"
+                type="text"
+                id="totalEstoque"
+                placeholder="totalEstoque"
+                value={medicamentoEditado.totalEstoque}
+                onChange={(e) =>
+                  setMedicamentoEditado({
+                    ...medicamentoEditado,
+                    totalEstoque: e.target.value,
                   })
                 }
               />

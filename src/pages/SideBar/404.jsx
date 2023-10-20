@@ -1,9 +1,11 @@
 import React from 'react';
 import { Grid, Button, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function PageNotFound() {
+  const navigate = useNavigate();
   const handleGoBack = () => {
-    window.history.back(); // Volta para a página anterior
+    navigate(-1);
   };
 
   return (
@@ -26,7 +28,11 @@ export default function PageNotFound() {
         <Typography variant='p' component='div'>
           A URL requisitada não foi encontrada em nossos servidores.
         </Typography>
-        <Button variant="contained" color="primary" sx={{ mt: 5 }} onClick={handleGoBack}>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: 'rgb(32, 193, 148)' }}
+          sx={{ mt: 5 }}
+          onClick={handleGoBack}>
           Voltar
         </Button>
       </Grid>
