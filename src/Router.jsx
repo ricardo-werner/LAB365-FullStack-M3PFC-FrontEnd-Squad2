@@ -37,7 +37,7 @@ const AppRouter = () => {
   return (
     <Router>
       <AuthProvider>
-      <Navegacao />
+        <Navegacao />
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route

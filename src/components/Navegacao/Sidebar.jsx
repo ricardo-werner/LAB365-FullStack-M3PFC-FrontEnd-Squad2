@@ -13,6 +13,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import MedicationIcon from '@mui/icons-material/Medication';
+import { Link } from 'react-router-dom';
 
 
 export default function Sidebar({ state, setState, toggleDrawer }) {
@@ -36,10 +37,10 @@ export default function Sidebar({ state, setState, toggleDrawer }) {
             <List>
                 {menuItems.map((item, index) => (
                     <ListItem key={item.text} disablePadding>
-                        <ListItemButton href={item.route}>
+                        <Link to={item.route}>
                             <ListItemIcon>{item.icon}</ListItemIcon>
                             <ListItemText primary={item.text} />
-                        </ListItemButton>
+                        </Link>
                     </ListItem>
                 ))}
                 <Divider />
