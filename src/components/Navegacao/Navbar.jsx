@@ -16,13 +16,14 @@ import { UseAuth } from '../../Hooks/useAuth';
 export default function Navbar({ children }) {
   const navigate = useNavigate();
   const { tipoUsuario, nomeCompleto, setTipoUsuario, setNomeCompleto } = UseAuth();
-  const [nome, setNome] = useState("");
   const [drawerState, setDrawerState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+  
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -50,11 +51,15 @@ export default function Navbar({ children }) {
     }
   }, [tipoUsuario, nomeCompleto]);
 
+  const navbarStyles = {
+    backgroundColor: "rgb(32,193,148)",
+    color: "#000",
+  };
 
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar position="static" sx={navbarStyles}>
           <Toolbar>
             {tipoUsuario === "Administrador" && (
               <IconButton
