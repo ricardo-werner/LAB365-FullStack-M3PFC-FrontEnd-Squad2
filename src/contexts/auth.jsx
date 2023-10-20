@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
           navigate("/dashboard");
         } else if (usuarioLogado.tipoUsuario === "Comprador") {
           toast.success("Comprador seu login foi efetuado com sucesso!");
-          navigate("/medicamentos");
+          navigate("/medicamentosComprador");
         }
       }
     } catch (error) {
