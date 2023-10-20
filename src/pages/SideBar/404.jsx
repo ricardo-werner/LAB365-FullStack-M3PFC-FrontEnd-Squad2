@@ -26,7 +26,7 @@ export default function PageNotFound() {
           Isso é um erro.
         </Typography>
         <Typography variant='p' component='div'>
-          A URL requisitada não foi encontrada em nossos servidores.
+          A URL requisitada não foi encontrada, verifique o endereço digitado.
         </Typography>
         <Button
           variant="contained"
