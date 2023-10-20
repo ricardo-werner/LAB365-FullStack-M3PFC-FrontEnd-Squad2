@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -23,7 +23,7 @@ export default function Navbar({ children }) {
     right: false,
   });
 
-  
+
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -83,15 +83,18 @@ export default function Navbar({ children }) {
             </Typography>
 
             <List className="d-flex flexdirection-row">
-              <ListItem onClick={toggleDrawer(false)} style={{ cursor: 'pointer' }}>
+              <ListItem component={Link} to="/minhasCompras" style={{ cursor: 'pointer' }}>
                 <ListItemText primary="Minhas Compras" />
               </ListItem>
-              <ListItem onClick={toggleDrawer(false)} style={{ cursor: 'pointer' }}>
-                <ListItemText primary="Medicamentos" />
+              <ListItem component={Link} to="/medicamentosCompradores" style={{ cursor: 'pointer' }}>
+                <ListItemText primary="Medicamentos Comprador" />
               </ListItem>
               <ListItem>
                 <Avatar />
                 <ListItemText primary={nomeCompleto} />
+              </ListItem>
+              <ListItem component={Link} to="/faq" style={{ cursor: 'pointer' }}>
+                <ListItemText primary="FAQ" />
               </ListItem>
               <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
                 <ListItemText primary="Sair" />
