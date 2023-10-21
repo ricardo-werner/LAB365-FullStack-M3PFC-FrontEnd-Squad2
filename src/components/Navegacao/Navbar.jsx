@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from './Sidebar';
-import logo from '../../imagens/logo1.jpeg'
+import logo from '../../assets/imagens/logo1.jpeg';
 import { List, ListItem, ListItemIcon } from '@mui/material';
 import { Avatar } from '@mui/material';
 import { ListItemText } from '@mui/material';
