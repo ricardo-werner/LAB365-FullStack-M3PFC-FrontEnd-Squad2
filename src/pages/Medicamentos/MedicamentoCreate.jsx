@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
-import Controlado from "../../assets/imagens/Controlado.png";
-import NaoControlado from "../../assets/imagens/NaoControlado.png";
+import Controlado from "../../imagens/Controlado.png";
+import NaoControlado from "../../imagens/NaoControlado.png";
 
 function MedicamentoCreate() {
   // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
@@ -35,8 +35,8 @@ function MedicamentoCreate() {
     let formDataJsonString = JSON.stringify(formDataObject);
 
     try {
-      console.log(formDataObject, "formDataObject");
-      console.log(formDataJsonString, "formDataJsonString");
+      //console.log(formDataObject, "formDataObject");
+      //console.log(formDataJsonString, "formDataJsonString");
       const response = await api.post("/produtos/admin/", formDataObject); //precisa enviar para o banco o formDataObject que está no formato que o banco está esperando. O formDataJsonString está formatando os nomes dos campos como string ("tipoProduto") e não é isso que o banco espera
 
       if (response.ok) {
@@ -121,13 +121,11 @@ function MedicamentoCreate() {
                       <img
                         src={Controlado}
                         alt="medicamentoControlado"
-                        className="w-20 h-20"
                       />
                     ) : (
                       <img
                         src={NaoControlado}
                         alt="medicamentoNaoControlado"
-                        className="w-20 h-20"
                       />
                     )}
                   </span>
