@@ -55,7 +55,6 @@ const camposForm = [
 const FormCadastrarUsuario = () => {
   const [formData, setFormData] = useState(formDadosIniciais);
   const [showPassword, setShowPassword] = useState(false);
-  const [listaUsuario, setListaUsuario] = useState([]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

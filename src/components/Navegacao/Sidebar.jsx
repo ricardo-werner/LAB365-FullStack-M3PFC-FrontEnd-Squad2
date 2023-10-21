@@ -12,50 +12,65 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import MedicationIcon from '@mui/icons-material/Medication';
 import { Link } from 'react-router-dom';
 
-
 export default function Sidebar({ state, setState, toggleDrawer }) {
-    const menuItems = [
-        { text: 'Produtos', icon: <MedicationIcon />, route: '#' },
-        { text: 'Cadastrar Medicamento', icon: <MedicationIcon />, route: '/admin/medicamentos/create' },
-        { text: 'Vendas', icon: <MonetizationOnIcon />, route: '#' },
-        { text: 'Resultados de Vendas', icon: <AdminPanelSettingsIcon />, route: '/admin/dashboard' },
-        { text: 'Usuários', icon: <AccountCircleIcon />, route: '/admin/cadastro/usuario' },
-    ];
+  const menuItems = [
+    { text: 'Produtos', icon: <MedicationIcon />, route: '#' },
+    {
+      text: 'Cadastrar Medicamento',
+      icon: <MedicationIcon />,
+      route: '/admin/medicamentos/create',
+    },
+    {
+      text: 'Lista de Vendas',
+      icon: <MonetizationOnIcon />,
+      route: '/admin/vendas/lista',
+    },
+    {
+      text: 'Resultados de Vendas',
+      icon: <AdminPanelSettingsIcon />,
+      route: '/admin/dashboard',
+    },
+    {
+      text: 'Usuários',
+      icon: <AccountCircleIcon />,
+      route: '/admin/cadastro/usuario',
+    },
+  ];
 
-    const list = (anchor) => (
-        <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-        >
-            <List>
-                {menuItems.map((item, index) => (
-                    <ListItem key={item.text} disablePadding>
-                        <Link to={item.route}>
-                            <ListItemIcon>{item.icon}</ListItemIcon>
-                            <ListItemText primary={item.text} />
-                        </Link>
-                    </ListItem>
-                ))}
-                <Divider />
-            </List>
-        </Box>
-    );
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {menuItems.map((item, index) => (
+          <ListItem key={item.text} disablePadding>
+            <Link to={item.route}>
+              <ListItemIcon>{item.icon}</ListItemIcon>
+              <ListItemText primary={item.text} />
+            </Link>
+          </ListItem>
+        ))}
+        <Divider />
+      </List>
+    </Box>
+  );
 
-    return (
-        <div>
-            {['left'].map((anchor) => (
-                <React.Fragment key={anchor}>
-                    <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
-                    >
-                        {list(anchor)}
-                    </Drawer>
-                </React.Fragment>
-            ))}
-        </div>
-    );
+  return (
+    <div>
+      {['left'].map((anchor) => (
+        <React.Fragment key={anchor}>
+          <Drawer
+            anchor={anchor}
+            open={state[anchor]}
+            onClose={toggleDrawer(anchor, false)}
+          >
+            {list(anchor)}
+          </Drawer>
+        </React.Fragment>
+      ))}
+    </div>
+  );
 }
