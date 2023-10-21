@@ -12,6 +12,7 @@ export default function  MedicamentosListaAdmin() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState("");
   const [totalMedicamentos, setTotalMedicamentos] = useState(0);
+  const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
   const [medicamentoEditado, setMedicamentoEditado] = useState({
     id: "",
     nomeProduto: "",
@@ -21,7 +22,6 @@ export default function  MedicamentosListaAdmin() {
     descricao: "",
     totalEstoque: "",
   });
-  const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
 
   console.log(selecionarMedicamentoId, "selecionarMedicamentoId");
   const getInfoMedicamento = async (medicamentoId) => {
@@ -30,6 +30,7 @@ export default function  MedicamentosListaAdmin() {
     try {
       const response = await api.get(`/produto/${medicamentoId}`);
       const infoMedicamento = response.data;
+      console.log(infoMedicamento) 
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
       setAbrirModal(true);
@@ -47,7 +48,7 @@ export default function  MedicamentosListaAdmin() {
         const response = await api.get(
           `/produto/${offset}/${itensPorPagina}`,
           {
-            params: { nomeMedicamento: pesquisar },
+            params: { nomeProduto: pesquisar },
           }
         );
 
@@ -87,6 +88,8 @@ export default function  MedicamentosListaAdmin() {
         toast.success("Alterações salvas com sucesso.");
         setAbrirModal(false);
       }
+
+      fetchMedicamentos();
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
@@ -98,7 +101,6 @@ export default function  MedicamentosListaAdmin() {
   const handleFecharModal = () => {
     setAbrirModal(false);
     setMedicamentoEditado({
-      id: "",
       nomeProduto: "",
       dosagem: "",
       tipoProduto: "",
