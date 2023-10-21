@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
-import Controlado from "../../imagens/Controlado.png";
-import NaoControlado from "../../imagens/NaoControlado.png";
 
 function MedicamentoCreate() {
   // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
@@ -119,12 +117,12 @@ function MedicamentoCreate() {
                   <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
                     {Controlado.tipoProduto === "Controlado" ? (
                       <img
-                        src={Controlado}
+                        src="https://files.lojas.club/4PCPRGQNVS8711BN94CULI.png"
                         alt="medicamentoControlado"
                       />
                     ) : (
                       <img
-                        src={NaoControlado}
+                        src="https://files.lojas.club/4FKG4JB1L29N41BV0C0G4G.png"
                         alt="medicamentoNaoControlado"
                       />
                     )}
