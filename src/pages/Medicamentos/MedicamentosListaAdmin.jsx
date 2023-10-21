@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/auth";
 
 export default function  MedicamentosListaAdmin() {
-  // const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [itensPorPagina] = useState(30);
@@ -51,16 +51,15 @@ export default function  MedicamentosListaAdmin() {
           }
         );
 
-        if (Array.isArray(response.data.resultado)) {
-          // const produtosFiltrados = response.data.resultado.filter(
-          //   (produto) => produto.usuarioId === user.id
-          // );
+
+          const produtosFiltrados = response.data.resultado.filter(
+            (produto) => produto.usuarioId === user.id
+          );
           
-          setMedicamentos(response.data.resultado);
-          setTotalMedicamentos(response.data.contar);
-        } else {
-          console.log("Dados da Api não são um array", response.data);
-        }
+          setMedicamentos(produtosFiltrados);
+          setTotalMedicamentos(produtosFiltrados.length);
+
+          
       } catch (error) {
         console.error("Erro ao buscar medicamentos:", error);
       }
