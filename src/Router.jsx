@@ -7,6 +7,7 @@ import {
 import FinalizarCompraPage from './pages/FinalizarCompra/FinalizarCompraPage';
 import MedicamentosListaComprador from './pages/Medicamentos/MedicamentosListaComprador';
 import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
+import MedicamentosListaAdmin from './pages/Medicamentos/MedicamentosListaAdmin';
 import { Login } from './pages/Login/Login';
 import { AdminDashboard } from './pages/Dashboard/Dashboard';
 import { AuthProvider, AuthContext } from './contexts/auth';
@@ -46,7 +47,7 @@ const AppRouter = () => {
           <Route exact path="/*" element={<PageNotFound />} />
           <Route
             exact
-            path="/dashboard"
+            path="/admin/dashboard"
             element={
               <PrivateAdmin>
                 <AdminDashboard />
@@ -62,14 +63,6 @@ const AppRouter = () => {
             }
           />
           <Route
-            path="/medicamentosComprador"
-            element={
-              <PrivateComprador>
-                <MedicamentosListaComprador />
-              </PrivateComprador>
-            }
-          />
-          <Route
             path="/admin/medicamentos/create"
             element={
               <PrivateAdmin>
@@ -78,7 +71,15 @@ const AppRouter = () => {
             }
           />
           <Route
-            path="/medicamentosCompradores"
+            path="/admin/medicamentos"
+            element={
+              <PrivateAdmin>
+                <MedicamentosListaAdmin />
+              </PrivateAdmin>
+            }
+          />
+          <Route
+            path="/comprador/medicamentos"
             element={
               <PrivateComprador>
                 <MedicamentosListaComprador />
