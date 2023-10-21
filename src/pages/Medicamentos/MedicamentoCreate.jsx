@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
+import Controlado from "../../assets/imagens/Controlado.png";
+import NaoControlado from "../../assets/imagens/NaoControlado.png";
 
 function MedicamentoCreate() {
   // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
@@ -115,7 +117,19 @@ function MedicamentoCreate() {
                     pattern=".{10,}"
                   />
                   <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                    O Link da Imagem é obrigatório
+                    {Controlado.tipoProduto === "Controlado" ? (
+                      <img
+                        src={Controlado}
+                        alt="medicamentoControlado"
+                        className="w-20 h-20"
+                      />
+                    ) : (
+                      <img
+                        src={NaoControlado}
+                        alt="medicamentoNaoControlado"
+                        className="w-20 h-20"
+                      />
+                    )}
                   </span>
                 </label>
 
