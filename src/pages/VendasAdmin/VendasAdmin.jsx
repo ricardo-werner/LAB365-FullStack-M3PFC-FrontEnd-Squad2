@@ -11,9 +11,10 @@ export const ListarVendasAdmin = () => {
     try {
       const response = await api.get('/admin/vendas/lista');
       setVendas(response.data);
-    } catch (error) {}
+    } catch (error) {
+      toast.error(response.data.message);
+    }
   };
-  console.log(vendas, 'vendas');
 
   useEffect(() => {
     fetchListarVendasAdmin();

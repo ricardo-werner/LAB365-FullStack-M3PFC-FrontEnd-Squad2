@@ -39,15 +39,17 @@ export default function Sidebar({ state, setState, toggleDrawer }) {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{
+        width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         {menuItems.map((item, index) => (
-          <ListItem key={item.text} disablePadding>
-            <Link to={item.route}>
+          <ListItem className="px-2 py-2" key={item.text} disablePadding>
+            <Link to={item.route} className="flex">
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.text} />
             </Link>
