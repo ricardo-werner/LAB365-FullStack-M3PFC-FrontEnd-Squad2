@@ -48,7 +48,8 @@ export default function  MedicamentosListaAdmin() {
         const response = await api.get(
           `/produto/${offset}/${itensPorPagina}`,
           {
-            params: { nomeProduto: pesquisar },
+            params: { nomeProduto: pesquisar}, 
+
           }
         );
 
