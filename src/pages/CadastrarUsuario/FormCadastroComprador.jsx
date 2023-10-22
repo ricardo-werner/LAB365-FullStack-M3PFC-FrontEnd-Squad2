@@ -1,59 +1,59 @@
-import React, { useState } from "react";
-import { toast } from "react-toastify";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { api } from "../../service/api";
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { api } from '../../service/api';
 import {
   pegarDetalheEndereco,
   pegarLatLongPeloCEP,
-} from "../../service/viaCep";
+} from '../../service/viaCep';
 import {
   formataCEP,
   formataCpf,
   formataDataNascimento,
   formataTelefone,
-} from "../../utils/validacoes";
+} from '../../utils/validacoes';
 
-import { useNavigate } from "react-router-dom";
-const navigate = useNavigate();
+import { useNavigate } from 'react-router-dom';
 
 const formDadosIniciais = {
-  cpf: "",
-  dataNascimento: "",
-  nomeCompleto: "",
-  email: "",
-  telefone: "",
-  tipoUsuario: "Comprador",
-  senha: "",
-  cep: "",
-  estado: "",
-  cidade: "",
-  bairro: "",
-  logradouro: "",
-  numero: "",
-  complemento: "",
-  lat: "",
-  long: "",
+  cpf: '',
+  dataNascimento: '',
+  nomeCompleto: '',
+  email: '',
+  telefone: '',
+  tipoUsuario: 'Comprador',
+  senha: '',
+  cep: '',
+  estado: '',
+  cidade: '',
+  bairro: '',
+  logradouro: '',
+  numero: '',
+  complemento: '',
+  lat: '',
+  long: '',
 };
 
 const camposForm = [
-  { name: "cpf", label: "CPF", type: "text" },
-  { name: "nomeCompleto", label: "Nome Completo", type: "text" },
-  { name: "dataNascimento", label: "Data de Nascimento", type: "text" },
-  { name: "telefone", label: "Telefone", type: "text" },
-  { name: "email", label: "Email", type: "text" },
-  { name: "senha", label: "Senha", type: "password" },
-  { name: "cep", label: "CEP", type: "text" },
-  { name: "estado", label: "Estado", type: "text" },
-  { name: "cidade", label: "Cidade", type: "text" },
-  { name: "bairro", label: "Bairro", type: "text" },
-  { name: "logradouro", label: "Logradouro", type: "text" },
-  { name: "numero", label: "Número", type: "text" },
-  { name: "complemento", label: "Complemento", type: "text" },
-  { name: "lat", label: "Latitude", type: "text" },
-  { name: "long", label: "Longitude", type: "text" },
+  { name: 'cpf', label: 'CPF', type: 'text' },
+  { name: 'nomeCompleto', label: 'Nome Completo', type: 'text' },
+  { name: 'dataNascimento', label: 'Data de Nascimento', type: 'text' },
+  { name: 'telefone', label: 'Telefone', type: 'text' },
+  { name: 'email', label: 'Email', type: 'text' },
+  { name: 'senha', label: 'Senha', type: 'password' },
+  { name: 'cep', label: 'CEP', type: 'text' },
+  { name: 'estado', label: 'Estado', type: 'text' },
+  { name: 'cidade', label: 'Cidade', type: 'text' },
+  { name: 'bairro', label: 'Bairro', type: 'text' },
+  { name: 'logradouro', label: 'Logradouro', type: 'text' },
+  { name: 'numero', label: 'Número', type: 'text' },
+  { name: 'complemento', label: 'Complemento', type: 'text' },
+  { name: 'lat', label: 'Latitude', type: 'text' },
+  { name: 'long', label: 'Longitude', type: 'text' },
 ];
 
 const FormCadastrarComprador = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState(formDadosIniciais);
   const [showPassword, setShowPassword] = useState(false);
   const [listaUsuario, setListaUsuario] = useState([]);
@@ -62,17 +62,17 @@ const FormCadastrarComprador = () => {
     const { name, value } = e.target;
 
     //aplica mascaras
-    if (name === "cep") {
+    if (name === 'cep') {
       setFormData({ ...formData, [name]: formataCEP(value) });
-    } else if (name === "dataNascimento") {
+    } else if (name === 'dataNascimento') {
       const formattedDate = formataDataNascimento(value);
       setFormData({ ...formData, [name]: formattedDate });
-    } else if (name === "cpf") {
+    } else if (name === 'cpf') {
       const formattedDate = formataCpf(value);
       setFormData({ ...formData, [name]: formattedDate });
-    } else if (name === "telefone") {
+    } else if (name === 'telefone') {
       // Remove todos os caracteres não numéricos do valor do telefone
-      const numericValue = value.replace(/\D/g, "");
+      const numericValue = value.replace(/\D/g, '');
 
       // Aplica a máscara ao telefone no formato "(99) 99999-9999"
       const formattedDate = formataTelefone(numericValue);
@@ -94,7 +94,7 @@ const FormCadastrarComprador = () => {
 
   const handleCepBlur = async (e) => {
     const { value } = e.target;
-    const soNumeroCEP = value.replace(/\D/g, "");
+    const soNumeroCEP = value.replace(/\D/g, '');
 
     if (soNumeroCEP.length === 8) {
       try {
@@ -119,11 +119,11 @@ const FormCadastrarComprador = () => {
 
           setFormData(juntarData);
         } else {
-          toast.error("CEP não encontrado");
+          toast.error('CEP não encontrado');
         }
       } catch (error) {
-        console.error("Erro ao buscar detalhes do endereço:", error);
-        toast.error("Erro ao buscar detalhes do endereço");
+        console.error('Erro ao buscar detalhes do endereço:', error);
+        toast.error('Erro ao buscar detalhes do endereço');
       }
     }
   };
@@ -133,20 +133,20 @@ const FormCadastrarComprador = () => {
 
     const formDataemMascaras = {
       ...formData,
-      cpf: formData.cpf.replace(/\D/g, ""),
-      cep: formData.cep.replace(/\D/g, ""),
-      telefone: formData.telefone.replace(/\D/g, ""),
+      cpf: formData.cpf.replace(/\D/g, ''),
+      cep: formData.cep.replace(/\D/g, ''),
+      telefone: formData.telefone.replace(/\D/g, ''),
     };
 
     try {
       const response = await api.post(
-        "http://localhost:3333/api/usuario/cadastrar", //Ajustar API
+        '/usuario/cadastrar', //Ajustar API
         formDataemMascaras
       );
       if (response.status === 201) {
-        toast.success("Usuário cadastrado com sucesso!");
+        toast.success('Usuário cadastrado com sucesso!');
         setFormData(formDadosIniciais);
-        navigate("/"); //Verificar rota
+        navigate('/'); //Verificar rota
       } else {
         toast.error(response.data.message); // Exibe a mensagem de erro da API em outros casos
       }
@@ -154,7 +154,7 @@ const FormCadastrarComprador = () => {
       if (error.response) {
         toast.error(error.response.data.message); // Exibe a mensagem de erro da API
       } else {
-        toast.error("Erro ao cadastrar o usuário"); // Erro genérico
+        toast.error('Erro ao cadastrar o usuário'); // Erro genérico
       }
     }
   };
@@ -173,10 +173,10 @@ const FormCadastrarComprador = () => {
             {camposForm.slice(0, 7).map((campo) => (
               <div key={campo.name} className="grid">
                 <label className="text-slate-600 mb-2">{campo.label}</label>
-                {campo.name === "senha" ? (
+                {campo.name === 'senha' ? (
                   <div className="password-input relative ">
                     <input
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       name={campo.name}
                       value={formData[campo.name]}
                       onChange={handleChange}
@@ -200,7 +200,7 @@ const FormCadastrarComprador = () => {
                     name={campo.name}
                     value={formData[campo.name]}
                     onChange={handleChange}
-                    onBlur={campo.name === "cep" ? handleCepBlur : null}
+                    onBlur={campo.name === 'cep' ? handleCepBlur : null}
                     className="py-2 px-3 rounded border flex w-full"
                   />
                 )}
@@ -223,7 +223,7 @@ const FormCadastrarComprador = () => {
                     name={campo.name}
                     value={formData[campo.name]}
                     onChange={handleChange}
-                    onBlur={campo.name === "cep" ? handleCepBlur : null}
+                    onBlur={campo.name === 'cep' ? handleCepBlur : null}
                     className="py-2 px-3 rounded border flex w-full"
                   />
                 </div>
