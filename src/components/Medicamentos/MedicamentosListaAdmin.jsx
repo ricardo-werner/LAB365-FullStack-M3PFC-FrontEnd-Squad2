@@ -3,7 +3,7 @@ import { api } from "../../service/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/auth";
 
-export default function  MedicamentosListaAdmin() {
+export const MedicamentosListaAdmin = () => {
   const { user } = useContext(AuthContext);
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);

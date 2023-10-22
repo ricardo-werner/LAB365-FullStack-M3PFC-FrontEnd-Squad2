@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import FinalizarCompraPage from './pages/FinalizarCompra/FinalizarCompraPage';
 import MedicamentosListaComprador from './pages/Medicamentos/MedicamentosListaComprador';
-import MedicamentoCreate from './pages/Medicamentos/MedicamentoCreate';
-import MedicamentosListaAdmin from './pages/Medicamentos/MedicamentosListaAdmin';
+import {MedicamentoAdmin} from './pages/Medicamentos/MedicamentoAdmin';
+import MedicamentoCreate from './components/Medicamentos/MedicamentoCreate';
 import { Login } from './pages/Login/Login';
 import { AdminDashboard } from './pages/Dashboard/Dashboard';
 import { AuthProvider, AuthContext } from './contexts/auth';
@@ -74,7 +74,7 @@ const AppRouter = () => {
             path="/admin/medicamentos"
             element={
               <PrivateAdmin>
-                <MedicamentosListaAdmin />
+                <MedicamentoAdmin />
               </PrivateAdmin>
             }
           />

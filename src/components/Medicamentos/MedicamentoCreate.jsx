@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
 
-function MedicamentoCreate() {
+const MedicamentoCreate = () => {
   // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
   const [nomeProduto, setNomeProduto] = useState("");
   const [nomeLab, setNomeLab] = useState("");
@@ -38,11 +38,17 @@ function MedicamentoCreate() {
       const response = await api.post("/produtos/admin/", formDataObject); //precisa enviar para o banco o formDataObject que está no formato que o banco está esperando. O formDataJsonString está formatando os nomes dos campos como string ("tipoProduto") e não é isso que o banco espera
 
       if (response.ok) {
-        setNomeProduto("");
-        setNomeLab("");
         setSubmitted(true);
       }
       toast.success("Produto cadastrado com sucesso!");
+      setNomeProduto("");
+      setNomeLab("");
+      setImagemProduto("");
+      setDosagem("");
+      setTipoProduto("Controlado");
+      setPrecoUnitario("");
+      setTotalEstoque(0);
+      setDescricao("");
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error.response.data, "repon");
