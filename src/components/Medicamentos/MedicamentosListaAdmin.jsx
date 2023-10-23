@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { api } from "../../service/api";
 import { toast } from "react-toastify";
 import { AuthContext } from "../../contexts/auth";
 
-export default function  MedicamentosListaAdmin() {
-  // const { user } = useContext(AuthContext);
+export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
+  const { user } = useContext(AuthContext);
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [itensPorPagina] = useState(30);
@@ -12,16 +12,16 @@ export default function  MedicamentosListaAdmin() {
   const [abrirModal, setAbrirModal] = useState(false);
   const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState("");
   const [totalMedicamentos, setTotalMedicamentos] = useState(0);
+  const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
   const [medicamentoEditado, setMedicamentoEditado] = useState({
     id: "",
     nomeProduto: "",
     dosagem: "",
     tipoProduto: "",
-    precoUnitario : "",
+    precoUnitario: "",
     descricao: "",
     totalEstoque: "",
   });
-  const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
 
   console.log(selecionarMedicamentoId, "selecionarMedicamentoId");
   const getInfoMedicamento = async (medicamentoId) => {
@@ -30,6 +30,7 @@ export default function  MedicamentosListaAdmin() {
     try {
       const response = await api.get(`/produto/${medicamentoId}`);
       const infoMedicamento = response.data;
+      console.log(infoMedicamento);
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
       setAbrirModal(true);
@@ -39,35 +40,32 @@ export default function  MedicamentosListaAdmin() {
   };
 
   useEffect(() => {
-    // Função para buscar usuários do banco de dados com filtro e paginação
+    // Função para buscar medicamentos do banco de dados com filtro e paginação
     const fetchMedicamentos = async () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
-        const response = await api.get(
-          `/produto/${offset}/${itensPorPagina}`,
-          {
-            params: { nomeMedicamento: pesquisar },
-          }
+        const response = await api.get(`/produto/${offset}/${itensPorPagina}`, {
+          params: { nomeProduto: pesquisar },
+        });
+
+        const produtosFiltrados = response.data.resultado.filter(
+          (produto) => produto.usuarioId === user.id
         );
 
-        if (Array.isArray(response.data.resultado)) {
-          // const produtosFiltrados = response.data.resultado.filter(
-          //   (produto) => produto.usuarioId === user.id
-          // );
-          
-          setMedicamentos(response.data.resultado);
-          setTotalMedicamentos(response.data.contar);
-        } else {
-          console.log("Dados da Api não são um array", response.data);
-        }
+        setMedicamentos(produtosFiltrados);
+        setTotalMedicamentos(produtosFiltrados.length);
       } catch (error) {
         console.error("Erro ao buscar medicamentos:", error);
       }
     };
 
+    if (medicamentosListaAtualizada) {
+      // Se a lista precisar ser atualizada, chame a função fetchMedicamentos
+      fetchMedicamentos();
+    }
     fetchMedicamentos();
-  }, [paginaAtual, itensPorPagina, pesquisar]);
+  }, [paginaAtual, itensPorPagina, pesquisar, medicamentosListaAtualizada]);
 
   // Função para salvar as alterações no modal de edição
   const handleSalvarAlteracoes = async () => {
@@ -88,6 +86,8 @@ export default function  MedicamentosListaAdmin() {
         toast.success("Alterações salvas com sucesso.");
         setAbrirModal(false);
       }
+
+      fetchMedicamentos();
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
@@ -99,11 +99,10 @@ export default function  MedicamentosListaAdmin() {
   const handleFecharModal = () => {
     setAbrirModal(false);
     setMedicamentoEditado({
-      id: "",
       nomeProduto: "",
       dosagem: "",
       tipoProduto: "",
-      precoUnitario : "",
+      precoUnitario: "",
       descricao: "",
       totalEstoque: "",
     });
@@ -280,7 +279,10 @@ export default function  MedicamentosListaAdmin() {
               />
             </div>
             <div>
-              <label htmlFor="totalEstoque" className="text-slate-600 mb-2 mt-3">
+              <label
+                htmlFor="totalEstoque"
+                className="text-slate-600 mb-2 mt-3"
+              >
                 Estoque:
               </label>
               <input
