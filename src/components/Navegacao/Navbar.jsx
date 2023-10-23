@@ -84,16 +84,9 @@ export default function Navbar({ children }) {
             </Typography>
 
             <List className="d-flex flexdirection-row">
-              {/* <ListItem
-                component={Link}
-                to="/comprador/minhas-compras"
-                style={{ cursor: 'pointer' }}
-              >
-                <ListItemText primary="Minhas Compras" />
-              </ListItem> */}
               <ListItem
                 component={Link}
-                to="/minhasCompras"
+                to="/comprador/minhas-compras"
                 style={{ cursor: 'pointer' }}
               >
                 <ListItemText primary="Minhas Compras" className="w-[128px]" />
