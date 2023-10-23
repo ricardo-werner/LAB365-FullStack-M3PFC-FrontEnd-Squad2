@@ -40,9 +40,6 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
       if (response.ok) {
         setSubmitted(true);
       }
-
-      atualizarMedicamentosLista(formDataJsonString);
-
       setNomeProduto("");
       setNomeLab("");
       setImagemProduto("");
@@ -52,6 +49,8 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
       setTotalEstoque(0);
       setDescricao("");
       toast.success("Produto cadastrado com sucesso!");
+      
+      atualizarMedicamentosLista(formDataJsonString);
     } catch (error) {
       toast.error(error.response.data.error);
       console.log(error.response.data, "repon");
@@ -123,7 +122,7 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
                     required
                     pattern=".{10,}"
                   />
-                  <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                  {/* <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
                     {Controlado.tipoProduto === "Controlado" ? (
                       <img
                         src="https://files.lojas.club/4PCPRGQNVS8711BN94CULI.png"
@@ -135,7 +134,7 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
                         alt="medicamentoNaoControlado"
                       />
                     )}
-                  </span>
+                  </span> */}
                 </label>
 
                 <label htmlFor="dosagem" className="mb-2">
