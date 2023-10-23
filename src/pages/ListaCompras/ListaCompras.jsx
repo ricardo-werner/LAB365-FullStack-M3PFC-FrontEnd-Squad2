@@ -59,7 +59,7 @@ export const ListaCompras = () => {
   };
 
   return (
-    <section className="compras h-screen pt-10 md:px-10 lg:pt-20 lg:px-20">
+    <section className="compras h-screen pt-10 px-10 lg:pt-20 lg:px-20">
       <div className="results mb-12">
         <h1 className="text-slate-700 text-3xl font-semibold ">
           Compras Realizadas
