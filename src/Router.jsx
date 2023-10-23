@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import FAQ from './pages/Duvidas/Faq';
 import PageNotFound from './pages/SideBar/404';
 import { ListarVendasAdmin } from './pages/VendasAdmin/VendasAdmin';
+import { ListaCompras } from './pages/ListaCompras/ListaCompras';
 import FormCadastrarComprador from './pages/CadastrarUsuario/FormCadastroComprador';
 
 const AppRouter = () => {
@@ -98,6 +99,14 @@ const AppRouter = () => {
             }
           />
           <Route
+            path="/comprador/minhas-compras"
+            element={
+              <PrivateComprador>
+                <ListaCompras />
+              <PrivateComprador>
+            }
+           />
+           <Route
             path="/comprador/cadastro"
             element={
               <PrivateComprador>
