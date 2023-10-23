@@ -58,7 +58,7 @@ const AppRouter = () => {
             }
           />
           <Route
-            path="/admin/cadastro/usuario"
+            path="/admin/cadastro/usuario" //oksim
             element={
               <PrivateAdmin>
                 <CadastroUsuario />

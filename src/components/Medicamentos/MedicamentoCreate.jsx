@@ -52,8 +52,7 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
       
       atualizarMedicamentosLista(formDataJsonString);
     } catch (error) {
-      toast.error(error.response.data.error);
-      console.log(error.response.data, "repon");
+      toast.error(error.response.data.message);
     }
   };
 

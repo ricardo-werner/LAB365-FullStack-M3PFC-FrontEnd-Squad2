@@ -140,13 +140,13 @@ const FormCadastrarComprador = () => {
 
     try {
       const response = await api.post(
-        '/usuario/cadastrar', //Ajustar API
+        '/usuario/cadastrar', 
         formDataemMascaras
       );
       if (response.status === 201) {
         toast.success('Usuário cadastrado com sucesso!');
         setFormData(formDadosIniciais);
-        navigate('/'); //Verificar rota
+        navigate('/'); 
       } else {
         toast.error(response.data.message); // Exibe a mensagem de erro da API em outros casos
       }
