@@ -17,6 +17,9 @@ import Navegacao from './pages/SideBar/Navegacao';
 import { toast } from 'react-toastify';
 import FAQ from './pages/Duvidas/Faq';
 import PageNotFound from './pages/SideBar/404';
+import { ListarVendasAdmin } from './pages/VendasAdmin/VendasAdmin';
+import { ListaCompras } from './pages/ListaCompras/ListaCompras';
+import FormCadastrarComprador from './pages/CadastrarUsuario/FormCadastroComprador';
 
 const AppRouter = () => {
   const PrivateAdmin = ({ children }) => {
@@ -79,10 +82,35 @@ const AppRouter = () => {
             }
           />
           <Route
+            exact
+            path="/admin/vendas/lista"
+            element={
+              <PrivateAdmin>
+                <ListarVendasAdmin />
+              </PrivateAdmin>
+            }
+          />
+          <Route
             path="/comprador/medicamentos"
             element={
               <PrivateComprador>
                 <MedicamentosListaComprador />
+              </PrivateComprador>
+            }
+          />
+          <Route
+            path="/comprador/minhas-compras"
+            element={
+              <PrivateComprador>
+                <ListaCompras />
+              </PrivateComprador>
+            }
+           />
+           <Route
+            path="/comprador/cadastro"
+            element={
+              <PrivateComprador>
+                <FormCadastrarComprador />
               </PrivateComprador>
             }
           />

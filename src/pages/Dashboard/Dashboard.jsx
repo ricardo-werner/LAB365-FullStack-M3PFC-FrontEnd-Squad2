@@ -25,10 +25,7 @@ export const AdminDashboard = () => {
         },
       };
 
-      const dashboardResponse = await api.get(
-        `/vendas/admin/dashboard`,
-        config
-      );
+      const dashboardResponse = await api.get(`/admin/dashboard`, config);
       setTotalVendas(dashboardResponse.data.totalVendas.toFixed(2) || '0.00');
       setTotalQuantidadeVendida(
         dashboardResponse.data.totalQuantidadeVendida || 0
@@ -71,16 +68,16 @@ export const AdminDashboard = () => {
   }, [paginaAtual, itensPorPagina, user]);
 
   return (
-    <section className="admin-dashboard w-full h-screen flex pt-10 px-20 ">
-      <div className="mx-auto max-w-4xl">
+    <section className="admin-dashboard h-screen flex pt-20 px-20 ">
+      <div className="mx-auto ">
         <div className="results pb-14 text-center">
           <div className="flex justify-between mb-10">
             <h2 className="text-slate-700 text-3xl font-semibold ">
               Resultado das suas Vendas
             </h2>
           </div>
-          <div className="flex justify-around m-auto columns-2 gap-8 max-w-4xl">
-            <div className="flex items-center gap-3 border-2 p-4 rounded w-[23rem] text-center ">
+          <div className="flex justify-around m-auto columns-2 gap-8 ">
+            <div className="flex items-center gap-3 border-2 p-4 rounded w-[25rem] text-center ">
               <div className="p-3  rounded-full bg-[#8754ec]  max-h-[68px]">
                 <TbPigMoney className="text-4xl text-[#c6b2f1]" />
               </div>
@@ -93,7 +90,7 @@ export const AdminDashboard = () => {
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3 border-2 p-4 rounded w-[22.07rem] text-center ">
+            <div className="flex items-center gap-3 border-2 p-4 rounded w-[25rem] text-center ">
               <div className="p-3 rounded-full bg-[#25D296]  max-h-[68px]">
                 <BsFillBarChartFill className="text-4xl text-[#b3e9d6]" />
               </div>
@@ -108,14 +105,14 @@ export const AdminDashboard = () => {
             </div>
           </div>
         </div>
-        <div className="max-w-4xl m-auto">
+        <div className=" m-auto">
           <h3 className="text-lg font-semibold text-slate-700 mb-4">
             Produtos em Estoque
           </h3>
 
           {produtosFiltrados && produtosFiltrados.length > 0 ? (
             <table className="table-auto w-full">
-              <thead className="">
+              <thead>
                 <tr className="border-2 border-slate-300 text-slate-500">
                   <th className=" font-medium">ID</th>
                   <th className=" font-medium">Nome do Produto</th>
@@ -123,7 +120,7 @@ export const AdminDashboard = () => {
                   <th className=" font-medium">Qtd em Estoque</th>
                 </tr>
               </thead>
-              <tbody className="">
+              <tbody>
                 {produtosFiltrados.map((produto) => (
                   <tr key={produto.id} className="border border-slate-300">
                     <td className="py-1">{produto.id}</td>

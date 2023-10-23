@@ -18,8 +18,8 @@ export default function Cart({ mostraModal, toggle }) {
       draggable: true,
       theme: "colored",
       style: {
-        backgroundColor: "#000",
-        color: "#fff",
+        backgroundColor: "rgb(32,193,148)",
+        color: "#000",
       },
     });
 
@@ -33,8 +33,8 @@ export default function Cart({ mostraModal, toggle }) {
       draggable: true,
       theme: "colored",
       style: {
-        backgroundColor: "#000",
-        color: "#fff",
+        backgroundColor: "rgb(32,193,148))",
+        color: "#000",
       },
     });
 
@@ -45,7 +45,7 @@ export default function Cart({ mostraModal, toggle }) {
 
   return (
     mostraModal && (
-      <div className="flex-col flex items-center fixed inset-0 left-1/4 bg-white dark:bg-black gap-8  p-10  text-black dark:text-white font-normal uppercase text-sm">
+      <div className="flex-col flex items-center fixed inset-0 left-1/4 bg-white dark:bg-black gap-8 p-10 text-black dark:text-white font-normal uppercase text-sm">
         <ToastContainer />
         <h1 className="text-2xl font-bold">Carrinho de Compras</h1>
         <div className="absolute right-16 top-10">
@@ -74,15 +74,6 @@ export default function Cart({ mostraModal, toggle }) {
                 <button
                   className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
                   onClick={() => {
-                    adicionarAoCarrinho(item);
-                  }}
-                >
-                  +
-                </button>
-                <p>{item.qtde}</p>
-                <button
-                  className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                  onClick={() => {
                     const itemCarrinho = itensCarrinho.find(
                       (product) => product.id === item.id
                     );
@@ -94,6 +85,15 @@ export default function Cart({ mostraModal, toggle }) {
                   }}
                 >
                   -
+                </button>
+                <p>{item.qtde}</p>
+                <button
+                  className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                  onClick={() => {
+                    adicionarAoCarrinho(item);
+                  }}
+                >
+                  +
                 </button>
               </div>
             </div>

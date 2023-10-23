@@ -56,7 +56,7 @@ export default function MedicamentosListaComprador() {
       draggable: true,
       theme: "colored",
       style: {
-        backgroundColor: "#fff",
+        backgroundColor: "rgb(32,193,148)",
         color: "#000",
       },
     });
@@ -71,8 +71,8 @@ export default function MedicamentosListaComprador() {
       draggable: true,
       theme: "colored",
       style: {
-        backgroundColor: "#000",
-        color: "#fff",
+        backgroundColor: "rgb(32,193,148)",
+        color: "#000",
       },
     });
 
@@ -141,17 +141,6 @@ export default function MedicamentosListaComprador() {
                   <button
                     className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
                     onClick={() => {
-                      adicionarAoCarrinho(product);
-                    }}
-                  >
-                    +
-                  </button>
-                  <p className="text-gray-600">
-                    {itensCarrinho.find((item) => item.id === product.id).qtde}
-                  </p>
-                  <button
-                    className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                    onClick={() => {
                       const itemCarrinho = itensCarrinho.find(
                         (item) => item.id === product.id
                       );
@@ -163,6 +152,17 @@ export default function MedicamentosListaComprador() {
                     }}
                   >
                     -
+                  </button>
+                  <p className="text-gray-600">
+                    {itensCarrinho.find((item) => item.id === product.id).qtde}
+                  </p>
+                  <button
+                    className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                    onClick={() => {
+                      adicionarAoCarrinho(product);
+                    }}
+                  >
+                    +
                   </button>
                 </div>
               )}
