@@ -98,7 +98,7 @@ const FormCadastrarUsuario = () => {
       try {
         const enderecoData = await pegarDetalheEndereco(soNumeroCEP);
         const latLongData = await pegarLatLongPeloCEP(soNumeroCEP);
-        
+
 
         if (enderecoData) {
           // Preencha os campos de endereço independentemente dos dados de latLongData
@@ -156,11 +156,6 @@ const FormCadastrarUsuario = () => {
     }
   };
 
-  const { logout } = useContext(AuthContext);
-  const handleLogout = () => {
-    logout();
-  };
-
   return (
     <section className=" flex py-20 px-20">
       <form onSubmit={handleSubmit} className="mx-auto w-full">
@@ -168,12 +163,6 @@ const FormCadastrarUsuario = () => {
           <h2 className="text-slate-700 text-3xl font-semibold ">
             Cadastrar Usuário
           </h2>
-          <button
-            onClick={handleLogout}
-            className="text-lg text-red-700 font-semibold px-5 py-2 rounded"
-          >
-            Sair
-          </button>
         </div>
         <div>
           <h3 className="text-xl font-semibold text-slate-500 mb-4">
