@@ -19,6 +19,7 @@ import FAQ from './pages/Duvidas/Faq';
 import PageNotFound from './pages/SideBar/404';
 import { ListarVendasAdmin } from './pages/VendasAdmin/VendasAdmin';
 import { ListaCompras } from './pages/ListaCompras/ListaCompras';
+import FormCadastrarComprador from './pages/CadastrarUsuario/FormCadastroComprador';
 
 const AppRouter = () => {
   const PrivateAdmin = ({ children }) => {
@@ -102,6 +103,14 @@ const AppRouter = () => {
             element={
               <PrivateComprador>
                 <ListaCompras />
+              <PrivateComprador>
+            }
+           />
+           <Route
+            path="/comprador/cadastro"
+            element={
+              <PrivateComprador>
+                <FormCadastrarComprador />
               </PrivateComprador>
             }
           />
