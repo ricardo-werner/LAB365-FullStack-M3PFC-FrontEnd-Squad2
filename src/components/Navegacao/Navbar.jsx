@@ -89,17 +89,6 @@ export default function Navbar({ children }) {
                 to="/comprador/minhas-compras"
                 style={{ cursor: 'pointer' }}
               >
-                <ListItemText primary="Minhas Compras" />
-              </ListItem>
-              <ListItem
-                component={Link}
-                to="/medicamentosCompradores"
-                style={{ cursor: 'pointer' }}
-              >
-                <ListItemText primary="Medicamentos Comprador" />
-                to="/minhasCompras"
-                style={{ cursor: 'pointer' }}
-              >
                 <ListItemText primary="Minhas Compras" className="w-[128px]" />
               </ListItem>
               <ListItem
