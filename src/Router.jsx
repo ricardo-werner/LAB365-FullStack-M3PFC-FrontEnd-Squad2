@@ -103,7 +103,7 @@ const AppRouter = () => {
             element={
               <PrivateComprador>
                 <ListaCompras />
-              <PrivateComprador>
+              </PrivateComprador>
             }
            />
            <Route
