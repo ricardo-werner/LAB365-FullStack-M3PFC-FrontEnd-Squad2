@@ -55,17 +55,6 @@ export default function Navbar({ children }) {
     navigate('/');
   };
 
-
-
-
-  // const handleLogout = (e) => {
-  //   e.preventDefault();
-  //   localStorage.clear();
-  //   setNomeCompleto('');
-  //   setTipoUsuario('');
-  //   navigate('/');
-  // };
-
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem('usuario');
     if (usuarioRecuperado) {
