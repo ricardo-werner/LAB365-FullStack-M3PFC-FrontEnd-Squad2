@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 
 import { AuthContext } from '../../../contexts/auth'; // Importe o contexto de autenticação
 import { Paper } from '@mui/material';
+import { toast } from 'react-toastify';
 
 export function Endereco() {
     const { user } = useContext(AuthContext); // Obtenha o usuário do contexto de autenticação
@@ -30,16 +31,10 @@ export function Endereco() {
                     };
 
                     const response = await api.get(`/comprador/endereco`);
-                    console.log(response);
+                    console.log(response.data);
                     setEnderecos(response.data);
-                    if (!response.ok) {
-                        throw new Error('Não foi possível obter os endereços.');
-                    }
-
-                    const data = await response.json();
-                    setEnderecos(data);
                 } catch (error) {
-                    console.error('Erro ao buscar os endereços:', error);
+                    toast.error(error.response.data.message);
                 }
             };
 
