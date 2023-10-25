@@ -116,10 +116,10 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated }) => {
           Cadastrar Endereço
         </h4>
         <div>
-          <div className="endereco-section grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3">
+          <div className="endereco-section grid grid-cols-1 md:grid-cols-2 gap-3 lg:grid-cols-3">
             {camposForm.map((campo) => (
               <div key={campo.name} className="grid">
-                <label className="text-slate-600 mb-2">{campo.label}</label>
+                <label className="text-slate-500 mb-2">{campo.label}</label>
                 <div className="password-input">
                   <input
                     type={campo.type}
@@ -135,12 +135,14 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated }) => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="text-green-800 font-bold mt-10 bg-[#25D296] py-[9px] px-20 rounded w-full lg:w-auto"
-        >
-          CADASTRAR
-        </button>
+        <div className="flex justify-center items-center mt-10">
+          <button
+            type="submit"
+            className="text-black-800 font-bold bg-[#25D296] py-[9px] px-20 rounded lg:w-auto"
+          >
+            CADASTRAR
+          </button>
+        </div>
       </form>
     </section>
   );
