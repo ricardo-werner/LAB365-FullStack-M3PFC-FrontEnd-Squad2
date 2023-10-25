@@ -95,13 +95,6 @@ export default function Navbar({ children }) {
             <List className="d-flex flexdirection-row">
               <ListItem
                 component={Link}
-                to="/comprador/cadastro"
-                style={{ cursor: 'pointer' }}
-              >
-                <ListItemText primary="Novo Comprador" className="w-[128px]" />
-              </ListItem>
-              <ListItem
-                component={Link}
                 to="/comprador/minhas-compras"
                 style={{ cursor: 'pointer' }}
               >
