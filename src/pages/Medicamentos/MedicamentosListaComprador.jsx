@@ -45,7 +45,7 @@ export default function MedicamentosListaComprador() {
     getMedicamentos();
   }, [paginaAtual, itensPorPagina, pesquisar]);
 
-  console.log(totalMedicamentos, "wwww");
+  //console.log(totalMedicamentos, "wwww");
   const notificacaoAdicionadoCarrinho = (item) =>
     toast.success(`${item.nomeProduto} adicionado ao carrinho!`, {
       position: "top-center",
@@ -89,21 +89,27 @@ export default function MedicamentosListaComprador() {
   return (
     <div className="flex flex-col justify-center bg-gray-100">
       <ToastContainer />
-      <div className="flex justify-between items-center px-20 py-5">
-        <h1 className="text-2xl uppercase font-bold mt-10 text-center mb-10">
+      <div className="flex justify-between items-center px-20">
+        <h1 className="text-4xl uppercase font-bold mt-10 text-center mb-10">
           Produtos
         </h1>
         {!mostraModal && (
           <button
-            className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+            className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
             onClick={toggle}
           >
             Carrinho de Compras ({itensCarrinho.length})
           </button>
         )}
+      </div>
+      <div className="flex justify-content-end items-center mr-20 mb-10">
+        <label className="text-gray-700 text-sm font-bold">
+          Producar pelo:
+        </label>
         <input
+          className="border-2 border-gray-300 bg-white h-10 pr-5 pl-5 rounded-lg text-lg-start focus:outline-none"
           type="text"
-          placeholder="Filtrar por Nome do Medicamento"
+          placeholder="Nome do Medicamento"
           value={pesquisar}
           onChange={handlePesquisar}
         />
@@ -128,7 +134,7 @@ export default function MedicamentosListaComprador() {
             <div className="mt-6 flex justify-between items-center">
               {!itensCarrinho.find((item) => item.id === product.id) ? (
                 <button
-                  className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                  className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
                   onClick={() => {
                     adicionarAoCarrinho(product);
                     notificacaoAdicionadoCarrinho(product);
@@ -139,7 +145,7 @@ export default function MedicamentosListaComprador() {
               ) : (
                 <div className="flex gap-4">
                   <button
-                    className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
                     onClick={() => {
                       const itemCarrinho = itensCarrinho.find(
                         (item) => item.id === product.id
@@ -157,7 +163,7 @@ export default function MedicamentosListaComprador() {
                     {itensCarrinho.find((item) => item.id === product.id).qtde}
                   </p>
                   <button
-                    className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
                     onClick={() => {
                       adicionarAoCarrinho(product);
                     }}

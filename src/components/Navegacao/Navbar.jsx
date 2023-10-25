@@ -35,11 +35,23 @@ export default function Navbar({ children }) {
     setDrawerState({ ...drawerState, [anchor]: open });
   };
 
-  const handleLogout = (e) => {
-    e.preventDefault();
+  // Função para fazer o logout e limpar o localStorage
+  const performLogout = () => {
     localStorage.clear();
     setNomeCompleto('');
     setTipoUsuario('');
+  }
+
+  // Adicione um ouvinte de evento ao window para o evento beforeunload
+  window.addEventListener('beforeunload', () => {
+    // Realiza o logout ao fechar a aba do navegador
+    performLogout();
+  });
+
+  // Função para fazer logout quando o botão de logout é clicado
+  const handleLogout = (e) => {
+    e.preventDefault();
+    performLogout();
     navigate('/');
   };
 

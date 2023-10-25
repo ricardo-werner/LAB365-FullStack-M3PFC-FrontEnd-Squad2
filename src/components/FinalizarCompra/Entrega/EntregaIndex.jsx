@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { api } from "../../../service/api";
-import { Paper, Grid, Box, Button, Typography } from "@mui/material";
-import { FormCadastrarNovoEndereco } from "../../Endereco/CadastroNovoEndereco";
+import React, { useState, useEffect, useContext } from 'react';
+import { api } from '../../../service/api';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 import { AuthContext } from "../../../contexts/auth"; // Importe o contexto de autenticação
 
