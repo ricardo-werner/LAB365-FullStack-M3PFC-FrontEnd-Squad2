@@ -47,7 +47,7 @@ const AppRouter = () => {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/faq" element={<FAQ />} />
-          <Route exact path="/*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound />} />
           <Route exact path="/comprador/cadastro"
             element={<FormCadastrarComprador />} />
           <Route
