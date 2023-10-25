@@ -18,13 +18,22 @@ export function Passos() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [compraEfetuada, setCompraEfetuada] = useState(false);
- 
-  
+
+  const dadosCompra = {
+    compradorId: Produtos.usuarioId,
+    vendedorId: Produtos.vendedorId,
+    produtoId: Produtos.produtoId,
+    ususariosUsuariosId: Endereco.usuarioEnderecoId,
+    precoUnitario: Produtos.precoUnitario,
+    quantidadeProdutoVendido: Produtos.quantidadeEstoque,
+    valorTotal: Produtos.precoUnitario * Produtos.quantidadeEstoque,
+    tipoPagamento: Pagamento.tipoPagamento,
+  };
 
   async function enviarDadosParaBanco(dadosCompra) {
     try {
       const response = await api.post('/venda/criar', dadosCompra);
-      
+
       if (response.status === 200) {
         console.log('Compra efetuada com sucesso');
       }
