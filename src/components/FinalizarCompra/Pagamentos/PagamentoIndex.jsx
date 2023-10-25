@@ -20,9 +20,9 @@ export class Pagamento extends Component {
         const { selectedOption } = this.state;
 
         return (
-            <div className="form-floating">
+            <div className="mt-4 form-floating">
                 <select
-                    className="form-select"
+                    className="form-select" style={{ backgroundColor: 'rgb(32,193,148)' }}
                     id="floatingSelect"
                     onChange={this.handleSelectChange}
                     value={selectedOption}
@@ -33,7 +33,7 @@ export class Pagamento extends Component {
                     <option value="3">Pix</option>
                     <option value="4">Transferência Bancária</option>
                 </select>
-                <label className="labelPagamento" htmlFor="floatingSelect">Selecione a Forma de Pagamento</label>
+                <label className="labelPagamento" htmlFor="floatingSelect" style={{ "fontWeight": "bold" }}>Selecione a Forma de Pagamento</label>
 
                 {selectedOption === '1' && <CartaoCredito />}
                 {selectedOption === '2' && <Boleto />}
