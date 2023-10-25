@@ -45,34 +45,35 @@ const AppRouter = () => {
       <AuthProvider>
         <Navegacao />
         <Routes>
-          <Route exact path="/" element={<Login />} />
-          <Route exact path="/faq" element={<FAQ />} />
-          <Route exact path="/*" element={<PageNotFound />} />
+          <Route exact path="/" element={<Login />} /> {/* 01 e 09 */}
+          <Route exact path="/faq" element={<FAQ />} /> 
+          <Route exact path="/*" element={<PageNotFound />} /> 
+         
           <Route
             exact
-            path="/admin/dashboard"
+            path="/admin/dashboard" 
             element={
               <PrivateAdmin>
                 <AdminDashboard />
               </PrivateAdmin>
             }
-          />
+          />  {/* 01 e 02 */}
           <Route
-            path="/admin/cadastro/usuario" //oksim
+            path="/admin/cadastro/usuario" 
             element={
               <PrivateAdmin>
                 <CadastroUsuario />
               </PrivateAdmin>
             }
-          />
+          /> {/* 01 e 02 */}
           <Route
-            path="/admin/medicamentos/create"
+            path="/admin/medicamentos/create" 
             element={
               <PrivateAdmin>
                 <MedicamentoCreate />
               </PrivateAdmin>
             }
-          />
+          /> {/* 01 e 02 */}
           <Route
             path="/admin/medicamentos"
             element={
@@ -80,24 +81,24 @@ const AppRouter = () => {
                 <MedicamentoAdmin />
               </PrivateAdmin>
             }
-          />
+          /> {/* 01 e 02 */}
           <Route
             exact
-            path="/admin/vendas/lista"
+            path="/admin/vendas/lista" 
             element={
               <PrivateAdmin>
                 <ListarVendasAdmin />
               </PrivateAdmin>
             }
-          />
+          /> {/* 01 e 02 */}
           <Route
-            path="/comprador/medicamentos"
+            path="/comprador/medicamentos" 
             element={
               <PrivateComprador>
                 <MedicamentosListaComprador />
               </PrivateComprador>
             }
-          />
+          />{/* 01 e 02 */}
           <Route
             path="/comprador/minhas-compras"
             element={
@@ -105,7 +106,7 @@ const AppRouter = () => {
                 <ListaCompras />
               </PrivateComprador>
             }
-          />
+          /> {/* 01 e 02 */}
           <Route
             path="/comprador/cadastro"
             element={
@@ -113,7 +114,7 @@ const AppRouter = () => {
                 <FormCadastrarComprador />
               </PrivateComprador>
             }
-          />
+          /> {/* 01 e 02 */}
           <Route
             path="/finalizar"
             element={
@@ -121,7 +122,7 @@ const AppRouter = () => {
                 <FinalizarCompraPage />
               </PrivateComprador>
             }
-          />
+          /> {/* 01 e 02 */}
         </Routes>
       </AuthProvider>
     </Router>
