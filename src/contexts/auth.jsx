@@ -8,6 +8,8 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const usuarioRecuperado = JSON.parse(localStorage.getItem('usuario')) || null;
+  const expirarToken = localStorage.getItem('expirarToken') || null;
+  
   const [user, setUser] = useState(usuarioRecuperado); // <--- aqui é onde você configura o estado do usuário
   const [loading, setLoading] = useState(true);
   const [tipoUsuario, setTipoUsuario] = useState('');
@@ -16,11 +18,20 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem('usuario');
     if (usuarioRecuperado) {
-      setUser(JSON.parse(usuarioRecuperado)); //Muda o valor do UseState User
-      setTipoUsuario(JSON.parse(usuarioRecuperado).tipoUsuario);
-      setNomeCompleto(JSON.parse(usuarioRecuperado).nomeCompleto);
+      const tempoExpirarToken = new Date(expirarToken);
+
+      if (new Date() > tempoExpirarToken) {
+        // O token expirou, faça logout
+        logout();
+      } else {
+        setUser(JSON.parse(usuarioRecuperado));
+        setTipoUsuario(JSON.parse(usuarioRecuperado).tipoUsuario);
+        setNomeCompleto(JSON.parse(usuarioRecuperado).nomeCompleto);
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   const login = async (email, senha) => {
@@ -43,6 +54,7 @@ export const AuthProvider = ({ children }) => {
         const token = response.data.token; //Pega o token
         localStorage.setItem('usuario', JSON.stringify(usuarioLogado));
         localStorage.setItem('token', token); //Salva o token no localstorage
+        localStorage.setItem('expirarToken', tempoExpirarToken.toISOString());
 
         //Configurar token no headers do axios
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -67,6 +79,8 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
+    localStorage.removeItem('expirarToken');
+    
     axios.defaults.headers.common['Authorization'] = null;
     navigate('/');
   };
