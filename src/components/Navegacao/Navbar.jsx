@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,16 +9,17 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Sidebar } from './Sidebar';
 import logo from '../../assets/imagens/logo1.jpeg';
-import { List, ListItem, ListItemIcon } from '@mui/material';
+import { List, ListItem} from '@mui/material';
 import { Avatar } from '@mui/material';
 import { ListItemText } from '@mui/material';
 import { UseAuth } from '../../Hooks/useAuth';
+import { AuthContext } from '../../contexts/auth';
 
 export const Navbar = ({ children }) => {
   const navigate = useNavigate();
   const { tipoUsuario, nomeCompleto, setTipoUsuario, setNomeCompleto } =
     UseAuth();
-  const [drawerState, setDrawerState] = React.useState({
+  const [drawerState, setDrawerState] = useState({
     top: false,
     left: false,
     bottom: false,
@@ -41,7 +42,6 @@ export const Navbar = ({ children }) => {
     ) {
       return;
     }
-
     setDrawerState({ ...drawerState, [anchor]: open });
     setListVisible(false);
   };
@@ -79,16 +79,24 @@ export const Navbar = ({ children }) => {
   // Função para fazer logout quando o botão de logout é clicado
   const handleLogout = (e) => {
     e.preventDefault();
-    performLogout();
+    logout();
+    localStorage.clear();
+    setNomeCompleto('');
+    setTipoUsuario('');
     navigate('/');
   };
 
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem('usuario');
-    if (usuarioRecuperado) {
+    const tokenExpirado = !localStorage.getItem('token'); //verifica se o token ainda está presente
+    
+    if (usuarioRecuperado && !tokenExpirado) {
       const usuarioLogado = JSON.parse(usuarioRecuperado);
       setTipoUsuario(usuarioLogado.tipoUsuario);
       setNomeCompleto(usuarioLogado.nomeCompleto);
+    }else{
+      setTipoUsuario(''); // Limpa o tipo de usuário
+      setNomeCompleto(''); // Limpa o nome do usuário
     }
   }, [tipoUsuario, nomeCompleto]);
 

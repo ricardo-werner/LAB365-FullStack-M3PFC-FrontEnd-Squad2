@@ -1,13 +1,15 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-export const AuthContext = createContext();
 import { toast } from 'react-toastify';
 import { api } from '../service/api';
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const usuarioRecuperado = JSON.parse(localStorage.getItem('usuario')) || null;
+  const expirarToken = localStorage.getItem('expirarToken') || null;
+  
   const [user, setUser] = useState(usuarioRecuperado); // <--- aqui é onde você configura o estado do usuário
   const [loading, setLoading] = useState(true);
   const [tipoUsuario, setTipoUsuario] = useState('');
@@ -16,11 +18,20 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem('usuario');
     if (usuarioRecuperado) {
-      setUser(JSON.parse(usuarioRecuperado)); //Muda o valor do UseState User
-      setTipoUsuario(JSON.parse(usuarioRecuperado).tipoUsuario);
-      setNomeCompleto(JSON.parse(usuarioRecuperado).nomeCompleto);
+      const tempoExpirarToken = new Date(expirarToken);
+
+      if (new Date() > tempoExpirarToken) {
+        // O token expirou, faça logout
+        logout();
+      } else {
+        setUser(JSON.parse(usuarioRecuperado));
+        setTipoUsuario(JSON.parse(usuarioRecuperado).tipoUsuario);
+        setNomeCompleto(JSON.parse(usuarioRecuperado).nomeCompleto);
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
 
   const login = async (email, senha) => {
@@ -34,9 +45,16 @@ export const AuthProvider = ({ children }) => {
         const usuarioLogado = response.data; //Pega resposta do backend
         setTipoUsuario(usuarioLogado.tipoUsuario); //Muda o valor do UseState tipoUsuario
         setNomeCompleto(usuarioLogado.nomeCompleto); //Muda o valor do UseState nomeCompleto
+
+        //defina o tempo de expiração do token para 1 dia (86400 segundos)
+        //altera os 20 segundos abaixo que foi usado para teste
+        const tempoExpirarToken = new Date();
+        tempoExpirarToken.setSeconds(tempoExpirarToken.getSeconds() + 86400);
+
         const token = response.data.token; //Pega o token
         localStorage.setItem('usuario', JSON.stringify(usuarioLogado));
         localStorage.setItem('token', token); //Salva o token no localstorage
+        localStorage.setItem('expirarToken', tempoExpirarToken.toISOString());
 
         //Configurar token no headers do axios
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -61,6 +79,8 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
+    localStorage.removeItem('expirarToken');
+    
     axios.defaults.headers.common['Authorization'] = null;
     navigate('/');
   };
