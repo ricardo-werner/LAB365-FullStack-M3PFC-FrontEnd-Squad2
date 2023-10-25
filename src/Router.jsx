@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import FinalizarCompraPage from './pages/FinalizarCompra/FinalizarCompraPage';
 import MedicamentosListaComprador from './pages/Medicamentos/MedicamentosListaComprador';
-import {MedicamentoAdmin} from './pages/Medicamentos/MedicamentoAdmin';
+import { MedicamentoAdmin } from './pages/Medicamentos/MedicamentoAdmin';
 import MedicamentoCreate from './components/Medicamentos/MedicamentoCreate';
 import { Login } from './pages/Login/Login';
 import { AdminDashboard } from './pages/Dashboard/Dashboard';
@@ -47,7 +47,9 @@ const AppRouter = () => {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route exact path="/faq" element={<FAQ />} />
-          <Route exact path="/*" element={<PageNotFound />} />
+          <Route path="*" element={<PageNotFound />} />
+          <Route exact path="/comprador/cadastro"
+            element={<FormCadastrarComprador />} />
           <Route
             exact
             path="/admin/dashboard"
@@ -103,14 +105,6 @@ const AppRouter = () => {
             element={
               <PrivateComprador>
                 <ListaCompras />
-              </PrivateComprador>
-            }
-          />
-          <Route
-            path="/comprador/cadastro"
-            element={
-              <PrivateComprador>
-                <FormCadastrarComprador />
               </PrivateComprador>
             }
           />
