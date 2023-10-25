@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -12,12 +12,14 @@ import { List, ListItem, ListItemIcon } from '@mui/material';
 import { Avatar } from '@mui/material';
 import { ListItemText } from '@mui/material';
 import { UseAuth } from '../../Hooks/useAuth';
+import { AuthContext } from '../../contexts/auth';
 
 export default function Navbar({ children }) {
+  const { authenticated,logout } = UseAuth();
   const navigate = useNavigate();
   const { tipoUsuario, nomeCompleto, setTipoUsuario, setNomeCompleto } =
     UseAuth();
-  const [drawerState, setDrawerState] = React.useState({
+  const [drawerState, setDrawerState] = useState({
     top: false,
     left: false,
     bottom: false,
@@ -31,13 +33,15 @@ export default function Navbar({ children }) {
     ) {
       return;
     }
-
     setDrawerState({ ...drawerState, [anchor]: open });
   };
+
+  const authContext = useContext(AuthContext);
 
   // Função para fazer logout quando o botão de logout é clicado
   const handleLogout = (e) => {
     e.preventDefault();
+    logout();
     localStorage.clear();
     setNomeCompleto('');
     setTipoUsuario('');
@@ -100,8 +104,11 @@ export default function Navbar({ children }) {
                 <ListItemText primary="Medicamentos" />
               </ListItem>
               <ListItem>
-                <Avatar />
-                <ListItemText primary={nomeCompleto} />
+                {authContext.authenticated && <Avatar />}
+                <ListItemText
+                  primary={
+                    authContext.authenticated ? authContext.nomeCompleto : ''
+                  } />
               </ListItem>
               <ListItem
                 component={Link}
@@ -110,8 +117,12 @@ export default function Navbar({ children }) {
               >
                 <ListItemText primary="FAQ" />
               </ListItem>
-              <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
-                <ListItemText primary="Sair" />
+              <ListItem>
+                {authenticated && (
+                  <div onClick={handleLogout} style={{ cursor: 'pointer' }}>
+                    <ListItemText primary="Sair" />
+                  </div>
+                )}
               </ListItem>
             </List>
           </Toolbar>
