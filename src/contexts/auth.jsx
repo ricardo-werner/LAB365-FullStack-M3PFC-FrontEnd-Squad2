@@ -1,9 +1,9 @@
 import React, { useState, createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-export const AuthContext = createContext();
 import { toast } from 'react-toastify';
 import { api } from '../service/api';
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
@@ -34,6 +34,12 @@ export const AuthProvider = ({ children }) => {
         const usuarioLogado = response.data; //Pega resposta do backend
         setTipoUsuario(usuarioLogado.tipoUsuario); //Muda o valor do UseState tipoUsuario
         setNomeCompleto(usuarioLogado.nomeCompleto); //Muda o valor do UseState nomeCompleto
+
+        //defina o tempo de expiração do token para 1 dia (86400 segundos)
+        //altera os 20 segundos abaixo que foi usado para teste
+        const tempoExpirarToken = new Date();
+        tempoExpirarToken.setSeconds(tempoExpirarToken.getSeconds() + 86400);
+
         const token = response.data.token; //Pega o token
         localStorage.setItem('usuario', JSON.stringify(usuarioLogado));
         localStorage.setItem('token', token); //Salva o token no localstorage
