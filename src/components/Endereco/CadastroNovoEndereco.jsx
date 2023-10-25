@@ -112,9 +112,9 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated }) => {
   return (
     <section className=" flex py-20 px-20">
       <form onSubmit={handleSubmit} className="mx-auto w-full">
-        <h2 className="text-slate-700 text-3xl font-semibold mb-10  text-center">
+        <h4 className="text-slate-700 text-3xl font-semibold mb-10  text-center">
           Cadastrar Endereço
-        </h2>
+        </h4>
         <div>
           <div className="endereco-section grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3">
             {camposForm.map((campo) => (

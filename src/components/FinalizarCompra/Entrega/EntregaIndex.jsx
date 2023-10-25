@@ -39,11 +39,6 @@ export function Endereco() {
     }
   };
 
-  const handleSaveNovoEndereco = () => {
-    console.log("Chamado o handleSaveNovoEndereco");
-    fetchEnderecos();
-  };
-
   const handleEnderecoSelect = (enderecoId) => {
     setEnderecoSelecionado(enderecoId);
   };
