@@ -87,8 +87,14 @@ export default function Navbar({ children }) {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Marketplace
             </Typography>
-
             <List className="d-flex flexdirection-row">
+              <ListItem
+                component={Link}
+                to="/comprador/cadastro"
+                style={{ cursor: 'pointer' }}
+              >
+                <ListItemText primary="Novo Comprador" className="w-[128px]" />
+              </ListItem>
               <ListItem
                 component={Link}
                 to="/comprador/minhas-compras"
