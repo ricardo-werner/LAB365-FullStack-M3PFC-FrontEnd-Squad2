@@ -8,14 +8,14 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from './Sidebar';
 import logo from '../../assets/imagens/logo1.jpeg';
-import { List, ListItem, ListItemIcon } from '@mui/material';
+import { List, ListItem} from '@mui/material';
 import { Avatar } from '@mui/material';
 import { ListItemText } from '@mui/material';
 import { UseAuth } from '../../Hooks/useAuth';
 import { AuthContext } from '../../contexts/auth';
 
 export default function Navbar({ children }) {
-  const { authenticated,logout } = UseAuth();
+  const {logout } = UseAuth();
   const navigate = useNavigate();
   const { tipoUsuario, nomeCompleto, setTipoUsuario, setNomeCompleto } =
     UseAuth();
@@ -50,10 +50,15 @@ export default function Navbar({ children }) {
 
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem('usuario');
-    if (usuarioRecuperado) {
+    const tokenExpirado = !localStorage.getItem('token'); //verifica se o token ainda está presente
+    
+    if (usuarioRecuperado && !tokenExpirado) {
       const usuarioLogado = JSON.parse(usuarioRecuperado);
       setTipoUsuario(usuarioLogado.tipoUsuario);
       setNomeCompleto(usuarioLogado.nomeCompleto);
+    }else{
+      setTipoUsuario(''); // Limpa o tipo de usuário
+      setNomeCompleto(''); // Limpa o nome do usuário
     }
   }, [tipoUsuario, nomeCompleto]);
 
@@ -109,26 +114,40 @@ export default function Navbar({ children }) {
               >
                 <ListItemText primary="Medicamentos" />
               </ListItem>
-              <ListItem>
-                {authContext.authenticated && <Avatar />}
-                <ListItemText
-                  primary={
-                    authContext.authenticated ? authContext.nomeCompleto : ''
-                  } />
-              </ListItem>
+           {tipoUsuario ? ( // Verifica se há um usuário logado
+                <>
+                  <ListItem>
+                    <Avatar />
+                    <ListItemText
+                      primary={
+                        authContext.authenticated
+                          ? authContext.nomeCompleto
+                          : ''
+                      }
+                    />
+                  </ListItem>
+                  <ListItem
+                    onClick={handleLogout}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <ListItemText primary="Sair" />
+                  </ListItem>
+                </>
+              ) : (
+                <ListItem
+                  component={Link}
+                  to="/comprador/cadastro" // Redireciona para a página de cadastro
+                  style={{ cursor: 'pointer' }}
+                >
+                  <ListItemText primary="Cadastrar" />
+                </ListItem>
+              )}
               <ListItem
                 component={Link}
                 to="/faq"
                 style={{ cursor: 'pointer' }}
               >
                 <ListItemText primary="FAQ" />
-              </ListItem>
-              <ListItem>
-                {authenticated && (
-                  <div onClick={handleLogout} style={{ cursor: 'pointer' }}>
-                    <ListItemText primary="Sair" />
-                  </div>
-                )}
               </ListItem>
             </List>
           </Toolbar>
