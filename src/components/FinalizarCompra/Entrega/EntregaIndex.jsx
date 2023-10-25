@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { api } from '../../../service/api';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-
+import React, { useState, useEffect, useContext } from "react";
+import { api } from "../../../service/api";
+import { Box, Grid, Typography, Paper } from "@mui/material";
 import { AuthContext } from "../../../contexts/auth"; // Importe o contexto de autenticação
+import { FormCadastrarNovoEndereco } from "../../Endereco/CadastroNovoEndereco";
 
 export function Endereco() {
   const { user } = useContext(AuthContext); // Obtenha o usuário do contexto de autenticação
