@@ -4,7 +4,7 @@ import { CartContext } from "../../contexts/carrinhoCompras.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function Cart({ mostraModal, toggle }) {
+export const Cart=({ mostraModal, toggle }) =>{
   const {
     itensCarrinho,
     adicionarAoCarrinho,

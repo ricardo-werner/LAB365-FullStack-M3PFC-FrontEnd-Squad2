@@ -66,6 +66,7 @@ export const ListaCompras = () => {
         <div className="grid grid-cols-2 gap-2 w-full mx-auto  md:grid md:grid-cols-1 md:gap-4 px-1 md:max-h-24 md:w-1/4">
           {Object.keys(comprasAgrupadas).map((dataKey) => (
             <div
+              key={dataKey}
               className="cards bg-white  shadow-md rounded-lg p-3 lg:p-10 border hover:cursor-pointer hover:scale-105 transition"
               onClick={() => handleClickCartao(comprasAgrupadas[dataKey])}
             >

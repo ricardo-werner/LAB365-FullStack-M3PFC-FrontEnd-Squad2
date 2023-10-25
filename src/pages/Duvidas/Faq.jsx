@@ -1,6 +1,6 @@
 import { DuvidasCard } from '../../components/Duvidas/FaqCard';
 
-const FAQ = () => {
+export const FAQ = () => {
 
     return (
         <div>
@@ -9,4 +9,3 @@ const FAQ = () => {
     );
 };
 
-export default FAQ;

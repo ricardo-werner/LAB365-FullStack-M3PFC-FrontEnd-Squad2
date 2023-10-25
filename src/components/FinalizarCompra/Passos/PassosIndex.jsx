@@ -9,8 +9,7 @@ import { Produtos } from '../Produtos/ProdutosIndex';
 import { Endereco } from '../Entrega/EntregaIndex';
 import { Pagamento } from '../Pagamentos/PagamentoIndex';
 
-
-export function Passos() {
+export const Passos = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [compraEfetuada, setCompraEfetuada] = useState(false);
 
@@ -41,21 +40,15 @@ export function Passos() {
       {currentStep === 2 && !compraEfetuada && <Pagamento />}
 
       {currentStep > 0 && !compraEfetuada && (
-        <Button onClick={handleBack}>
-          Voltar
-        </Button>
+        <Button onClick={handleBack}>Voltar</Button>
       )}
 
       {currentStep < 2 && !compraEfetuada && (
-        <Button onClick={handleNext}>
-          Próximo
-        </Button>
+        <Button onClick={handleNext}>Próximo</Button>
       )}
 
       {currentStep === 2 && !compraEfetuada && (
-        <Button onClick={() => setCompraEfetuada(true)}>
-          Finalizar
-        </Button>
+        <Button onClick={() => setCompraEfetuada(true)}>Finalizar</Button>
       )}
 
       {compraEfetuada && (
@@ -63,6 +56,6 @@ export function Passos() {
           Compra efetuada com sucesso! Confira seu e-mail para mais informações.
         </Alert>
       )}
-    </Box >
+    </Box>
   );
-}
+};

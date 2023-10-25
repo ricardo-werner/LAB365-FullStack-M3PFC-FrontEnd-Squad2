@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import { api } from "../../service/api";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import { api } from '../../service/api';
+import { toast } from 'react-toastify';
 
-const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
+export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
   // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
-  const [nomeProduto, setNomeProduto] = useState("");
-  const [nomeLab, setNomeLab] = useState("");
-  const [imagemProduto, setImagemProduto] = useState("");
-  const [dosagem, setDosagem] = useState("");
-  const [tipoProduto, setTipoProduto] = useState("Controlado");
-  const [precoUnitario, setPrecoUnitario] = useState("");
+  const [nomeProduto, setNomeProduto] = useState('');
+  const [nomeLab, setNomeLab] = useState('');
+  const [imagemProduto, setImagemProduto] = useState('');
+  const [dosagem, setDosagem] = useState('');
+  const [tipoProduto, setTipoProduto] = useState('Controlado');
+  const [precoUnitario, setPrecoUnitario] = useState('');
   const [totalEstoque, setTotalEstoque] = useState(0);
-  const [descricao, setDescricao] = useState("");
+  const [descricao, setDescricao] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const cadastraMedicamento = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append("nomeProduto", nomeProduto);
-    formData.append("nomeLab", nomeLab);
-    formData.append("imagemProduto", imagemProduto);
-    formData.append("dosagem", dosagem);
-    formData.append("tipoProduto", tipoProduto);
-    formData.append("precoUnitario", precoUnitario);
-    formData.append("totalEstoque", totalEstoque);
-    formData.append("descricao", descricao);
+    formData.append('nomeProduto', nomeProduto);
+    formData.append('nomeLab', nomeLab);
+    formData.append('imagemProduto', imagemProduto);
+    formData.append('dosagem', dosagem);
+    formData.append('tipoProduto', tipoProduto);
+    formData.append('precoUnitario', precoUnitario);
+    formData.append('totalEstoque', totalEstoque);
+    formData.append('descricao', descricao);
 
     //Cria um objeto do formulário
     let formDataObject = Object.fromEntries(formData.entries());
@@ -35,21 +35,21 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
     try {
       //console.log(formDataObject, "formDataObject");
       //console.log(formDataJsonString, "formDataJsonString");
-      const response = await api.post("/produtos/admin/", formDataObject); //precisa enviar para o banco o formDataObject que está no formato que o banco está esperando. O formDataJsonString está formatando os nomes dos campos como string ("tipoProduto") e não é isso que o banco espera
+      const response = await api.post('/produtos/admin/', formDataObject); //precisa enviar para o banco o formDataObject que está no formato que o banco está esperando. O formDataJsonString está formatando os nomes dos campos como string ("tipoProduto") e não é isso que o banco espera
 
       if (response.ok) {
         setSubmitted(true);
       }
-      setNomeProduto("");
-      setNomeLab("");
-      setImagemProduto("");
-      setDosagem("");
-      setTipoProduto("Controlado");
-      setPrecoUnitario("");
+      setNomeProduto('');
+      setNomeLab('');
+      setImagemProduto('');
+      setDosagem('');
+      setTipoProduto('Controlado');
+      setPrecoUnitario('');
       setTotalEstoque(0);
-      setDescricao("");
-      toast.success("Produto cadastrado com sucesso!");
-      
+      setDescricao('');
+      toast.success('Produto cadastrado com sucesso!');
+
       atualizarMedicamentosLista(formDataJsonString);
     } catch (error) {
       toast.error(error.response.data.message);
@@ -57,14 +57,14 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-100 flex items-center justify-center text-gray-500 text-sm">
+    <div className="min-h-screen bg-blue-100 flex items-center justify-center text-gray-500 text-sm pt-20 pb-20">
       <div className="bg-white shadow-lg rounded-md p-3 md:p-10 flex flex-col w-11/12 max-w-lg">
         <div>
           {submitted ? (
             <p className="text-center">Medicamento cadastrado com sucesso!</p>
           ) : (
             <div>
-              <h1 className="text-4xl font-extrabold text-center">
+              <h1 className="text-slate-700 text-3xl font-semibold text-center mb-10">
                 Cadastrar Medicamento
               </h1>
               <form
@@ -231,5 +231,3 @@ const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
     </div>
   );
 };
-
-export default MedicamentoCreate;

@@ -52,7 +52,7 @@ const camposForm = [
   { name: 'long', label: 'Longitude', type: 'text' },
 ];
 
-const FormCadastrarComprador = () => {
+export const FormCadastrarComprador = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(formDadosIniciais);
   const [showPassword, setShowPassword] = useState(false);
@@ -242,5 +242,3 @@ const FormCadastrarComprador = () => {
     </section>
   );
 };
-
-export default FormCadastrarComprador;

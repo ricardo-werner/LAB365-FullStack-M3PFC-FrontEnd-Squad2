@@ -12,7 +12,7 @@ import {
   formataDataNascimento,
   formataTelefone,
 } from '../../utils/validacoes';
-import { AuthContext } from '../../contexts/auth';
+
 
 const formDadosIniciais = {
   cpf: '',
@@ -52,7 +52,7 @@ const camposForm = [
   { name: 'long', label: 'Longitude', type: 'text' },
 ];
 
-const FormCadastrarUsuario = () => {
+export const FormCadastrarUsuario = () => {
   const [formData, setFormData] = useState(formDadosIniciais);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -98,7 +98,6 @@ const FormCadastrarUsuario = () => {
       try {
         const enderecoData = await pegarDetalheEndereco(soNumeroCEP);
         const latLongData = await pegarLatLongPeloCEP(soNumeroCEP);
-
 
         if (enderecoData) {
           // Preencha os campos de endereço independentemente dos dados de latLongData
@@ -252,5 +251,3 @@ const FormCadastrarUsuario = () => {
     </section>
   );
 };
-
-export default FormCadastrarUsuario;
