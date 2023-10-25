@@ -10,6 +10,7 @@ import { Produtos } from '../Produtos/ProdutosIndex';
 import { Endereco } from '../Entrega/EntregaIndex';
 import { Pagamento } from '../Pagamentos/PagamentoIndex';
 import { CartContext } from '../../../contexts/carrinhoCompras';
+import { api } from '../../../service/api';
 
 export function Passos() {
   const [compraFinalizada, setCompraFinalizada] = useState(false);
@@ -17,6 +18,21 @@ export function Passos() {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
   const [compraEfetuada, setCompraEfetuada] = useState(false);
+ 
+  
+
+  async function enviarDadosParaBanco(dadosCompra) {
+    try {
+      const response = await api.post('/venda/criar', dadosCompra);
+      
+      if (response.status === 200) {
+        console.log('Compra efetuada com sucesso');
+      }
+      setCompraEfetuada(true);
+    } catch (error) {
+      console.error('Erro ao efetuar a compra:', error);
+    }
+  }
 
   function handleNext() {
     setCurrentStep(currentStep + 1);
@@ -27,6 +43,7 @@ export function Passos() {
   }
 
   const FinalizarCompra = () => {
+    enviarDadosParaBanco(dadosCompra);
     localStorage.removeItem('itensCarrinho');
     setCompraFinalizada(true);
     limparCarrinho();
