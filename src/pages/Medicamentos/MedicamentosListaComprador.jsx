@@ -95,7 +95,7 @@ export default function MedicamentosListaComprador() {
         </h1>
         {!mostraModal && (
           <button
-            className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
+            className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
             onClick={toggle}
           >
             Carrinho de Compras ({itensCarrinho.length})
@@ -134,7 +134,7 @@ export default function MedicamentosListaComprador() {
             <div className="mt-6 flex justify-between items-center">
               {!itensCarrinho.find((item) => item.id === product.id) ? (
                 <button
-                  className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
+                  className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
                   onClick={() => {
                     adicionarAoCarrinho(product);
                     notificacaoAdicionadoCarrinho(product);
@@ -145,7 +145,7 @@ export default function MedicamentosListaComprador() {
               ) : (
                 <div className="flex gap-4">
                   <button
-                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
+                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
                     onClick={() => {
                       const itemCarrinho = itensCarrinho.find(
                         (item) => item.id === product.id
@@ -163,7 +163,7 @@ export default function MedicamentosListaComprador() {
                     {itensCarrinho.find((item) => item.id === product.id).qtde}
                   </p>
                   <button
-                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{backgroundColor: 'rgb(32,193,148)'}}
+                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
                     onClick={() => {
                       adicionarAoCarrinho(product);
                     }}
@@ -176,8 +176,9 @@ export default function MedicamentosListaComprador() {
           </div>
         ))}
       </div>
-      <div className="pagination">
+      <div className="flex justify-center mt-3 mb-2 pagination">
         <button
+          className="mr-2 px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
           onClick={() => setPaginaAtual(paginaAtual - 1)}
           disabled={paginaAtual <= 1} // Desabilita o botão Anterior se estiver na primeira página
         >
@@ -185,6 +186,7 @@ export default function MedicamentosListaComprador() {
         </button>
         <span>{paginaAtual}</span>
         <button
+          className="ml-2 px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
           onClick={() => setPaginaAtual(paginaAtual + 1)}
           disabled={paginaAtual >= totalMedicamentos}
         >
