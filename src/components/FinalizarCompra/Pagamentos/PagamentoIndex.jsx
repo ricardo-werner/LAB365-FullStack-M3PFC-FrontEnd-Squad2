@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { CartaoCredito } from './CartaoCreditoForm';
+import { CartaoDebito } from './CartaoDebitoForm';
 import { Boleto } from './BoletoForm';
 import { Pix } from './PixForm';
 import { Transferencia } from './TransferenciaForm';
@@ -50,6 +51,7 @@ export class Pagamento extends Component {
         >
           <option value=""></option>
           <option value="cartão de crédito">Cartão de Crédito</option>
+          <option value="cartão de débito">Cartão de Débito</option>
           <option value="boleto">Boleto</option>
           <option value="PIX">Pix</option>
           <option value="transferência bancária">Transferência Bancária</option>
@@ -63,6 +65,7 @@ export class Pagamento extends Component {
         </label>
 
         {selectedOption === 'cartão de crédito' && <CartaoCredito />}
+        {selectedOption === 'cartão de débito' && <CartaoCredito />}
         {selectedOption === 'boleto' && <Boleto />}
         {selectedOption === 'PIX' && <Pix />}
         {selectedOption === 'transferência bancária' && <Transferencia />}
