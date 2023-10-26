@@ -21,7 +21,7 @@ export const ListarVendasAdmin = () => {
   }, [user]);
 
   return (
-    <div className="mx-auto max-w-5xl my-20">
+    <div className="mx-auto w-full py-20 px-20">
       <div className="flex justify-between mb-10">
         <h2 className="text-slate-700 text-3xl font-semibold ">
           Resultado das suas Vendas

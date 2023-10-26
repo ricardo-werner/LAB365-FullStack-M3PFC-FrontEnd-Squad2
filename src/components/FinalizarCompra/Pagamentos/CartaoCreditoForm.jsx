@@ -3,7 +3,7 @@ import Container from '@mui/material/Container';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 
-export function CartaoCredito() {
+export const CartaoCredito=() =>{
     return (
         <Card sx={{
             margin: 2,

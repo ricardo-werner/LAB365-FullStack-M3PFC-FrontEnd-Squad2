@@ -140,4 +140,5 @@ export function Passos() {
       </div>
     </Box>
   );
-}
+};
+

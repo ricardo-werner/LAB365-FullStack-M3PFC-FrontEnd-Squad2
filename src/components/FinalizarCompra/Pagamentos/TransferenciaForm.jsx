@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-export function Transferencia() {
+export const Transferencia = () => {
   return (
     <Card
       sx={{
@@ -57,11 +57,14 @@ export function Transferencia() {
                         <MenuItem value={10}>Conta Corrente</MenuItem>
                         <MenuItem value={20}>Poupança</MenuItem>
                     </Select> */}
+
         </Stack>
       </Contaniner>
     </Card>
   );
-}
+
+};
+
 
 // export function Transferencia() {
 //     return (

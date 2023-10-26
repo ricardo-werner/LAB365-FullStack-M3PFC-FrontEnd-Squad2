@@ -15,7 +15,7 @@ export const ListaCompras = () => {
         const response = await api.get('/vendas/lista');
         setCompras(response.data);
       } catch (error) {
-        toast.error(response.data.error);
+        toast.error(error.response.data.message);
       }
     };
     fetCompras();
@@ -23,7 +23,7 @@ export const ListaCompras = () => {
 
   useEffect(() => {
     const agrupado = {};
-    console.log(agrupado, 'agru');
+
     compras.forEach((compra) => {
       const dataCompra = new Date(compra.createdAt);
       const dia = String(dataCompra.getDate()).padStart(2, '0');
@@ -46,10 +46,7 @@ export const ListaCompras = () => {
     }, 0);
   };
 
-  console.log(compras, 'comprasAgrupada');
-
   const handleClickCartao = (compra) => {
-    console.log('clicou');
     setCompraSelecionada(compra);
     setAbrirModal(true);
   };
@@ -59,17 +56,18 @@ export const ListaCompras = () => {
   };
 
   return (
-    <section className="compras h-screen pt-10 px-10 lg:pt-20 lg:px-20">
+    <section className="compras h-screen pt-10 px-3 lg:pt-20 lg:px-20">
       <div className="results mb-12">
-        <h1 className="text-slate-700 text-3xl font-semibold ">
+        <h1 className="text-slate-700 text-2xl md:text-3xl font-semibold ">
           Compras Realizadas
         </h1>
       </div>
-      <div className="grid md:flex md:flex-row gap-8">
-        <div className="flex gap-4 mx-auto md:grid md:gap-4 px-1 md:max-h-24 md:w-1/4">
+      <div className="grid pb-5 md:flex md:flex-row gap-8">
+        <div className="grid grid-cols-2 gap-2 w-full mx-auto  md:grid md:grid-cols-1 md:gap-4 px-1 md:max-h-24 md:w-1/4">
           {Object.keys(comprasAgrupadas).map((dataKey) => (
             <div
-              className="bg-white shadow-md rounded-lg px-3 py-3 lg:p-10 border hover:cursor-pointer hover:scale-105 transition"
+              key={dataKey}
+              className="cards bg-white  shadow-md rounded-lg p-3 lg:p-10 border hover:cursor-pointer hover:scale-105 transition"
               onClick={() => handleClickCartao(comprasAgrupadas[dataKey])}
             >
               <p className="grid mb-3">
@@ -86,7 +84,7 @@ export const ListaCompras = () => {
           ))}
         </div>
 
-        <div className="detalhes-compra mb-20 bg-[#ebebeb] py-6 px-6 rounded text-slate-600 md:w-3/4 md:px-10 md:py-10 hidden md:block">
+        <div className="detalhes-compra min-h-[500px] bg-[#ebebeb] py-6 px-6 rounded text-slate-600 md:w-3/4 md:px-10 md:py-10 hidden md:block">
           {compraSelecionada && (
             <DetalhesCompra
               compra={compraSelecionada}
@@ -97,9 +95,9 @@ export const ListaCompras = () => {
       </div>
 
       {abrirModal && (
-        <div className="relative fff">
-          <div className="overflow-y-auto bg-white p-4 rounded-md fixed top-0 left-0 z-50 w-full h-screen flex justify-center md:hidden">
-            <div>
+        <div className="">
+          <div className="overflow-y-auto bg-white p-4 rounded-md fixed top-0 left-0 z-50 w-full h-full flex justify-center md:hidden">
+            <div className="w-full">
               {compraSelecionada && (
                 <DetalhesCompra
                   compra={compraSelecionada}
@@ -174,7 +172,7 @@ const DetalhesCompra = ({ compra, calcularTotalCartao }) => {
 
               <div>
                 <img
-                  className="w-36 m-auto mt-3"
+                  className="w-44 m-auto mt-3"
                   src={item.produto.imagemProduto}
                   alt={item.produto.nomeProduto}
                 />

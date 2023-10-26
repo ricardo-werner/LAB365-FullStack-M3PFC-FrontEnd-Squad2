@@ -33,7 +33,7 @@ function CarrinhoResumo({ itensDoCarrinho, totalDaCompra }) {
   );
 }
 
-export function Produtos() {
+export const Produtos = () => {
   // Estado para armazenar os itens do carrinho
   const [itensDoCarrinho, setItensDoCarrinho] = useState([]);
   const [totalDaCompra, setTotalDaCompra] = useState(0);
@@ -62,4 +62,4 @@ export function Produtos() {
       totalDaCompra={totalDaCompra}
     />
   );
-}
+};
