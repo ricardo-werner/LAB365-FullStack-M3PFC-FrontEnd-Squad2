@@ -35,7 +35,6 @@ export const AdminDashboard = () => {
     }
   };
 
-  // Função para buscar os produtos em estoque do usuário
   const fetchProdutosEmEstoque = async () => {
     try {
       const token = localStorage.getItem('token');

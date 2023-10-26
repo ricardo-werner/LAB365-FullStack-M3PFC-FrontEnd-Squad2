@@ -13,8 +13,8 @@ export const formataDataNascimento = (data) => {
 };
 
 export const formataTelefone = (telefone) => {
-  const mascara = telefone.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
-  const match = mascara.match(/^(\d{0,2})(\d{0,5})(\d{0,4})$/); // Permite dígitos opcionais
+  const mascara = telefone.replace(/\D/g, ''); 
+  const match = mascara.match(/^(\d{0,2})(\d{0,5})(\d{0,4})$/); 
 
   if (match) {
     let numeroFormatado = '';

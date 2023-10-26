@@ -15,14 +15,11 @@ export const MedicamentosListaComprador = () => {
   const [pesquisar, setPesquisar] = useState('');
   const [totalMedicamentos, setTotalMedicmentos] = useState(0);
 
-
-  console.log(itensCarrinho, 'MedicamentoListaComprador')
   const toggle = () => {
     setMostraModal(!mostraModal);
   };
 
   useEffect(() => {
-    // Função para buscar usuários do banco de dados com filtro e paginação
     const getMedicamentos = async () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
@@ -31,8 +28,6 @@ export const MedicamentosListaComprador = () => {
           params: { nomeProduto: pesquisar },
         });
 
-        console.log(response, 'response');
-
         if (Array.isArray(response.data.resultado)) {
           setMedicamentos(response.data.resultado);
           setTotalMedicmentos(response.data.contar);
@@ -40,14 +35,13 @@ export const MedicamentosListaComprador = () => {
           console.log('Dados da Api não são um array', response.data);
         }
       } catch (error) {
-        console.error('Erro ao buscar medicamentos:', error);
+        toast.error(error.response.data.message);
       }
     };
 
     getMedicamentos();
   }, [paginaAtual, itensPorPagina, pesquisar]);
 
-  //console.log(totalMedicamentos, "wwww");
   const notificacaoAdicionadoCarrinho = (item) =>
     toast.success(`${item.nomeProduto} adicionado ao carrinho!`, {
       position: 'top-center',
@@ -186,7 +180,7 @@ export const MedicamentosListaComprador = () => {
         <button
           className="mr-2 px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
           onClick={() => setPaginaAtual(paginaAtual - 1)}
-          disabled={paginaAtual <= 1} // Desabilita o botão Anterior se estiver na primeira página
+          disabled={paginaAtual <= 1} 
         >
           Anterior
         </button>

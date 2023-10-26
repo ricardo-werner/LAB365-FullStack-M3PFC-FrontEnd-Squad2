@@ -15,7 +15,6 @@ export const CartProvider = ({ children }) => {
       (itemCarrinho) => itemCarrinho.id === item.id
     );
 
-    console.log(itensCarrinho, 'isItemInCart');
     if (isItemInCart) {
       setItensCarrinho(
         itensCarrinho.map((itemCarrinho) =>
@@ -82,8 +81,6 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('itensCarrinho', JSON.stringify(itensCarrinho));
   }, [itensCarrinho]);
-
-  console.log(itensCarrinho, 'context itensCarrinho');
 
   return (
     <CartContext.Provider

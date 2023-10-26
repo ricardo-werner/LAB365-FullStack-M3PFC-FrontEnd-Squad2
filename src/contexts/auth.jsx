@@ -9,8 +9,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const usuarioRecuperado = JSON.parse(localStorage.getItem('usuario')) || null;
   const expirarToken = localStorage.getItem('expirarToken') || null;
-  
-  const [user, setUser] = useState(usuarioRecuperado); // <--- aqui é onde você configura o estado do usuário
+  const [user, setUser] = useState(usuarioRecuperado);  
   const [loading, setLoading] = useState(true);
   const [tipoUsuario, setTipoUsuario] = useState('');
   const [nomeCompleto, setNomeCompleto] = useState('');
@@ -21,7 +20,7 @@ export const AuthProvider = ({ children }) => {
       const tempoExpirarToken = new Date(expirarToken);
 
       if (new Date() > tempoExpirarToken) {
-        // O token expirou, faça logout
+
         logout();
       } else {
         setUser(JSON.parse(usuarioRecuperado));
@@ -36,27 +35,24 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, senha) => {
     try {
-      // <--- aqui é onde você configura o login do usuário
+
       const response = await api.post('/usuario/login', {
         email,
         senha,
       });
       if (response.status === 200) {
-        const usuarioLogado = response.data; //Pega resposta do backend
-        setTipoUsuario(usuarioLogado.tipoUsuario); //Muda o valor do UseState tipoUsuario
-        setNomeCompleto(usuarioLogado.nomeCompleto); //Muda o valor do UseState nomeCompleto
+        const usuarioLogado = response.data; 
+        setTipoUsuario(usuarioLogado.tipoUsuario);
+        setNomeCompleto(usuarioLogado.nomeCompleto); 
 
-        //defina o tempo de expiração do token para 1 dia (86400 segundos)
-        //altera os 20 segundos abaixo que foi usado para teste
         const tempoExpirarToken = new Date();
         tempoExpirarToken.setSeconds(tempoExpirarToken.getSeconds() + 86400);
 
-        const token = response.data.token; //Pega o token
+        const token = response.data.token;
         localStorage.setItem('usuario', JSON.stringify(usuarioLogado));
-        localStorage.setItem('token', token); //Salva o token no localstorage
+        localStorage.setItem('token', token); 
         localStorage.setItem('expirarToken', tempoExpirarToken.toISOString());
 
-        //Configurar token no headers do axios
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         setUser(usuarioLogado);
 
@@ -69,18 +65,17 @@ export const AuthProvider = ({ children }) => {
         }
       }
     } catch (error) {
-      toast.error(error.response.data.message); // Exibe a mensagem de erro da API
+      toast.error(error.response.data.message); 
       navigate('/');
     }
   };
 
   const logout = () => {
-    // <--- aqui é onde você configura o logout do usuário
     setUser(null);
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
     localStorage.removeItem('expirarToken');
-    
+
     axios.defaults.headers.common['Authorization'] = null;
     navigate('/');
   };
