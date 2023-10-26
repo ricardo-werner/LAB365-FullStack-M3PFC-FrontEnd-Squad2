@@ -52,16 +52,19 @@ export const Transferencia = () => {
             variant="standard"
             required
           />
-          <Select label="Selecione o Endereço de Entrega">
-            <MenuItem value={10}></MenuItem>
-            <MenuItem value={20}>Conta Corrente</MenuItem>
-            <MenuItem value={30}>Poupança</MenuItem>
-          </Select>
+          {/* <Select label="Selecione o Endereço de Entrega">
+                        <MenuItem value={10}></MenuItem>
+                        <MenuItem value={10}>Conta Corrente</MenuItem>
+                        <MenuItem value={20}>Poupança</MenuItem>
+                    </Select> */}
+
         </Stack>
       </Contaniner>
     </Card>
   );
+
 };
+
 
 // export function Transferencia() {
 //     return (
