@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const usuarioRecuperado = JSON.parse(localStorage.getItem('usuario')) || null;
   const expirarToken = localStorage.getItem('expirarToken') || null;
-  
+
   const [user, setUser] = useState(usuarioRecuperado); // <--- aqui é onde você configura o estado do usuário
   const [loading, setLoading] = useState(true);
   const [tipoUsuario, setTipoUsuario] = useState('');
@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
     localStorage.removeItem('expirarToken');
-    
+
     axios.defaults.headers.common['Authorization'] = null;
     navigate('/');
   };
