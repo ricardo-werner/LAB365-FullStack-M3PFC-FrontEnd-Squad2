@@ -36,14 +36,13 @@ export function Passos() {
     // Armazene os itens filtrados no estado 'dadosFiltrados'
     setDadosFiltrados(itensFiltrados);
   }, []);
-  console.log(dadosFiltrados, 'dadosFiltrados');
 
   async function enviarDadosParaBanco() {
     try {
       const response = await api.post('/vendas/criar', dadosFiltrados);
 
       if (response.status === 200) {
-        console.log('Compra efetuada com sucesso');
+        toast.success('Compra efetuada com sucesso');
       }
       setCompraEfetuada(true);
     } catch (error) {
@@ -140,5 +139,4 @@ export function Passos() {
       </div>
     </Box>
   );
-};
-
+}

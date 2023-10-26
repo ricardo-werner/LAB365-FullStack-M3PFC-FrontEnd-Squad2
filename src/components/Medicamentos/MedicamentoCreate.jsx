@@ -33,9 +33,7 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
     let formDataJsonString = JSON.stringify(formDataObject);
 
     try {
-      //console.log(formDataObject, "formDataObject");
-      //console.log(formDataJsonString, "formDataJsonString");
-      const response = await api.post('/produtos/admin/', formDataObject); //precisa enviar para o banco o formDataObject que está no formato que o banco está esperando. O formDataJsonString está formatando os nomes dos campos como string ("tipoProduto") e não é isso que o banco espera
+      const response = await api.post('/produtos/admin/', formDataObject); 
 
       if (response.ok) {
         setSubmitted(true);

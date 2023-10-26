@@ -14,7 +14,6 @@ export const Endereco = () => {
   const [enderecos, setEnderecos] = useState([]);
   const [enderecoSelecionado, setEnderecoSelecionado] = useState('');
 
-  console.log(user.id);
   useEffect(() => {
     if (usuarioId) {
       const fetchEnderecos = async () => {
@@ -33,7 +32,6 @@ export const Endereco = () => {
           };
 
           const response = await api.get(`/comprador/endereco`);
-          console.log(response.data);
           setEnderecos(response.data);
         } catch (error) {
           toast.error(error.response.data.message);

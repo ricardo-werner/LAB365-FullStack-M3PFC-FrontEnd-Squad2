@@ -15,8 +15,6 @@ export const MedicamentosListaComprador = () => {
   const [pesquisar, setPesquisar] = useState('');
   const [totalMedicamentos, setTotalMedicmentos] = useState(0);
 
-
-  console.log(itensCarrinho, 'MedicamentoListaComprador')
   const toggle = () => {
     setMostraModal(!mostraModal);
   };
@@ -31,8 +29,6 @@ export const MedicamentosListaComprador = () => {
           params: { nomeProduto: pesquisar },
         });
 
-        console.log(response, 'response');
-
         if (Array.isArray(response.data.resultado)) {
           setMedicamentos(response.data.resultado);
           setTotalMedicmentos(response.data.contar);
@@ -40,14 +36,13 @@ export const MedicamentosListaComprador = () => {
           console.log('Dados da Api não são um array', response.data);
         }
       } catch (error) {
-        console.error('Erro ao buscar medicamentos:', error);
+        toast.error(error.response.data.message);
       }
     };
 
     getMedicamentos();
   }, [paginaAtual, itensPorPagina, pesquisar]);
 
-  //console.log(totalMedicamentos, "wwww");
   const notificacaoAdicionadoCarrinho = (item) =>
     toast.success(`${item.nomeProduto} adicionado ao carrinho!`, {
       position: 'top-center',

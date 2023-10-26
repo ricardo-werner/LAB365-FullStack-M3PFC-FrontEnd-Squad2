@@ -23,14 +23,12 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
     totalEstoque: '',
   });
 
-  console.log(selecionarMedicamentoId, 'selecionarMedicamentoId');
   const getInfoMedicamento = async (medicamentoId) => {
     setSelecionarMedicamentoId(medicamentoId);
 
     try {
       const response = await api.get(`/produto/${medicamentoId}`);
       const infoMedicamento = response.data;
-      console.log(infoMedicamento);
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
       setAbrirModal(true);

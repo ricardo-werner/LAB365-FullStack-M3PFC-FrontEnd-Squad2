@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 
 // Componente que exibe os itens do carrinho e o total
 function CarrinhoResumo({ itensDoCarrinho, totalDaCompra }) {
-  console.log(itensDoCarrinho, 'itensDoCarrinho, totalDaCompra');
   return (
     <Box p={4}>
       <Paper elevation={1}>
@@ -50,11 +49,9 @@ export const Produtos = () => {
       (total, item) => total + item.quantidadeProdutoVendido * parseFloat(item.precoUnitario),
       0
     );
-    console.log(total, 'produtoIndexxx total')
+
     setTotalDaCompra(total);
   }, []);
-
-  console.log(itensDoCarrinho, 'produtoIndexxx')
 
   return (
     <CarrinhoResumo

@@ -20,7 +20,6 @@ export const ListaUsuarios = () => {
     tipoUsuario: '',
   });
 
-  console.log(usuarioEditado, 'selecionaUsuarioId');
   const removeMascaras = (usuario) => {
     return {
       ...usuario,
@@ -66,7 +65,7 @@ export const ListaUsuarios = () => {
         console.log('Dados da Api deve ser um array', response.data);
       }
     } catch (error) {
-      console.error('Erro ao buscar usuários:', error);
+      toast.error(error.response.data.message);
     }
   };
 
