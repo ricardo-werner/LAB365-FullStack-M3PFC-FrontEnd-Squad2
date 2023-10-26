@@ -34,10 +34,9 @@ export function Passos() {
     }));
 
     // Armazene os itens filtrados no estado 'dadosFiltrados'
-    console.log(itensFiltrados, 'dadosFiltrados');
     setDadosFiltrados(itensFiltrados);
   }, []);
-  console.log(dadosFiltrados, 'item');
+  console.log(dadosFiltrados, 'dadosFiltrados');
 
   async function enviarDadosParaBanco() {
     try {
@@ -83,7 +82,9 @@ export function Passos() {
 
       {currentStep === 0 && !compraEfetuada && <Produtos />}
       {currentStep === 1 && !compraEfetuada && <Endereco />}
-      {currentStep === 2 && !compraEfetuada && <Pagamento />}
+      {currentStep === 2 && !compraEfetuada && (
+        <Pagamento atualizarDadosFiltrados={setDadosFiltrados} />
+      )}
 
       <div className="flex justify-center gap-12">
         {currentStep > 0 && !compraEfetuada && (

@@ -1,9 +1,8 @@
-import { Component, useContext } from 'react';
+import { Component } from 'react';
 import { CartaoCredito } from './CartaoCreditoForm';
 import { Boleto } from './BoletoForm';
 import { Pix } from './PixForm';
 import { Transferencia } from './TransferenciaForm';
-import { CartContext } from '../../../contexts/carrinhoCompras';
 
 export class Pagamento extends Component {
   constructor() {
@@ -17,22 +16,24 @@ export class Pagamento extends Component {
     const selectedOption = e.target.value;
     this.setState({ selectedOption });
 
-    // Recupere os itens do carrinho do localStorage
     const itensCarrinho =
       JSON.parse(localStorage.getItem('itensCarrinho')) || [];
 
     // Atualize o tipo de pagamento em cada item do carrinho
     const itensCarrinhoComTipoPagamento = itensCarrinho.map((item) => ({
-      ...item,
+      produtoId: item.id,
+      quantidadeProdutoVendido: item.quantidadeProdutoVendido,
       tipoPagamento: selectedOption,
     }));
 
-    console.log(itensCarrinhoComTipoPagamento, 'itensCarrinhoComTipoPagamento');
     // Atualize o localStorage com os itens do carrinho atualizados
     localStorage.setItem(
       'itensCarrinho',
       JSON.stringify(itensCarrinhoComTipoPagamento)
     );
+
+    // Atualize os dadosFiltrados no componente Pai (Passos)
+    this.props.atualizarDadosFiltrados(itensCarrinhoComTipoPagamento);
   };
 
   render() {
