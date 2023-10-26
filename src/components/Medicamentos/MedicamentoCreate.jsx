@@ -31,7 +31,7 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
     let formDataJsonString = JSON.stringify(formDataObject);
 
     try {
-      const response = await api.post('/produtos/admin/', formDataObject); 
+      const response = await api.post('/produtos/admin/', formDataObject);
 
       if (response.ok) {
         setSubmitted(true);
@@ -77,7 +77,7 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
                     className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
                     placeholder=" "
                     required
-                    pattern=".{5,}"
+                    pattern=".{3,}"
                     value={nomeProduto}
                     onChange={(e) => setNomeProduto(e.target.value)}
                   />
@@ -95,7 +95,7 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
                     className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
                     placeholder=" "
                     required
-                    pattern=".{5,}"
+                    pattern=".{3,}"
                     value={nomeLab}
                     onChange={(e) => setNomeLab(e.target.value)}
                   />
@@ -105,18 +105,19 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
                 </label>
 
                 <label htmlFor="imagemProduto" className="mb-2">
-                  <span>Link da Imagem</span>
-                  <input
+                  <span>Imagem</span>
+                  <select
                     name="imagemProduto"
                     id="imagemProduto"
-                    type="text"
                     className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
                     value={imagemProduto}
                     onChange={(e) => setImagemProduto(e.target.value)}
-                    placeholder="http://"
                     required
-                    pattern=".{10,}"
-                  />
+                  >
+                    <option >Selecione a imagem</option>
+                    <option value="https://files.lojas.club/4PCPRGQNVS8711BN94CULI.png">Controlado</option>
+                    <option value="https://files.lojas.club/4FKG4JB1L29N41BV0C0G4G.png">Não Controlado</option>
+                  </select>
                 </label>
 
                 <label htmlFor="dosagem" className="mb-2">
@@ -130,7 +131,7 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
                     onChange={(e) => setDosagem(e.target.value)}
                     placeholder=" "
                     required
-                    pattern=".{2,}"
+                    pattern=".{1,}"
                   />
                   <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
                     A dosagem é obrigatória
