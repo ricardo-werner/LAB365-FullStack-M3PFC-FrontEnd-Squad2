@@ -3,7 +3,7 @@ import axios from 'axios';
 const apiKey = '30b535e5b0bf433cbb7586c23d4b676a';
 
 const eCepValido = (cep) => {
-  return /^\d{8}$/.test(cep); // Verifica se o CEP contém exatamente 8 dígitos
+  return /^\d{8}$/.test(cep); 
 };
 
 export const pegarDetalheEndereco = async (cep) => {
@@ -36,7 +36,7 @@ export const pegarLatLongPeloCEP = async (cep) => {
 
       return { lat, long };
     } else {
-      return null; // Não foi possível encontrar a latitude e a longitude
+      return null; 
     }
   } catch (error) {
     console.error('Erro ao buscar a latitude e a longitude:', error);

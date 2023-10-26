@@ -73,7 +73,6 @@ export const ListaUsuarios = () => {
     fetchUsuarios();
   }, [paginaAtual, itensPorPagina, pesquisar]);
 
-  // Função para salvar as alterações no modal de edição
   const handleSalvarAlteracoes = async () => {
     const usuarioSemMascaras = removeMascaras(usuarioEditado);
 

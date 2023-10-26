@@ -59,7 +59,6 @@ export const ListarVendasAdmin = () => {
                         className="object-cover w-[80px] h-[80px]"
                         src={venda.produto.imagemProduto}
                         alt={venda.produto.nomeProduto}
-                        // style={{ maxWidth: '80px', maxHeight: '80px' }}
                       />
                     </td>
                   </tr>

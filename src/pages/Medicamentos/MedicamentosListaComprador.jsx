@@ -20,7 +20,6 @@ export const MedicamentosListaComprador = () => {
   };
 
   useEffect(() => {
-    // Função para buscar usuários do banco de dados com filtro e paginação
     const getMedicamentos = async () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
@@ -181,7 +180,7 @@ export const MedicamentosListaComprador = () => {
         <button
           className="mr-2 px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
           onClick={() => setPaginaAtual(paginaAtual - 1)}
-          disabled={paginaAtual <= 1} // Desabilita o botão Anterior se estiver na primeira página
+          disabled={paginaAtual <= 1} 
         >
           Anterior
         </button>

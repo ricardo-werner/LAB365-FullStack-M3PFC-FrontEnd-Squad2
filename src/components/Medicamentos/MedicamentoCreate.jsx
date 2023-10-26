@@ -3,7 +3,6 @@ import { api } from '../../service/api';
 import { toast } from 'react-toastify';
 
 export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
-  // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
   const [nomeProduto, setNomeProduto] = useState('');
   const [nomeLab, setNomeLab] = useState('');
   const [imagemProduto, setImagemProduto] = useState('');
@@ -27,9 +26,8 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
     formData.append('totalEstoque', totalEstoque);
     formData.append('descricao', descricao);
 
-    //Cria um objeto do formulário
     let formDataObject = Object.fromEntries(formData.entries());
-    //Transforma o objeto em JSON
+
     let formDataJsonString = JSON.stringify(formDataObject);
 
     try {
@@ -119,19 +117,6 @@ export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
                     required
                     pattern=".{10,}"
                   />
-                  {/* <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                    {Controlado.tipoProduto === "Controlado" ? (
-                      <img
-                        src="https://files.lojas.club/4PCPRGQNVS8711BN94CULI.png"
-                        alt="medicamentoControlado"
-                      />
-                    ) : (
-                      <img
-                        src="https://files.lojas.club/4FKG4JB1L29N41BV0C0G4G.png"
-                        alt="medicamentoNaoControlado"
-                      />
-                    )}
-                  </span> */}
                 </label>
 
                 <label htmlFor="dosagem" className="mb-2">

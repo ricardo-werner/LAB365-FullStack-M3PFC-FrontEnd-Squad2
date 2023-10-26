@@ -38,7 +38,6 @@ export const Navbar = ({ children }) => {
 
   const authContext = useContext(AuthContext);
 
-  // Função para fazer logout quando o botão de logout é clicado
   const handleLogout = (e) => {
     e.preventDefault();
     logout();
@@ -50,15 +49,15 @@ export const Navbar = ({ children }) => {
 
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem('usuario');
-    const tokenExpirado = !localStorage.getItem('token'); //verifica se o token ainda está presente
+    const tokenExpirado = !localStorage.getItem('token'); 
 
     if (usuarioRecuperado && !tokenExpirado) {
       const usuarioLogado = JSON.parse(usuarioRecuperado);
       setTipoUsuario(usuarioLogado.tipoUsuario);
       setNomeCompleto(usuarioLogado.nomeCompleto);
     } else {
-      setTipoUsuario(''); // Limpa o tipo de usuário
-      setNomeCompleto(''); // Limpa o nome do usuário
+      setTipoUsuario(''); 
+      setNomeCompleto(''); 
     }
   }, [tipoUsuario, nomeCompleto]);
 
@@ -107,7 +106,7 @@ export const Navbar = ({ children }) => {
               >
                 <ListItemText primary="Medicamentos" />
               </ListItem>
-              {tipoUsuario ? ( // Verifica se há um usuário logado
+              {tipoUsuario ? ( 
                 <>
                   <ListItem>
                     <Avatar />
@@ -129,7 +128,7 @@ export const Navbar = ({ children }) => {
               ) : (
                 <ListItem
                   component={Link}
-                  to="/comprador/cadastro" // Redireciona para a página de cadastro
+                  to="/comprador/cadastro" 
                   style={{ cursor: 'pointer' }}
                 >
                   <ListItemText primary="Cadastrar" />

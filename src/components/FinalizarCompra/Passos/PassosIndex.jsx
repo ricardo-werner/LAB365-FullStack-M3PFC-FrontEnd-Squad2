@@ -22,18 +22,15 @@ export function Passos() {
   const [dadosFiltrados, setDadosFiltrados] = useState([]);
 
   useEffect(() => {
-    // Recupere os itens do carrinho do localStorage
     const itensCarrinho =
       JSON.parse(localStorage.getItem('itensCarrinho')) || [];
 
-    // Mapeie e atualize os campos necessários
     const itensFiltrados = itensCarrinho.map((item) => ({
-      produtoId: item.id, // Renomeie 'id' para 'produtoId'
+      produtoId: item.id, 
       quantidadeProdutoVendido: item.quantidadeProdutoVendido,
       tipoPagamento: item.tipoPagamento,
     }));
 
-    // Armazene os itens filtrados no estado 'dadosFiltrados'
     setDadosFiltrados(itensFiltrados);
   }, []);
 
@@ -59,7 +56,7 @@ export function Passos() {
   }
 
   const FinalizarCompra = () => {
-    enviarDadosParaBanco(); // Não passe 'dadosCompra' como argumento
+    enviarDadosParaBanco(); 
     setCompraFinalizada(true);
     limparCarrinho();
     localStorage.removeItem('itensCarrinho');

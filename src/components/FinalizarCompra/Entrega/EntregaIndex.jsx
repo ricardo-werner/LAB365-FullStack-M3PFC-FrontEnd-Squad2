@@ -4,13 +4,13 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-import { AuthContext } from '../../../contexts/auth'; // Importe o contexto de autenticação
+import { AuthContext } from '../../../contexts/auth'; 
 import { Paper } from '@mui/material';
 import { toast } from 'react-toastify';
 
 export const Endereco = () => {
-  const { user } = useContext(AuthContext); // Obtenha o usuário do contexto de autenticação
-  const usuarioId = user ? user.id : null; // Obtenha o usuarioId do usuário logado
+  const { user } = useContext(AuthContext); 
+  const usuarioId = user ? user.id : null; 
   const [enderecos, setEnderecos] = useState([]);
   const [enderecoSelecionado, setEnderecoSelecionado] = useState('');
 
@@ -18,7 +18,6 @@ export const Endereco = () => {
     if (usuarioId) {
       const fetchEnderecos = async () => {
         try {
-          // Obtenha o token de autenticação do localStorage
           const token = localStorage.getItem('token');
 
           if (!token) {
@@ -56,14 +55,14 @@ export const Endereco = () => {
         {enderecos.map((endereco) => (
           <Grid item xs={6} key={endereco.id}>
             <Paper
-              elevation={endereco.id === enderecoSelecionado ? 5 : 3} // Elevação maior quando selecionado
+              elevation={endereco.id === enderecoSelecionado ? 5 : 3} 
               sx={{
                 p: 2,
                 cursor: 'pointer',
                 backgroundColor:
                   endereco.id === enderecoSelecionado
                     ? 'rgb(32, 193, 148)'
-                    : 'white', // Cor de fundo quando selecionado
+                    : 'white', 
               }}
               onClick={() => handleEnderecoSelect(endereco.id)}
             >

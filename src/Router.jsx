@@ -23,23 +23,21 @@ import { FormCadastrarComprador } from './pages/CadastrarUsuario/FormCadastroCom
 
 const AppRouter = () => {
   const PrivateAdmin = ({ children }) => {
-    //Verifica se o usuário está autenticado e se é admin
     const { authenticated, user } = useContext(AuthContext);
     if (!authenticated || user.tipoUsuario !== 'Administrador') {
       toast.error('Acesso negado para esse tipo de usuário.');
       return <Navigate to="/" />;
     }
-    return children; //Se estiver autenticado, retorna o children
+    return children; 
   };
   const PrivateComprador = ({ children }) => {
-    //Verifica se o usuário é um comprador
     const { authenticated, user } = useContext(AuthContext);
     if (!authenticated || user.tipoUsuario !== 'Comprador') {
       return <Navigate to="/" />;
     }
-    return children; //Se estiver autenticado, retorna o children
+    return children; 
   };
-  // <--- aqui é onde você configura as rotas da sua aplicação
+
   return (
     <Router>
       <AuthProvider>

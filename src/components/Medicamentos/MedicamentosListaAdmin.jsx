@@ -38,7 +38,6 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
   };
 
   useEffect(() => {
-    // Função para buscar medicamentos do banco de dados com filtro e paginação
     const fetchMedicamentos = async () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
@@ -62,13 +61,11 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
     };
 
     if (medicamentosListaAtualizada) {
-      // Se a lista precisar ser atualizada, chame a função fetchMedicamentos
       fetchMedicamentos();
     }
     fetchMedicamentos();
   }, [paginaAtual, itensPorPagina, pesquisar, medicamentosListaAtualizada]);
 
-  // Função para salvar as alterações no modal de edição
   const handleSalvarAlteracoes = async () => {
     const dadosAlterados = {};
     for (const campo in medicamentoEditado) {
@@ -96,7 +93,6 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
     }
   };
 
-  // Função para fechar o modal de edição
   const handleFecharModal = () => {
     setAbrirModal(false);
     setMedicamentoEditado({

@@ -3,7 +3,6 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 
-// Componente que exibe os itens do carrinho e o total
 function CarrinhoResumo({ itensDoCarrinho, totalDaCompra }) {
   return (
     <Box p={4}>
@@ -33,18 +32,15 @@ function CarrinhoResumo({ itensDoCarrinho, totalDaCompra }) {
 }
 
 export const Produtos = () => {
-  // Estado para armazenar os itens do carrinho
   const [itensDoCarrinho, setItensDoCarrinho] = useState([]);
   const [totalDaCompra, setTotalDaCompra] = useState(0);
 
-  // Efeito para carregar os itens do localStorage
   useEffect(() => {
     const itensCarrinho = JSON.parse(
       localStorage.getItem('itensCarrinho') || '[]'
     );
     setItensDoCarrinho(itensCarrinho);
-
-    // Calcule o total da compra com base nos itens do carrinho
+    
     const total = itensCarrinho.reduce(
       (total, item) => total + item.quantidadeProdutoVendido * parseFloat(item.precoUnitario),
       0

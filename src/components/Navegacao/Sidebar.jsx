@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 
 export const Sidebar = ({ state, setState, toggleDrawer }) => {
   const menuItems = [
-    { text: 'Produtos', icon: <MedicationIcon />, route: '#' },
     {
       text: 'Cadastrar Medicamento',
       icon: <MedicationIcon />,
@@ -46,7 +45,7 @@ export const Sidebar = ({ state, setState, toggleDrawer }) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
+      <List className="pt-4">
         {menuItems.map((item, index) => (
           <ListItem className="px-2 py-2" key={item.text} disablePadding>
             <Link to={item.route} className="flex">

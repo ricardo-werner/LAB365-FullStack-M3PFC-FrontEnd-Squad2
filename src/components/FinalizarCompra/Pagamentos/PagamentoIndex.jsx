@@ -9,7 +9,7 @@ export class Pagamento extends Component {
   constructor() {
     super();
     this.state = {
-      selectedOption: '', // Estado para armazenar a opção selecionada
+      selectedOption: '',
     };
   }
 
@@ -20,20 +20,17 @@ export class Pagamento extends Component {
     const itensCarrinho =
       JSON.parse(localStorage.getItem('itensCarrinho')) || [];
 
-    // Atualize o tipo de pagamento em cada item do carrinho
     const itensCarrinhoComTipoPagamento = itensCarrinho.map((item) => ({
       produtoId: item.id,
       quantidadeProdutoVendido: item.quantidadeProdutoVendido,
       tipoPagamento: selectedOption,
     }));
 
-    // Atualize o localStorage com os itens do carrinho atualizados
     localStorage.setItem(
       'itensCarrinho',
       JSON.stringify(itensCarrinhoComTipoPagamento)
     );
 
-    // Atualize os dadosFiltrados no componente Pai (Passos)
     this.props.atualizarDadosFiltrados(itensCarrinhoComTipoPagamento);
   };
 
