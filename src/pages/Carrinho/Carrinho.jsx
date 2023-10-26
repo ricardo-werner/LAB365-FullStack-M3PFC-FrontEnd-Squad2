@@ -87,7 +87,7 @@ export const Cart=({ mostraModal, toggle }) =>{
                         const itemCarrinho = itensCarrinho.find(
                           (product) => product.id === item.id
                         );
-                        if (itemCarrinho.qtde === 1) {
+                        if (itemCarrinho.quantidadeProdutoVendido === 1) {
                           handleremoverDoCarrinho(item);
                         } else {
                           removerDoCarrinho(item);
@@ -96,7 +96,7 @@ export const Cart=({ mostraModal, toggle }) =>{
                     >
                       -
                     </button>
-                    <p>{item.qtde}</p>
+                    <p>{item.quantidadeProdutoVendido}</p>
                     <button
                       className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
                       onClick={() => {

@@ -15,6 +15,8 @@ export const MedicamentosListaComprador = () => {
   const [pesquisar, setPesquisar] = useState('');
   const [totalMedicamentos, setTotalMedicmentos] = useState(0);
 
+
+  console.log(itensCarrinho, 'MedicamentoListaComprador')
   const toggle = () => {
     setMostraModal(!mostraModal);
   };
@@ -153,7 +155,7 @@ export const MedicamentosListaComprador = () => {
                       const itemCarrinho = itensCarrinho.find(
                         (item) => item.id === product.id
                       );
-                      if (itemCarrinho.qtde === 1) {
+                      if (itemCarrinho.quantidadeProdutoVendido === 1) {
                         handleremoverDoCarrinho(product);
                       } else {
                         removerDoCarrinho(product);
@@ -163,7 +165,7 @@ export const MedicamentosListaComprador = () => {
                     -
                   </button>
                   <p className="text-gray-600">
-                    {itensCarrinho.find((item) => item.id === product.id).qtde}
+                    {itensCarrinho.find((item) => item.id === product.id).quantidadeProdutoVendido}
                   </p>
                   <button
                     className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
