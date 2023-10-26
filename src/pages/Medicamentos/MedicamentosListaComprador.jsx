@@ -15,6 +15,8 @@ export default function MedicamentosListaComprador() {
   const [pesquisar, setPesquisar] = useState("");
   const [totalMedicamentos, setTotalMedicmentos] = useState(0);
 
+
+  console.log(itensCarrinho, 'MedicamentoListaComprador')
   const toggle = () => {
     setMostraModal(!mostraModal);
   };
@@ -25,7 +27,7 @@ export default function MedicamentosListaComprador() {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
-        const response = await api.get(`produto/${offset}/${itensPorPagina}`, {
+        const response = await api.get(`produtos/${offset}/${itensPorPagina}`, {
           params: { nomeProduto: pesquisar },
         });
 
@@ -150,7 +152,7 @@ export default function MedicamentosListaComprador() {
                       const itemCarrinho = itensCarrinho.find(
                         (item) => item.id === product.id
                       );
-                      if (itemCarrinho.qtde === 1) {
+                      if (itemCarrinho.quantidadeProdutoVendido === 1) {
                         handleremoverDoCarrinho(product);
                       } else {
                         removerDoCarrinho(product);
@@ -160,7 +162,7 @@ export default function MedicamentosListaComprador() {
                     -
                   </button>
                   <p className="text-gray-600">
-                    {itensCarrinho.find((item) => item.id === product.id).qtde}
+                    {itensCarrinho.find((item) => item.id === product.id).quantidadeProdutoVendido}
                   </p>
                   <button
                     className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}

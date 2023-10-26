@@ -47,7 +47,7 @@ export const AdminDashboard = () => {
 
       const offset = (paginaAtual - 1) * itensPorPagina;
       const produtosResponse = await api.get(
-        `produto/${offset}/${itensPorPagina}`,
+        `produtos/${offset}/${itensPorPagina}`,
         config
       );
 

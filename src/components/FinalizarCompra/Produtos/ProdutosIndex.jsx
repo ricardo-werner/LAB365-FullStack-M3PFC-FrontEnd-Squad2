@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 
 // Componente que exibe os itens do carrinho e o total
 function CarrinhoResumo({ itensDoCarrinho, totalDaCompra }) {
+  console.log(itensDoCarrinho, 'itensDoCarrinho, totalDaCompra');
   return (
     <Box p={4}>
       <Paper elevation={1}>
@@ -17,7 +18,7 @@ function CarrinhoResumo({ itensDoCarrinho, totalDaCompra }) {
               Nome: {item.nomeProduto}
             </Typography>
             <Typography variant="body1" p={2}>
-              Quantidade: {item.qtde}
+              Quantidade: {item.quantidadeProdutoVendido}
             </Typography>
             <Typography variant="body1" p={2}>
               Preço Unitário: R$ {item.precoUnitario}
@@ -39,17 +40,26 @@ export function Produtos() {
 
   // Efeito para carregar os itens do localStorage
   useEffect(() => {
-    const itensCarrinho = JSON.parse(localStorage.getItem('itensCarrinho') || '[]');
+    const itensCarrinho = JSON.parse(
+      localStorage.getItem('itensCarrinho') || '[]'
+    );
     setItensDoCarrinho(itensCarrinho);
 
     // Calcule o total da compra com base nos itens do carrinho
     const total = itensCarrinho.reduce(
-      (total, item) => total + (item.qtde * parseFloat(item.precoUnitario)), 0
+      (total, item) => total + item.quantidadeProdutoVendido * parseFloat(item.precoUnitario),
+      0
     );
+    console.log(total, 'produtoIndexxx total')
     setTotalDaCompra(total);
   }, []);
 
+  console.log(itensDoCarrinho, 'produtoIndexxx')
+
   return (
-    <CarrinhoResumo itensDoCarrinho={itensDoCarrinho} totalDaCompra={totalDaCompra} />
+    <CarrinhoResumo
+      itensDoCarrinho={itensDoCarrinho}
+      totalDaCompra={totalDaCompra}
+    />
   );
 }

@@ -45,7 +45,7 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
-        const response = await api.get(`/produto/${offset}/${itensPorPagina}`, {
+        const response = await api.get(`/produtos/${offset}/${itensPorPagina}`, {
           params: { nomeProduto: pesquisar },
         });
 
