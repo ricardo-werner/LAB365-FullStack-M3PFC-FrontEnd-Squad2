@@ -13,6 +13,7 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
   const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState('');
   const [totalMedicamentos, setTotalMedicamentos] = useState(0);
   const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
+  const [medicamentosAtualizados, setMedicamentosAtualizados] = useState(false);
   const [medicamentoEditado, setMedicamentoEditado] = useState({
     id: '',
     nomeProduto: '',
@@ -22,6 +23,7 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
     descricao: '',
     totalEstoque: '',
   });
+  console.log(medicamentoEditado, 'medicamentoEditado');
 
   const getInfoMedicamento = async (medicamentoId) => {
     setSelecionarMedicamentoId(medicamentoId);
@@ -31,6 +33,7 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
       const infoMedicamento = response.data;
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
+
       setAbrirModal(true);
     } catch (error) {
       console.error('Erro ao carregar informações do medicamento:', error);
@@ -60,11 +63,18 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
       }
     };
 
-    if (medicamentosListaAtualizada) {
+    if (medicamentosListaAtualizada || medicamentosAtualizados) {
       fetchMedicamentos();
+      setMedicamentosAtualizados(false); // Redefina o estado
     }
     fetchMedicamentos();
-  }, [paginaAtual, itensPorPagina, pesquisar, medicamentosListaAtualizada]);
+  }, [
+    paginaAtual,
+    itensPorPagina,
+    pesquisar,
+    medicamentosListaAtualizada,
+    medicamentosAtualizados,
+  ]);
 
   const handleSalvarAlteracoes = async () => {
     const dadosAlterados = {};
@@ -81,8 +91,9 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
       );
 
       if (response.status === 204) {
-        toast.success('Alterações salvas com sucesso.');
+        toast.success('Alterações salvas com sucesso');
         setAbrirModal(false);
+        setMedicamentosAtualizados(true); // Sinalize que os medicamentos foram atualizados
       }
 
       fetchMedicamentos();
