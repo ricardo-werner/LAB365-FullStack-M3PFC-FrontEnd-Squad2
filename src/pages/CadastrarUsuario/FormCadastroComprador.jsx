@@ -52,7 +52,7 @@ const camposForm = [
   { name: 'long', label: 'Longitude', type: 'text' },
 ];
 
-const FormCadastrarComprador = () => {
+export const FormCadastrarComprador = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(formDadosIniciais);
   const [showPassword, setShowPassword] = useState(false);
@@ -140,13 +140,13 @@ const FormCadastrarComprador = () => {
 
     try {
       const response = await api.post(
-        '/usuario/cadastrar', //Ajustar API
+        '/usuario/cadastrar', 
         formDataemMascaras
       );
       if (response.status === 201) {
         toast.success('Usuário cadastrado com sucesso!');
         setFormData(formDadosIniciais);
-        navigate('/'); //Verificar rota
+        navigate('/'); 
       } else {
         toast.error(response.data.message); // Exibe a mensagem de erro da API em outros casos
       }
@@ -242,5 +242,3 @@ const FormCadastrarComprador = () => {
     </section>
   );
 };
-
-export default FormCadastrarComprador;

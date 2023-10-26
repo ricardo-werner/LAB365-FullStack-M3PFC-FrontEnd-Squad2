@@ -10,8 +10,7 @@ import { Produtos } from '../Produtos/ProdutosIndex';
 import { Endereco } from '../Entrega/EntregaIndex';
 import { Pagamento } from '../Pagamentos/PagamentoIndex';
 import { CartContext } from '../../../contexts/carrinhoCompras';
-
-export function Passos() {
+export const Passos = () => {
   const [compraFinalizada, setCompraFinalizada] = useState(false);
   const { limparCarrinho } = useContext(CartContext);
   const navigate = useNavigate();
@@ -95,4 +94,4 @@ export function Passos() {
       </div>
     </Box >
   );
-}
+};

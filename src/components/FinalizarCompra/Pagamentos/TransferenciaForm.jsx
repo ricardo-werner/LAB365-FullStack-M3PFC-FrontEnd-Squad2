@@ -7,82 +7,61 @@ import Typography from '@mui/material/Typography';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
-export function Transferencia() {
-    return (
-        <Card sx={{
-            margin: 2,
-            padding: 2,
+export const Transferencia = () => {
+  return (
+    <Card
+      sx={{
+        margin: 2,
+        padding: 2,
+      }}
+    >
+      <Contaniner
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
         }}
+      >
+        <Stack
+          component="form"
+          sx={{
+            width: '50vw',
+          }}
+          spacing={2}
+          noValidate
+          autoComplete="off"
         >
-            <Contaniner
-                sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                }}
-            >
-                <Stack
-                    component="form"
-                    sx={{
-                        width: '50vw',
-                    }}
-                    spacing={2}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <TextField
-                        type='text'
-                        label="Nome / Razão Social"
-                        variant="standard"
-                        required
-                    />
-                    <TextField
-                        label="CPF / CNPJ"
-                        variant="standard"
-                        required
-                    />
-                    <TextField
-                        type='email'
-                        label="E-mail"
-                        variant="standard"
-                        required
-                    />
-                    <TextField
-                        type='text'
-                        label="Banco"
-                        variant="standard"
-                        required
-                    />
-                    <TextField
-                        type='number'
-                        label="Agência"
-                        variant="standard"
-                        required
-                    />
-                    <TextField
-                        type='text'
-                        label="Conta"
-                        variant="standard"
-                        required
-                    />
-                    <TextField
-                        type='text'
-                        label="Tipo de Conta"
-                        variant="standard"
-                        required
-                    />
-                    <Select label="Selecione o Endereço de Entrega">
-                        <MenuItem value={10}></MenuItem>
-                        <MenuItem value={20}>Conta Corrente</MenuItem>
-                        <MenuItem value={30}>Poupança</MenuItem>
-                    </Select>
-                </Stack>
-            </Contaniner>
-        </Card>
-    );
-}
-
-
-
+          <TextField
+            type="text"
+            label="Nome / Razão Social"
+            variant="standard"
+            required
+          />
+          <TextField label="CPF / CNPJ" variant="standard" required />
+          <TextField type="email" label="E-mail" variant="standard" required />
+          <TextField type="text" label="Banco" variant="standard" required />
+          <TextField
+            type="number"
+            label="Agência"
+            variant="standard"
+            required
+          />
+          <TextField type="text" label="Conta" variant="standard" required />
+          <TextField
+            type="text"
+            label="Tipo de Conta"
+            variant="standard"
+            required
+          />
+          <Select label="Selecione o Endereço de Entrega">
+            <MenuItem value={10}></MenuItem>
+            <MenuItem value={20}>Conta Corrente</MenuItem>
+            <MenuItem value={30}>Poupança</MenuItem>
+          </Select>
+        </Stack>
+      </Contaniner>
+    </Card>
+  );
+};
 
 // export function Transferencia() {
 //     return (

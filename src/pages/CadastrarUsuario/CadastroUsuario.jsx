@@ -1,8 +1,8 @@
 import React from 'react';
-import FormCadastrarUsuario from '../../components/FormCadastroUsuario/FormCadastroUsuario';
+import { FormCadastrarUsuario } from '../../components/FormCadastroUsuario/FormCadastroUsuario';
 import { ListaUsuarios } from '../../components/ListaUsuario/ListaUsuario';
 
-const CadastroUsuario = () => {
+export const CadastroUsuario = () => {
   return (
     <div>
       <FormCadastrarUsuario />
@@ -10,5 +10,3 @@ const CadastroUsuario = () => {
     </div>
   );
 };
-
-export default CadastroUsuario;

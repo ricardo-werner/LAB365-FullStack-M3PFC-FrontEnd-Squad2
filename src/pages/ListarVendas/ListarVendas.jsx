@@ -8,8 +8,6 @@ export const ListarVendas = () => {
   const [vendas, setVendas] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  console.log(user.id,"vendassss")
-
   useEffect(() => {
     if (!user) {
       return;
@@ -21,7 +19,7 @@ export const ListarVendas = () => {
         setVendas(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Erro ao buscar vendas:', error);
+        toast.error(error.response.data.message);
       }
     };
 

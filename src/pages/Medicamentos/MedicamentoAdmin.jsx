@@ -1,4 +1,4 @@
-import MedicamentoCreate from "../../components/Medicamentos/MedicamentoCreate";
+import {MedicamentoCreate} from "../../components/Medicamentos/MedicamentoCreate";
 import {MedicamentosListaAdmin} from "../../components/Medicamentos/MedicamentosListaAdmin";
 
 export const MedicamentoAdmin = () => {

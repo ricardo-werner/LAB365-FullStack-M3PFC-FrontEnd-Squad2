@@ -32,24 +32,30 @@ function CarrinhoResumo({ itensDoCarrinho, totalDaCompra }) {
   );
 }
 
-export function Produtos() {
+export const Produtos = () => {
   // Estado para armazenar os itens do carrinho
   const [itensDoCarrinho, setItensDoCarrinho] = useState([]);
   const [totalDaCompra, setTotalDaCompra] = useState(0);
 
   // Efeito para carregar os itens do localStorage
   useEffect(() => {
-    const itensCarrinho = JSON.parse(localStorage.getItem('itensCarrinho') || '[]');
+    const itensCarrinho = JSON.parse(
+      localStorage.getItem('itensCarrinho') || '[]'
+    );
     setItensDoCarrinho(itensCarrinho);
 
     // Calcule o total da compra com base nos itens do carrinho
     const total = itensCarrinho.reduce(
-      (total, item) => total + (item.qtde * parseFloat(item.precoUnitario)), 0
+      (total, item) => total + item.qtde * parseFloat(item.precoUnitario),
+      0
     );
     setTotalDaCompra(total);
   }, []);
 
   return (
-    <CarrinhoResumo itensDoCarrinho={itensDoCarrinho} totalDaCompra={totalDaCompra} />
+    <CarrinhoResumo
+      itensDoCarrinho={itensDoCarrinho}
+      totalDaCompra={totalDaCompra}
+    />
   );
-}
+};
