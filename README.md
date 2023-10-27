@@ -32,33 +32,39 @@ Tela do FrontEnd do "SISTEMA"
   <img width="300" src="src/assets/to_readme/telaSistema.JPG">
 </p>
 
-Video do "SISTEMA"
+Tela do Administrador - Sidebar
+<p align="center">
+  <img width="400" src="src/assets/to_readme/sidebar.JPEG"-->
+</p>
+
+Tela do Administrador Inicial - Dashboard
+<p align="center">
+  <img width="400" src="src/assets/to_readme/PLogin.JPEG">
+</p>
+
+Telas do Administrador - Cadastro e Listagem de Medicamentos
+<p align="center">
+  <img width="400" src="src/assets/to_readme/admin.PNG">
+</p>
+
+Tela do Adminstrador - Listagem de Vendas
+<p align="center">
+  <img width="400" src="src/assets/to_readme/listavendacad.JPEG">
+</p>
+
+Tela do Adminstrador - Cadastro de Usuário
+<p align="center">
+  <img width="400" src="src/assets/to_readme/">
+</p>
+
+Tela do Comprador Inicial - Listagem de Medicamentos  
+<p align="center">
+  <img width="400" src="src/assets/to_readme/medicamentoTable.jpg">
+</p>
+
+Tela do Comprador - Minhas Vendas 
 <p align="center">
     <!--img width="480" src="src/assets/to_readme/PharmaCentralSystem.gif"-->
-</p>
-
-Estrutura geral do back-end do "SISTEMA"
-<p align="center">
-  <!--img width="480" src="src/assets/to_readme/estruturaFoldersTables.jpg"-->
-</p>
-
-Estrutura geral do back-end das Tabelas
-<p align="center">
-  <!--img width="480" src="src/assets/to_readme/geralTabelas.jpg"-->
-</p>
-
-Estrutura geral do back-end dos Usuários
-<p align="center">
-  <!--img width="480" src="src/assets/to_readme/usuarioTable.jpg"-->
-</p>
-
-Estrutura geral do back-end dos Produtos
-<p align="center">
-  <!--img width="480" src="src/assets/to_readme/depositoTable.jpg"-->
-</p>
-Estrutura geral do back-end do Gateway de Pagamento
-<p align="center">
-  <!--img width="480" src="src/assets/to_readme/medicamentoTable.jpg"-->
 </p>
 
 ### O Desafio
@@ -131,7 +137,7 @@ No desenvolvimento desta aplicação, colocamos em prática:
 
 Clone o projeto para a sua máquina
 ```bash
-git@github.com:FullStack-Itaguacu/M3P-FrontEnd-Squad2.git
+gh repo clone FullStack-Itaguacu/M3P-FrontEnd-Squad2
 ```
 
 Instale as dependências.
@@ -154,9 +160,11 @@ Este projeto já vem com o Bootstrap 5 e react-bootstrap instalado e configurado
 
 
 ## Autores:
+```bash
 Turma: Full-Stack - Itaguaçu
 Squad: ItaguaDevs
 Mentoria: Prof. Pedro Henrique Silva
 Senai/SC: Serviço Nacional de Aprendizagem Industrial
 LAB365: espaço do @senai.sc para desenvolver as habilidades do futuro
-Floripa Mais Tech  
+Floripa Mais Tech - Iniciativa da Prefeitura de Florianópolis - SC
+```
