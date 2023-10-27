@@ -54,7 +54,7 @@ Tela do Adminstrador - Listagem de Vendas
 
 Tela do Adminstrador - Cadastro de Usuário
 <p align="center">
-  <img width="480" src="src/assets/to_readme/admincaduser.jpg">
+  <img width="480" src="src/assets/to_readme/admincaduser.png">
 </p>
 
 Tela do Comprador Inicial - Listagem de Medicamentos  
