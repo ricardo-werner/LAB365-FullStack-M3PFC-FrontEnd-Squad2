@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -6,18 +6,20 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Sidebar from './Sidebar';
+import { Sidebar } from './Sidebar';
 import logo from '../../assets/imagens/logo1.jpeg';
-import { List, ListItem, ListItemIcon } from '@mui/material';
+import { List, ListItem } from '@mui/material';
 import { Avatar } from '@mui/material';
 import { ListItemText } from '@mui/material';
 import { UseAuth } from '../../Hooks/useAuth';
+import { AuthContext } from '../../contexts/auth';
 
-export default function Navbar({ children }) {
+export const Navbar = ({ children }) => {
+  const { logout } = UseAuth();
   const navigate = useNavigate();
   const { tipoUsuario, nomeCompleto, setTipoUsuario, setNomeCompleto } =
     UseAuth();
-  const [drawerState, setDrawerState] = React.useState({
+  const [drawerState, setDrawerState] = useState({
     top: false,
     left: false,
     bottom: false,
@@ -31,12 +33,14 @@ export default function Navbar({ children }) {
     ) {
       return;
     }
-
     setDrawerState({ ...drawerState, [anchor]: open });
   };
 
+  const authContext = useContext(AuthContext);
+
   const handleLogout = (e) => {
     e.preventDefault();
+    logout();
     localStorage.clear();
     setNomeCompleto('');
     setTipoUsuario('');
@@ -45,10 +49,15 @@ export default function Navbar({ children }) {
 
   useEffect(() => {
     const usuarioRecuperado = localStorage.getItem('usuario');
-    if (usuarioRecuperado) {
+    const tokenExpirado = !localStorage.getItem('token'); 
+
+    if (usuarioRecuperado && !tokenExpirado) {
       const usuarioLogado = JSON.parse(usuarioRecuperado);
       setTipoUsuario(usuarioLogado.tipoUsuario);
       setNomeCompleto(usuarioLogado.nomeCompleto);
+    } else {
+      setTipoUsuario(''); 
+      setNomeCompleto(''); 
     }
   }, [tipoUsuario, nomeCompleto]);
 
@@ -82,7 +91,6 @@ export default function Navbar({ children }) {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               Marketplace
             </Typography>
-
             <List className="d-flex flexdirection-row">
               <ListItem
                 component={Link}
@@ -98,19 +106,40 @@ export default function Navbar({ children }) {
               >
                 <ListItemText primary="Medicamentos" />
               </ListItem>
-              <ListItem>
-                <Avatar />
-                <ListItemText primary={nomeCompleto} />
-              </ListItem>
+              {tipoUsuario ? ( 
+                <>
+                  <ListItem>
+                    <Avatar />
+                    <ListItemText
+                      primary={
+                        authContext.authenticated
+                          ? authContext.nomeCompleto
+                          : ''
+                      }
+                    />
+                  </ListItem>
+                  <ListItem
+                    onClick={handleLogout}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <ListItemText primary="Sair" />
+                  </ListItem>
+                </>
+              ) : (
+                <ListItem
+                  component={Link}
+                  to="/comprador/cadastro" 
+                  style={{ cursor: 'pointer' }}
+                >
+                  <ListItemText primary="Cadastrar" />
+                </ListItem>
+              )}
               <ListItem
                 component={Link}
                 to="/faq"
                 style={{ cursor: 'pointer' }}
               >
                 <ListItemText primary="FAQ" />
-              </ListItem>
-              <ListItem onClick={handleLogout} style={{ cursor: 'pointer' }}>
-                <ListItemText primary="Sair" />
               </ListItem>
             </List>
           </Toolbar>
@@ -124,4 +153,4 @@ export default function Navbar({ children }) {
       <>{children}</>
     </>
   );
-}
+};

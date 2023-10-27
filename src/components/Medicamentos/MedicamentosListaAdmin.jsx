@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { api } from "../../service/api";
-import { toast } from "react-toastify";
-import { AuthContext } from "../../contexts/auth";
+import React, { useState, useEffect, useContext } from 'react';
+import { api } from '../../service/api';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../contexts/auth';
 
-export default function  MedicamentosListaAdmin() {
-  // const { user } = useContext(AuthContext);
+export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
+  const { user } = useContext(AuthContext);
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [itensPorPagina] = useState(30);
-  const [pesquisar, setPesquisar] = useState("");
+  const [pesquisar, setPesquisar] = useState('');
   const [abrirModal, setAbrirModal] = useState(false);
-  const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState("");
+  const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState('');
   const [totalMedicamentos, setTotalMedicamentos] = useState(0);
-  const [medicamentoEditado, setMedicamentoEditado] = useState({
-    id: "",
-    nomeProduto: "",
-    dosagem: "",
-    tipoProduto: "",
-    precoUnitario : "",
-    descricao: "",
-    totalEstoque: "",
-  });
   const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
+  const [medicamentosAtualizados, setMedicamentosAtualizados] = useState(false);
+  const [medicamentoEditado, setMedicamentoEditado] = useState({
+    id: '',
+    nomeProduto: '',
+    dosagem: '',
+    tipoProduto: '',
+    precoUnitario: '',
+    descricao: '',
+    totalEstoque: '',
+  });
+  console.log(medicamentoEditado, 'medicamentoEditado');
 
-  console.log(selecionarMedicamentoId, "selecionarMedicamentoId");
   const getInfoMedicamento = async (medicamentoId) => {
     setSelecionarMedicamentoId(medicamentoId);
 
@@ -32,44 +33,49 @@ export default function  MedicamentosListaAdmin() {
       const infoMedicamento = response.data;
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
+
       setAbrirModal(true);
     } catch (error) {
-      console.error("Erro ao carregar informações do medicamento:", error);
+      console.error('Erro ao carregar informações do medicamento:', error);
     }
   };
 
   useEffect(() => {
-    // Função para buscar usuários do banco de dados com filtro e paginação
     const fetchMedicamentos = async () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
         const response = await api.get(
-          `/produto/${offset}/${itensPorPagina}`,
+          `/produtos/${offset}/${itensPorPagina}`,
           {
-            params: { nomeMedicamento: pesquisar },
+            params: { nomeProduto: pesquisar },
           }
         );
 
-        if (Array.isArray(response.data.resultado)) {
-          // const produtosFiltrados = response.data.resultado.filter(
-          //   (produto) => produto.usuarioId === user.id
-          // );
-          
-          setMedicamentos(response.data.resultado);
-          setTotalMedicamentos(response.data.contar);
-        } else {
-          console.log("Dados da Api não são um array", response.data);
-        }
+        const produtosFiltrados = response.data.resultado.filter(
+          (produto) => produto.usuarioId === user.id
+        );
+
+        setMedicamentos(produtosFiltrados);
+        setTotalMedicamentos(produtosFiltrados.length);
       } catch (error) {
-        console.error("Erro ao buscar medicamentos:", error);
+        console.error('Erro ao buscar medicamentos:', error);
       }
     };
 
+    if (medicamentosListaAtualizada || medicamentosAtualizados) {
+      fetchMedicamentos();
+      setMedicamentosAtualizados(false); // Redefina o estado
+    }
     fetchMedicamentos();
-  }, [paginaAtual, itensPorPagina, pesquisar]);
+  }, [
+    paginaAtual,
+    itensPorPagina,
+    pesquisar,
+    medicamentosListaAtualizada,
+    medicamentosAtualizados,
+  ]);
 
-  // Função para salvar as alterações no modal de edição
   const handleSalvarAlteracoes = async () => {
     const dadosAlterados = {};
     for (const campo in medicamentoEditado) {
@@ -85,9 +91,12 @@ export default function  MedicamentosListaAdmin() {
       );
 
       if (response.status === 204) {
-        toast.success("Alterações salvas com sucesso.");
+        toast.success('Alterações salvas com sucesso');
         setAbrirModal(false);
+        setMedicamentosAtualizados(true); // Sinalize que os medicamentos foram atualizados
       }
+
+      fetchMedicamentos();
     } catch (error) {
       if (error.response) {
         toast.error(error.response.data.message);
@@ -95,17 +104,15 @@ export default function  MedicamentosListaAdmin() {
     }
   };
 
-  // Função para fechar o modal de edição
   const handleFecharModal = () => {
     setAbrirModal(false);
     setMedicamentoEditado({
-      id: "",
-      nomeProduto: "",
-      dosagem: "",
-      tipoProduto: "",
-      precoUnitario : "",
-      descricao: "",
-      totalEstoque: "",
+      nomeProduto: '',
+      dosagem: '',
+      tipoProduto: '',
+      precoUnitario: '',
+      descricao: '',
+      totalEstoque: '',
     });
     setMedicamentoOriginal({});
   };
@@ -116,10 +123,10 @@ export default function  MedicamentosListaAdmin() {
   };
 
   return (
-    <section className="lista-medicamentos pb-20 px-20">
-      <h3 className="text-lg font-semibold text-slate-700 mb-4">
+    <section className="lista-medicamentos py-20 px-20">
+      <h2 className="text-slate-700 text-3xl font-semibold mb-10">
         Medicamentos Cadastrados
-      </h3>
+      </h2>
 
       <input
         className="py-2 px-3 mb-4 border rounded w-80"
@@ -280,7 +287,10 @@ export default function  MedicamentosListaAdmin() {
               />
             </div>
             <div>
-              <label htmlFor="totalEstoque" className="text-slate-600 mb-2 mt-3">
+              <label
+                htmlFor="totalEstoque"
+                className="text-slate-600 mb-2 mt-3"
+              >
                 Estoque:
               </label>
               <input

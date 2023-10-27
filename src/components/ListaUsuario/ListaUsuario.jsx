@@ -20,7 +20,6 @@ export const ListaUsuarios = () => {
     tipoUsuario: '',
   });
 
-  console.log(usuarioEditado, 'selecionaUsuarioId');
   const removeMascaras = (usuario) => {
     return {
       ...usuario,
@@ -66,7 +65,7 @@ export const ListaUsuarios = () => {
         console.log('Dados da Api deve ser um array', response.data);
       }
     } catch (error) {
-      console.error('Erro ao buscar usuários:', error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -74,7 +73,6 @@ export const ListaUsuarios = () => {
     fetchUsuarios();
   }, [paginaAtual, itensPorPagina, pesquisar]);
 
-  // Função para salvar as alterações no modal de edição
   const handleSalvarAlteracoes = async () => {
     const usuarioSemMascaras = removeMascaras(usuarioEditado);
 
@@ -138,26 +136,26 @@ export const ListaUsuarios = () => {
       <table className="table-auto w-full">
         <thead>
           <tr className="border-2 border-slate-300 text-slate-500">
-            <th>ID</th>
-            <th>CPF</th>
-            <th>Nome Completo</th>
-            <th>Data Nascimento</th>
-            <th>Email</th>
-            <th>Telefone</th>
-            <th>Tipo Usuário</th>
-            <th>Ações</th>
+            <th className="py-2  font-medium text-lg pl-5">ID</th>
+            <th className="py-2  font-medium text-lg">CPF</th>
+            <th className="py-2  font-medium text-lg">Nome Completo</th>
+            <th className="py-2  font-medium text-lg">Data Nascimento</th>
+            <th className="py-2  font-medium text-lg">Email</th>
+            <th className="py-2  font-medium text-lg">Telefone</th>
+            <th className="py-2  font-medium text-lg">Tipo Usuário</th>
+            <th className="py-2  font-medium text-lg">Ações</th>
           </tr>
         </thead>
         <tbody>
           {usuarios.map((usuario) => (
             <tr key={usuario.id} className="border border-slate-300">
               <td className="py-1 pl-5">{usuario.id}</td>
-              <td>{usuario.cpf}</td>
-              <td>{usuario.nomeCompleto}</td>
-              <td>{usuario.dataNascimento}</td>
-              <td>{usuario.email}</td>
-              <td>{usuario.telefone}</td>
-              <td>{usuario.tipoUsuario}</td>
+              <td className="py-2 pl-5">{usuario.cpf}</td>
+              <td className="py-2 pl-5">{usuario.nomeCompleto}</td>
+              <td className="py-2 pl-5">{usuario.dataNascimento}</td>
+              <td className="py-2 pl-5">{usuario.email}</td>
+              <td className="py-2 pl-5">{usuario.telefone}</td>
+              <td className="py-2 pl-5">{usuario.tipoUsuario}</td>
               <td>
                 <button
                   onClick={() => getInfoUsuario(usuario.id)}
@@ -253,11 +251,9 @@ export const ListaUsuarios = () => {
               <label htmlFor="tipoUsuario" className="text-slate-600 mb-2 mt-3">
                 Tipo de Usuário:
               </label>
-              <input
+              <select
                 className="py-2 px-3 rounded border flex w-full"
-                type="text"
                 id="tipoUsuario"
-                placeholder="Tipo de Usuário"
                 value={usuarioEditado.tipoUsuario}
                 onChange={(e) =>
                   setUsuarioEditado({
@@ -265,7 +261,10 @@ export const ListaUsuarios = () => {
                     tipoUsuario: e.target.value,
                   })
                 }
-              />
+              >
+                <option value="Administrador">Administrador</option>
+                <option value="Comprador">Comprador</option>
+              </select>
             </div>
             <div className="flex gap-5 mt-5">
               <button

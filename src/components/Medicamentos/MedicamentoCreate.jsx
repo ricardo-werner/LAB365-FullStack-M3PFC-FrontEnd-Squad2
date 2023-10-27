@@ -1,63 +1,66 @@
-import React, { useState } from "react";
-import { api } from "../../service/api";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import { api } from '../../service/api';
+import { toast } from 'react-toastify';
 
-function MedicamentoCreate() {
-  // const [usuarioId, setUsuarioId] = useState(1); // TODO: pegar o id do usuário logado
-  const [nomeProduto, setNomeProduto] = useState("");
-  const [nomeLab, setNomeLab] = useState("");
-  const [imagemProduto, setImagemProduto] = useState("");
-  const [dosagem, setDosagem] = useState("");
-  const [tipoProduto, setTipoProduto] = useState("Controlado");
-  const [precoUnitario, setPrecoUnitario] = useState("");
+export const MedicamentoCreate = ({ atualizarMedicamentosLista }) => {
+  const [nomeProduto, setNomeProduto] = useState('');
+  const [nomeLab, setNomeLab] = useState('');
+  const [imagemProduto, setImagemProduto] = useState('');
+  const [dosagem, setDosagem] = useState('');
+  const [tipoProduto, setTipoProduto] = useState('Controlado');
+  const [precoUnitario, setPrecoUnitario] = useState('');
   const [totalEstoque, setTotalEstoque] = useState(0);
-  const [descricao, setDescricao] = useState("");
+  const [descricao, setDescricao] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   const cadastraMedicamento = async (event) => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append("nomeProduto", nomeProduto);
-    formData.append("nomeLab", nomeLab);
-    formData.append("imagemProduto", imagemProduto);
-    formData.append("dosagem", dosagem);
-    formData.append("tipoProduto", tipoProduto);
-    formData.append("precoUnitario", precoUnitario);
-    formData.append("totalEstoque", totalEstoque);
-    formData.append("descricao", descricao);
+    formData.append('nomeProduto', nomeProduto);
+    formData.append('nomeLab', nomeLab);
+    formData.append('imagemProduto', imagemProduto);
+    formData.append('dosagem', dosagem);
+    formData.append('tipoProduto', tipoProduto);
+    formData.append('precoUnitario', precoUnitario);
+    formData.append('totalEstoque', totalEstoque);
+    formData.append('descricao', descricao);
 
-    //Cria um objeto do formulário
     let formDataObject = Object.fromEntries(formData.entries());
-    //Transforma o objeto em JSON
+
     let formDataJsonString = JSON.stringify(formDataObject);
 
     try {
-      //console.log(formDataObject, "formDataObject");
-      //console.log(formDataJsonString, "formDataJsonString");
-      const response = await api.post("/produtos/admin/", formDataObject); //precisa enviar para o banco o formDataObject que está no formato que o banco está esperando. O formDataJsonString está formatando os nomes dos campos como string ("tipoProduto") e não é isso que o banco espera
+      const response = await api.post('/produtos/admin/', formDataObject);
 
       if (response.ok) {
-        setNomeProduto("");
-        setNomeLab("");
         setSubmitted(true);
       }
-      toast.success("Produto cadastrado com sucesso!");
+      setNomeProduto('');
+      setNomeLab('');
+      setImagemProduto('');
+      setDosagem('');
+      setTipoProduto('Controlado');
+      setPrecoUnitario('');
+      setTotalEstoque(0);
+      setDescricao('');
+      toast.success('Produto cadastrado com sucesso!');
+
+      atualizarMedicamentosLista(formDataJsonString);
     } catch (error) {
-      toast.error(error.response.data.error);
-      console.log(error.response.data, "repon");
+      toast.error(error.response.data.message);
     }
   };
 
   return (
-    <div className="min-h-screen bg-blue-100 flex items-center justify-center text-gray-500 text-sm">
+    <div className="min-h-screen bg-blue-100 flex items-center justify-center text-gray-500 text-sm pt-20 pb-20">
       <div className="bg-white shadow-lg rounded-md p-3 md:p-10 flex flex-col w-11/12 max-w-lg">
         <div>
           {submitted ? (
             <p className="text-center">Medicamento cadastrado com sucesso!</p>
           ) : (
             <div>
-              <h1 className="text-4xl font-extrabold text-center">
+              <h1 className="text-slate-700 text-3xl font-semibold text-center mb-10">
                 Cadastrar Medicamento
               </h1>
               <form
@@ -74,7 +77,7 @@ function MedicamentoCreate() {
                     className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
                     placeholder=" "
                     required
-                    pattern=".{5,}"
+                    pattern=".{3,}"
                     value={nomeProduto}
                     onChange={(e) => setNomeProduto(e.target.value)}
                   />
@@ -92,7 +95,7 @@ function MedicamentoCreate() {
                     className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
                     placeholder=" "
                     required
-                    pattern=".{5,}"
+                    pattern=".{3,}"
                     value={nomeLab}
                     onChange={(e) => setNomeLab(e.target.value)}
                   />
@@ -102,31 +105,19 @@ function MedicamentoCreate() {
                 </label>
 
                 <label htmlFor="imagemProduto" className="mb-2">
-                  <span>Link da Imagem</span>
-                  <input
+                  <span>Imagem</span>
+                  <select
                     name="imagemProduto"
                     id="imagemProduto"
-                    type="text"
                     className="w-full rounded border border-gray-300 bg-inherit p-2.5 shadow shadow-gray-100 mt-0 appearance-none outline-none text-neutral-800 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer"
                     value={imagemProduto}
                     onChange={(e) => setImagemProduto(e.target.value)}
-                    placeholder="http://"
                     required
-                    pattern=".{10,}"
-                  />
-                  <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                    {Controlado.tipoProduto === "Controlado" ? (
-                      <img
-                        src="https://files.lojas.club/4PCPRGQNVS8711BN94CULI.png"
-                        alt="medicamentoControlado"
-                      />
-                    ) : (
-                      <img
-                        src="https://files.lojas.club/4FKG4JB1L29N41BV0C0G4G.png"
-                        alt="medicamentoNaoControlado"
-                      />
-                    )}
-                  </span>
+                  >
+                    <option >Selecione a imagem</option>
+                    <option value="https://files.lojas.club/4PCPRGQNVS8711BN94CULI.png">Controlado</option>
+                    <option value="https://files.lojas.club/4FKG4JB1L29N41BV0C0G4G.png">Não Controlado</option>
+                  </select>
                 </label>
 
                 <label htmlFor="dosagem" className="mb-2">
@@ -140,7 +131,7 @@ function MedicamentoCreate() {
                     onChange={(e) => setDosagem(e.target.value)}
                     placeholder=" "
                     required
-                    pattern=".{2,}"
+                    pattern=".{1,}"
                   />
                   <span className="mt-0 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
                     A dosagem é obrigatória
@@ -223,6 +214,4 @@ function MedicamentoCreate() {
       </div>
     </div>
   );
-}
-
-export default MedicamentoCreate;
+};
