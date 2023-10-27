@@ -29,12 +29,12 @@ Estrutura geral do front-end do "SISTEMA"
 
 Tela do FrontEnd do "SISTEMA"
 <p align="center">
-  <img width="300" height="200" src="src/assets/to_readme/telaSistema.JPG">
+  <img width="400" src="src/assets/to_readme/telaSistema.JPG">
 </p>
 
 Tela do Administrador - Sidebar
 <p align="center">
-  <img width="400" src="src/assets/to_readme/sidebar.JPG"-->
+  <img width="400" height="200" src="src/assets/to_readme/sidebar.JPG"-->
 </p>
 
 Tela do Administrador Inicial - Dashboard
@@ -44,7 +44,7 @@ Tela do Administrador Inicial - Dashboard
 
 Telas do Administrador - Cadastro e Listagem de Medicamentos
 <p align="center">
-  <img width="400" src="src/assets/to_readme/admin.png">
+  <img width="480" src="src/assets/to_readme/admincadmed.jpg">
 </p>
 
 Tela do Adminstrador - Listagem de Vendas
@@ -54,7 +54,7 @@ Tela do Adminstrador - Listagem de Vendas
 
 Tela do Adminstrador - Cadastro de Usuário
 <p align="center">
-  <img width="400" src="src/assets/to_readme/">
+  <img width="480" src="src/assets/to_readme/admincaduser.jpg">
 </p>
 
 Tela do Comprador Inicial - Listagem de Medicamentos  
