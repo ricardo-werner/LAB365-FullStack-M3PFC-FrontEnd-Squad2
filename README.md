@@ -3,7 +3,7 @@
 ## Projeto Avaliativo do Módulo3
 ## LAB365- FullStack - Itaguaçu
 ### Projeto realizado em squad, formado pelos alunos desenvolvedores:
-- Carlos Hnerique Moreira Junior (Github - https://www.github.com/chmjr)
+- Carlos Henrique Moreira Junior (Github - https://www.github.com/chmjr)
 - Debora Patricia Santos de Souza (Github - https://www.github.com/deborasous )
 - Rafael Zampieron (Github - https://www.github.com/rafazamp )
 - Ricardo Werner Grosscklauss (Github - https://www.github.com/ricado-werner)
@@ -14,22 +14,22 @@
 
 #### Nome do sistema: PharmaSellticos
 <p align="center">
-  <!--img width="480" src="src/assets/to_readme/logoInst.jpg"-->
+  <img width="250" src="src/assets/to_readme/logoInst.jpg">
 </p>
 
 ### 🔗 Links
 link das redes sociais dos participantes
 
 
-Status - Em Desenvolvimento
+Status - Finalizado
 
 ### Demonstração
 
 Estrutura geral do front-end do "SISTEMA"
 
-Tela do frontend do "SISTEMA"
+Tela do FrontEnd do "SISTEMA"
 <p align="center">
-  <!--img width="480" src="src/assets/to_readme/telaSistema.JPG"-->
+  <img width="300" src="src/assets/to_readme/telaSistema.JPG">
 </p>
 
 Video do "SISTEMA"
@@ -98,13 +98,13 @@ No desenvolvimento desta aplicação, colocamos em prática:
 
 | Item | Descrição  |
 | ---- | ---------- |
-|  1   | HTML       |
-|  2   | CSS        |
-|  3   | JavaScript |
+| 1    | HTML       |
+| 2    | CSS        |
+| 3    | JavaScript |
 | 3.1  | React.JS   |
-|  4   | Deploy     |
-|  5   | Skills     |
-|  6   | Squad      |
+| 4    | Deploy     |
+| 5    | Skills     |
+| 6    | Squad      |
 
 ### Tecnologias utilizadas:
 
