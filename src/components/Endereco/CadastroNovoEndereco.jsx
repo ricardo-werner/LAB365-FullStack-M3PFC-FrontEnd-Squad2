@@ -80,6 +80,10 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated, onClose }) => {
     }
   };
 
+  const handleFecharModal = () => {
+    onClose();
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -112,7 +116,7 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated, onClose }) => {
 
   return (
     <section className=" flex py-20 px-20">
-      <form onSubmit={handleSubmit} className="mx-auto w-full">
+      <div className="mx-auto w-full">
         <h4 className="text-slate-700 text-3xl font-semibold mb-10  text-center">
           Cadastrar Novo Endereço
         </h4>
@@ -138,13 +142,20 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated, onClose }) => {
 
         <div className="flex justify-center items-center mt-10">
           <button
-            type="submit"
-            className="text-black-800 font-bold bg-[#25D296] py-[9px] px-20 rounded lg:w-auto"
+            type="button"
+            onClick={handleSubmit}
+            className="text-black-800 font-bold bg-[#25D296] py-[9px] px-20 rounded lg:w-auto mr-5"
           >
             CADASTRAR
           </button>
+          <button
+            onClick={handleFecharModal}
+            className="bg-red-400 hover:bg-red-400 py-[9px] px-14 rounded text-black-800 font-semibold"
+          >
+            FECHAR
+          </button>
         </div>
-      </form>
+      </div>
     </section>
   );
 };
