@@ -17,16 +17,26 @@ export const DuvidasCard = () => {
           </span>
         </Accordion.Body>
       </Accordion.Item>
-      <Accordion.Item eventKey="1" className="mt-3 p-4">
-        <Accordion.Header>Problema relacionado ####?</Accordion.Header>
+      <Accordion.Item eventKey="2" className="mt-3 mb-6 p-4">
+        <Accordion.Header>Não lembra quais medicamentos comprou?</Accordion.Header>
         <Accordion.Body>
-          <span>No PharmaSellticos Marketplace</span>
+          <span>Na PharmaSellticos Marketplace, você pode realizar o seu login e
+            ir até o menu "Minhas Compras", que achará todas as suas compras seradas
+            pelo dia da compra e ao clicar no dia desejado, o detalhamento aparecerá
+            ao lado. Caso ainda tenha duvidas sobre a compra realizada, entre em contato
+            com o nosso suporte (SAC - 0800 555 1234).   </span>
         </Accordion.Body>
       </Accordion.Item>
-      <Accordion.Item eventKey="2" className="mt-3 mb-6 p-4">
-        <Accordion.Header>Problema relacionado #####?</Accordion.Header>
+      <Accordion.Item eventKey="1" className="mt-3 p-4">
+        <Accordion.Header>Política de devolução de medicamentos</Accordion.Header>
         <Accordion.Body>
-          <span>No PharmaSellticos Marketplace</span>
+          <span>Na PharmaSellticos Marketplace, permite que você devolva os produtos
+            comprados em até 7 dias corridos após o recebimento do pedido. Para
+            isso, o produto deve estar em sua embalagem original, sem indícios de
+            uso, sem violação do lacre original do fabricante, acompanhado de sua
+            nota fiscal. Entre em contato com o nosso suporte ao cliente (SAC - 0800 555 1234) e
+            inicie o processo de devolução.
+          </span>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
