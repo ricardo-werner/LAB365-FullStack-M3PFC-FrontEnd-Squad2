@@ -59,6 +59,7 @@ Tela Cadastro e listagem de Usuário
   <img width="480" src="src/assets/to_readme/Administrador/admincaduser.png">
 </p>
 
+
 ### Comprador
 
 Tela Cadastro de Novo Usuário  
@@ -73,22 +74,22 @@ Tela Inicial - Listagem de Medicamentos
 
 Tela Carrinho de Compras
 <p align="center">
-    <img width="400" src="src/assets/to_readme/Comprador/cart.JPG>
+    <img width="400" src="src/assets/to_readme/Comprador/cart.JPG">
 </p>
 
 Telas Pagamento
 <p align="center">
-    <img width="400" src="src/assets/to_readme/Comprador/FProdutos.jpg>
+    <img width="400" src="src/assets/to_readme/Comprador/FProdutos.jpg">
 </p>
 
 Tela Minhas Compras
 <p align="center">
-    <img width="400" src="src/assets/to_readme/Comprador/crealizada.JPG>
+    <img width="400" src="src/assets/to_readme/Comprador/crealizada.JPG">
 </p>
 
 Tela FAQ
 <p align="center">
-    <img width="400" src="src/assets/to_readme/Comprador/faq.JPG>
+    <img width="400" src="src/assets/to_readme/Comprador/faq.JPG">
 </p>
 
 ### O Desafio
@@ -128,6 +129,13 @@ Neste projeto, desenvolvemos um sistema completo de Marketplace para produtos fa
 ###Link de acesso:
 - Deploy
 - Front: https://projeto03front.onrender.com/
+
+- Acesse utilizando os dados de login abaixo:
+- Administrador master :
+  ```bash
+    email : teste@gmail.com
+    senha : Teste@123$
+  ```
 
 
 ### Plano do Projeto
