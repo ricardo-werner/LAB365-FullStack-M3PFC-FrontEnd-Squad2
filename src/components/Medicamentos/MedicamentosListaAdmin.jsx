@@ -1,53 +1,56 @@
-import React, { useState, useEffect, useContext } from "react";
-import { api } from "../../service/api";
-import { toast } from "react-toastify";
-import { AuthContext } from "../../contexts/auth";
+import React, { useState, useEffect, useContext } from 'react';
+import { api } from '../../service/api';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../contexts/auth';
 
 export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
   const { user } = useContext(AuthContext);
   const [medicamentos, setMedicamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [itensPorPagina] = useState(30);
-  const [pesquisar, setPesquisar] = useState("");
+  const [pesquisar, setPesquisar] = useState('');
   const [abrirModal, setAbrirModal] = useState(false);
-  const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState("");
+  const [selecionarMedicamentoId, setSelecionarMedicamentoId] = useState('');
   const [totalMedicamentos, setTotalMedicamentos] = useState(0);
   const [medicamentoOriginal, setMedicamentoOriginal] = useState({});
+  const [medicamentosAtualizados, setMedicamentosAtualizados] = useState(false);
   const [medicamentoEditado, setMedicamentoEditado] = useState({
-    id: "",
-    nomeProduto: "",
-    dosagem: "",
-    tipoProduto: "",
-    precoUnitario: "",
-    descricao: "",
-    totalEstoque: "",
+    id: '',
+    nomeProduto: '',
+    dosagem: '',
+    tipoProduto: '',
+    precoUnitario: '',
+    descricao: '',
+    totalEstoque: '',
   });
+  console.log(medicamentoEditado, 'medicamentoEditado');
 
-  console.log(selecionarMedicamentoId, "selecionarMedicamentoId");
   const getInfoMedicamento = async (medicamentoId) => {
     setSelecionarMedicamentoId(medicamentoId);
 
     try {
       const response = await api.get(`/produto/${medicamentoId}`);
       const infoMedicamento = response.data;
-      console.log(infoMedicamento);
       setMedicamentoOriginal(infoMedicamento);
       setMedicamentoEditado(infoMedicamento);
+
       setAbrirModal(true);
     } catch (error) {
-      console.error("Erro ao carregar informações do medicamento:", error);
+      console.error('Erro ao carregar informações do medicamento:', error);
     }
   };
 
   useEffect(() => {
-    // Função para buscar medicamentos do banco de dados com filtro e paginação
     const fetchMedicamentos = async () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
-        const response = await api.get(`/produto/${offset}/${itensPorPagina}`, {
-          params: { nomeProduto: pesquisar },
-        });
+        const response = await api.get(
+          `/produtos/${offset}/${itensPorPagina}`,
+          {
+            params: { nomeProduto: pesquisar },
+          }
+        );
 
         const produtosFiltrados = response.data.resultado.filter(
           (produto) => produto.usuarioId === user.id
@@ -56,18 +59,23 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
         setMedicamentos(produtosFiltrados);
         setTotalMedicamentos(produtosFiltrados.length);
       } catch (error) {
-        console.error("Erro ao buscar medicamentos:", error);
+        console.error('Erro ao buscar medicamentos:', error);
       }
     };
 
-    if (medicamentosListaAtualizada) {
-      // Se a lista precisar ser atualizada, chame a função fetchMedicamentos
+    if (medicamentosListaAtualizada || medicamentosAtualizados) {
       fetchMedicamentos();
+      setMedicamentosAtualizados(false); // Redefina o estado
     }
     fetchMedicamentos();
-  }, [paginaAtual, itensPorPagina, pesquisar, medicamentosListaAtualizada]);
+  }, [
+    paginaAtual,
+    itensPorPagina,
+    pesquisar,
+    medicamentosListaAtualizada,
+    medicamentosAtualizados,
+  ]);
 
-  // Função para salvar as alterações no modal de edição
   const handleSalvarAlteracoes = async () => {
     const dadosAlterados = {};
     for (const campo in medicamentoEditado) {
@@ -83,8 +91,9 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
       );
 
       if (response.status === 204) {
-        toast.success("Alterações salvas com sucesso.");
+        toast.success('Alterações salvas com sucesso');
         setAbrirModal(false);
+        setMedicamentosAtualizados(true); // Sinalize que os medicamentos foram atualizados
       }
 
       fetchMedicamentos();
@@ -95,16 +104,15 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
     }
   };
 
-  // Função para fechar o modal de edição
   const handleFecharModal = () => {
     setAbrirModal(false);
     setMedicamentoEditado({
-      nomeProduto: "",
-      dosagem: "",
-      tipoProduto: "",
-      precoUnitario: "",
-      descricao: "",
-      totalEstoque: "",
+      nomeProduto: '',
+      dosagem: '',
+      tipoProduto: '',
+      precoUnitario: '',
+      descricao: '',
+      totalEstoque: '',
     });
     setMedicamentoOriginal({});
   };
@@ -115,10 +123,10 @@ export const MedicamentosListaAdmin = ({ medicamentosListaAtualizada }) => {
   };
 
   return (
-    <section className="lista-medicamentos pb-20 px-20">
-      <h3 className="text-lg font-semibold text-slate-700 mb-4">
+    <section className="lista-medicamentos py-20 px-20">
+      <h2 className="text-slate-700 text-3xl font-semibold mb-10">
         Medicamentos Cadastrados
-      </h3>
+      </h2>
 
       <input
         className="py-2 px-3 mb-4 border rounded w-80"

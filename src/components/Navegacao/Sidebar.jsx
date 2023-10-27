@@ -12,13 +12,12 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import MedicationIcon from '@mui/icons-material/Medication';
 import { Link } from 'react-router-dom';
 
-export default function Sidebar({ state, setState, toggleDrawer }) {
+export const Sidebar = ({ state, setState, toggleDrawer }) => {
   const menuItems = [
-    { text: 'Produtos', icon: <MedicationIcon />, route: '#' },
     {
       text: 'Cadastrar Medicamento',
       icon: <MedicationIcon />,
-      route: '/admin/medicamentos/create',
+      route: '/admin/medicamentos/criar',
     },
     {
       text: 'Lista de Vendas',
@@ -46,7 +45,7 @@ export default function Sidebar({ state, setState, toggleDrawer }) {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
+      <List className="pt-4">
         {menuItems.map((item, index) => (
           <ListItem className="px-2 py-2" key={item.text} disablePadding>
             <Link to={item.route} className="flex">
@@ -75,4 +74,4 @@ export default function Sidebar({ state, setState, toggleDrawer }) {
       ))}
     </div>
   );
-}
+};

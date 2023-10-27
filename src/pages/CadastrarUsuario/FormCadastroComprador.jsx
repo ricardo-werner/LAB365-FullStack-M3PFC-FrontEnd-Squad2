@@ -52,7 +52,7 @@ const camposForm = [
   { name: 'long', label: 'Longitude', type: 'text' },
 ];
 
-const FormCadastrarComprador = () => {
+export const FormCadastrarComprador = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState(formDadosIniciais);
   const [showPassword, setShowPassword] = useState(false);
@@ -61,7 +61,6 @@ const FormCadastrarComprador = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    //aplica mascaras
     if (name === 'cep') {
       setFormData({ ...formData, [name]: formataCEP(value) });
     } else if (name === 'dataNascimento') {
@@ -71,13 +70,10 @@ const FormCadastrarComprador = () => {
       const formattedDate = formataCpf(value);
       setFormData({ ...formData, [name]: formattedDate });
     } else if (name === 'telefone') {
-      // Remove todos os caracteres não numéricos do valor do telefone
       const numericValue = value.replace(/\D/g, '');
 
-      // Aplica a máscara ao telefone no formato "(99) 99999-9999"
       const formattedDate = formataTelefone(numericValue);
 
-      // Exibe a máscara no campo de entrada
       const telefoneInput = document.querySelector('input[name="telefone"]');
       if (telefoneInput) {
         telefoneInput.value = formattedDate;
@@ -102,7 +98,6 @@ const FormCadastrarComprador = () => {
         const latLongData = await pegarLatLongPeloCEP(soNumeroCEP);
 
         if (enderecoData) {
-          // Preencha os campos de endereço independentemente dos dados de latLongData
           const juntarData = {
             ...formData,
             estado: enderecoData.uf,
@@ -112,7 +107,6 @@ const FormCadastrarComprador = () => {
           };
 
           if (latLongData) {
-            // Se latLongData existir, preencha os campos de latitude e longitude
             juntarData.lat = latLongData.lat;
             juntarData.long = latLongData.long;
           }
@@ -140,21 +134,21 @@ const FormCadastrarComprador = () => {
 
     try {
       const response = await api.post(
-        '/usuario/cadastrar', //Ajustar API
+        '/usuario/cadastrar', 
         formDataemMascaras
       );
       if (response.status === 201) {
         toast.success('Usuário cadastrado com sucesso!');
         setFormData(formDadosIniciais);
-        navigate('/'); //Verificar rota
+        navigate('/'); 
       } else {
-        toast.error(response.data.message); // Exibe a mensagem de erro da API em outros casos
+        toast.error(response.data.message); 
       }
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data.message); // Exibe a mensagem de erro da API
+        toast.error(error.response.data.message); 
       } else {
-        toast.error('Erro ao cadastrar o usuário'); // Erro genérico
+        toast.error('Erro ao cadastrar o usuário'); 
       }
     }
   };
@@ -242,5 +236,3 @@ const FormCadastrarComprador = () => {
     </section>
   );
 };
-
-export default FormCadastrarComprador;

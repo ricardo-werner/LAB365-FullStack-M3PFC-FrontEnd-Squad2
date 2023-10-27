@@ -1,18 +1,18 @@
-import { useState, useEffect, useContext } from "react";
-import { CartContext } from "../../contexts/carrinhoCompras";
-import Cart from "../Carrinho/Carrinho.jsx";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { api } from "../../service/api";
+import { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../../contexts/carrinhoCompras';
+import { Cart } from '../Carrinho/Carrinho.jsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { api } from '../../service/api';
 
-export default function MedicamentosListaComprador() {
+export const MedicamentosListaComprador = () => {
   const [mostraModal, setMostraModal] = useState(false);
   const [products, setMedicamentos] = useState([]);
   const { itensCarrinho, adicionarAoCarrinho, removerDoCarrinho } =
     useContext(CartContext);
   const [paginaAtual, setPaginaAtual] = useState(1);
   const [itensPorPagina] = useState(20);
-  const [pesquisar, setPesquisar] = useState("");
+  const [pesquisar, setPesquisar] = useState('');
   const [totalMedicamentos, setTotalMedicmentos] = useState(0);
 
   const toggle = () => {
@@ -20,59 +20,55 @@ export default function MedicamentosListaComprador() {
   };
 
   useEffect(() => {
-    // Função para buscar usuários do banco de dados com filtro e paginação
     const getMedicamentos = async () => {
       const offset = (paginaAtual - 1) * itensPorPagina;
 
       try {
-        const response = await api.get(`produto/${offset}/${itensPorPagina}`, {
+        const response = await api.get(`produtos/${offset}/${itensPorPagina}`, {
           params: { nomeProduto: pesquisar },
         });
-
-        console.log(response, "response");
 
         if (Array.isArray(response.data.resultado)) {
           setMedicamentos(response.data.resultado);
           setTotalMedicmentos(response.data.contar);
         } else {
-          console.log("Dados da Api não são um array", response.data);
+          console.log('Dados da Api não são um array', response.data);
         }
       } catch (error) {
-        console.error("Erro ao buscar medicamentos:", error);
+        toast.error(error.response.data.message);
       }
     };
 
     getMedicamentos();
   }, [paginaAtual, itensPorPagina, pesquisar]);
 
-  //console.log(totalMedicamentos, "wwww");
   const notificacaoAdicionadoCarrinho = (item) =>
     toast.success(`${item.nomeProduto} adicionado ao carrinho!`, {
-      position: "top-center",
+      position: 'top-center',
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      theme: "colored",
+      theme: 'colored',
       style: {
-        backgroundColor: "rgb(32,193,148)",
-        color: "#000",
+        backgroundColor: 'rgb(32,193,148)',
+        color: '#000',
       },
     });
 
   const notificacaoRemovidoCarrinho = (item) =>
     toast.error(`${item.nomeProduto} removido do carrinho!`, {
-      position: "top-center",
+      position: 'top-center',
       autoClose: 2000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      theme: "colored",
+      theme: 'colored',
       style: {
-        backgroundColor: "rgb(32,193,148)",
-        color: "#000",
+        backgroundColor: 'rgb(32,193,148)',
+        color: '#000',
       },
     });
 
@@ -95,7 +91,8 @@ export default function MedicamentosListaComprador() {
         </h1>
         {!mostraModal && (
           <button
-            className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
+            className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+            style={{ backgroundColor: 'rgb(32,193,148)' }}
             onClick={toggle}
           >
             Carrinho de Compras ({itensCarrinho.length})
@@ -134,7 +131,8 @@ export default function MedicamentosListaComprador() {
             <div className="mt-6 flex justify-between items-center">
               {!itensCarrinho.find((item) => item.id === product.id) ? (
                 <button
-                  className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
+                  className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                  style={{ backgroundColor: 'rgb(32,193,148)' }}
                   onClick={() => {
                     adicionarAoCarrinho(product);
                     notificacaoAdicionadoCarrinho(product);
@@ -145,12 +143,13 @@ export default function MedicamentosListaComprador() {
               ) : (
                 <div className="flex gap-4">
                   <button
-                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
+                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                    style={{ backgroundColor: 'rgb(32,193,148)' }}
                     onClick={() => {
                       const itemCarrinho = itensCarrinho.find(
                         (item) => item.id === product.id
                       );
-                      if (itemCarrinho.qtde === 1) {
+                      if (itemCarrinho.quantidadeProdutoVendido === 1) {
                         handleremoverDoCarrinho(product);
                       } else {
                         removerDoCarrinho(product);
@@ -160,10 +159,11 @@ export default function MedicamentosListaComprador() {
                     -
                   </button>
                   <p className="text-gray-600">
-                    {itensCarrinho.find((item) => item.id === product.id).qtde}
+                    {itensCarrinho.find((item) => item.id === product.id).quantidadeProdutoVendido}
                   </p>
                   <button
-                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
+                    className="px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                    style={{ backgroundColor: 'rgb(32,193,148)' }}
                     onClick={() => {
                       adicionarAoCarrinho(product);
                     }}
@@ -180,7 +180,7 @@ export default function MedicamentosListaComprador() {
         <button
           className="mr-2 px-4 py-2 text-black text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700" style={{ backgroundColor: 'rgb(32,193,148)' }}
           onClick={() => setPaginaAtual(paginaAtual - 1)}
-          disabled={paginaAtual <= 1} // Desabilita o botão Anterior se estiver na primeira página
+          disabled={paginaAtual <= 1} 
         >
           Anterior
         </button>
@@ -196,4 +196,4 @@ export default function MedicamentosListaComprador() {
       <Cart mostraModal={mostraModal} toggle={toggle} />
     </div>
   );
-}
+};

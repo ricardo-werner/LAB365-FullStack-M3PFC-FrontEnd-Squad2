@@ -3,8 +3,8 @@ import AppRouter from './Router';
 
 function App() {
   return (
-    <div className="App">
-      <AppRouter />
+    <div>
+      <AppRouter className="h-screen" />
     </div>
   );
 }
