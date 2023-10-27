@@ -34,22 +34,22 @@ Tela do FrontEnd do "SISTEMA"
 
 Tela do Administrador - Sidebar
 <p align="center">
-  <img width="400" src="src/assets/to_readme/sidebar.JPEG"-->
+  <img width="400" src="src/assets/to_readme/sidebar.JPG"-->
 </p>
 
 Tela do Administrador Inicial - Dashboard
 <p align="center">
-  <img width="400" src="src/assets/to_readme/PLogin.JPEG">
+  <img width="400" src="src/assets/to_readme/PLogin.JPG">
 </p>
 
 Telas do Administrador - Cadastro e Listagem de Medicamentos
 <p align="center">
-  <img width="400" src="src/assets/to_readme/admin.PNG">
+  <img width="400" src="src/assets/to_readme/admin.png">
 </p>
 
 Tela do Adminstrador - Listagem de Vendas
 <p align="center">
-  <img width="400" src="src/assets/to_readme/listavendacad.JPEG">
+  <img width="400" src="src/assets/to_readme/listavendacad.JPG">
 </p>
 
 Tela do Adminstrador - Cadastro de Usuário
