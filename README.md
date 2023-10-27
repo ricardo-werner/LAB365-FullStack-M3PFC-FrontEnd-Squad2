@@ -29,7 +29,7 @@ Estrutura geral do front-end do "SISTEMA"
 
 Tela do FrontEnd do "SISTEMA"
 <p align="center">
-  <img width="300" src="src/assets/to_readme/telaSistema.JPG">
+  <img width="300" height="200" src="src/assets/to_readme/telaSistema.JPG">
 </p>
 
 Tela do Administrador - Sidebar
