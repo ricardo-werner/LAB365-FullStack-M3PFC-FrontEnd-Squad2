@@ -31,7 +31,7 @@ const camposForm = [
   { name: "long", label: "Longitude", type: "text" },
 ];
 
-export const FormCadastrarNovoEndereco = ({ onAdressCreated }) => {
+export const FormCadastrarNovoEndereco = ({ onAdressCreated, onClose }) => {
   const [formData, setFormData] = useState(formDadosIniciais);
 
   const handleChange = (e) => {
@@ -97,6 +97,7 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated }) => {
         toast.success("Endereço cadastrado com sucesso!");
         setFormData(formDadosIniciais);
         onAdressCreated();
+        onClose();
       } else {
         toast.error(response.data.message); // Exibe a mensagem de erro da API em outros casos
       }

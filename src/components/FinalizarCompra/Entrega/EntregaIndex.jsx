@@ -1,6 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
 import { api } from "../../../service/api";
-import { Box, Grid, Typography, Paper } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Typography,
+  Paper,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+} from "@mui/material";
 import { AuthContext } from "../../../contexts/auth"; // Importe o contexto de autenticação
 import { FormCadastrarNovoEndereco } from "../../Endereco/CadastroNovoEndereco";
 
@@ -9,6 +18,14 @@ export function Endereco() {
   const usuarioId = user ? user.id : null; // Obtenha o usuarioId do usuário logado
   const [enderecos, setEnderecos] = useState([]);
   const [enderecoSelecionado, setEnderecoSelecionado] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const fetchEnderecos = async () => {
     try {
@@ -48,6 +65,9 @@ export function Endereco() {
 
   return (
     <Box p={4}>
+      <Button variant="contained" onClick={handleOpenModal}>
+        Cadastrar Novo Endereço
+      </Button>
       <Typography variant="body1" p={2}>
         Endereço de Entrega
       </Typography>
@@ -75,8 +95,15 @@ export function Endereco() {
           </Grid>
         ))}
       </Grid>
-      {/* Renderize o modal para o novo endereço */}
-      <FormCadastrarNovoEndereco onAdressCreated={fetchEnderecos} />
+            <Dialog open={openModal} onClose={handleCloseModal}>
+        <DialogTitle>Cadastrar Novo Endereço</DialogTitle>
+        <DialogContent>
+          <FormCadastrarNovoEndereco
+            onAdressCreated={fetchEnderecos}
+            onClose={handleCloseModal}
+          />
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 }
