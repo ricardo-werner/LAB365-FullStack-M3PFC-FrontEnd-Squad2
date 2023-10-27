@@ -27,35 +27,39 @@ Status - Finalizado
 
 Estrutura geral do front-end do PharmaSellticos Marketplace
 
+### Administrador
+
 Tela do FrontEnd Inicial
 <p align="center">
-  <img width="400" src="src/assets/to_readme/telaSistema.JPG">
+  <img width="400" src="src/assets/to_readme/Administrador/telaSistema.JPG">
 </p>
 
-Tela do Administrador - Sidebar
+Tela do Sidebar
 <p align="center">
-  <img width="400" height="200" src="src/assets/to_readme/sidebar.JPG"-->
+  <img width="400" height="200" src="src/assets/to_readme/Administrador/sidebar.JPG"-->
 </p>
 
-Tela do Administrador Inicial - Dashboard
+Tela Inicial - Dashboard
 <p align="center">
-  <img width="400" src="src/assets/to_readme/PLogin.JPG">
+  <img width="400" src="src/assets/to_readme/Administrador/PLogin.JPG">
 </p>
 
-Telas do Administrador - Cadastro e Listagem de Medicamentos
+Telas Cadastro e Listagem de Medicamentos
 <p align="center">
-  <img width="480" src="src/assets/to_readme/admincadmed.png">
+  <img width="480" src="src/assets/to_readme/Administrador/admincadmed.png">
 </p>
 
-Tela do Adminstrador - Listagem de Vendas
+Tela Listagem de Vendas
 <p align="center">
-  <img width="400" src="src/assets/to_readme/listavendacad.JPG">
+  <img width="400" src="src/assets/to_readme/Administrador/listavendacad.JPG">
 </p>
 
-Tela do Adminstrador - Cadastro e listagem de Usuário
+Tela Cadastro e listagem de Usuário
 <p align="center">
-  <img width="480" src="src/assets/to_readme/admincaduser.png">
+  <img width="480" src="src/assets/to_readme/Administrador/admincaduser.png">
 </p>
+
+### Comprador
 
 Tela do Comprador Inicial - Listagem de Medicamentos  
 <p align="center">
