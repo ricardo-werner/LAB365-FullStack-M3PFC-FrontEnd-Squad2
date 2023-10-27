@@ -1,5 +1,5 @@
-import React from 'react';
-import Accordion from 'react-bootstrap/Accordion';
+import React from "react";
+import Accordion from "react-bootstrap/Accordion";
 
 export const DuvidasCard = () => {
   return (
@@ -18,15 +18,37 @@ export const DuvidasCard = () => {
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1" className="mt-3 p-4">
-        <Accordion.Header>Problema relacionado ####?</Accordion.Header>
+        <Accordion.Header>Como faço para fazer um pedido?</Accordion.Header>
         <Accordion.Body>
-          <span>No PharmaSellticos Marketplace</span>
+          <span>
+            Fazer um pedido no PharmaSellticos Marketplace é simples. Basta
+            seguir estes passos: (1) Faça o login na sua conta. (2) Procure os
+            produtos desejados e adicione-os ao carrinho. (3) Vá para o carrinho
+            e revise os itens. (4) Prossiga para o pagamento e siga as
+            instruções para concluir o pedido.
+          </span>
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="2" className="mt-3 mb-6 p-4">
-        <Accordion.Header>Problema relacionado #####?</Accordion.Header>
+        <Accordion.Header>Como rastrear meu pedido?</Accordion.Header>
         <Accordion.Body>
-          <span>No PharmaSellticos Marketplace</span>
+          <span>
+            Para rastrear seu pedido, faça login na sua conta e vá para a seção
+            "Meus Pedidos". Lá você encontrará informações atualizadas sobre o
+            status do seu pedido, incluindo o número de rastreamento, se
+            aplicável.
+          </span>
+        </Accordion.Body>
+      </Accordion.Item>
+      <Accordion.Item eventKey="3" className="mt-3 mb-6 p-4">
+        <Accordion.Header>Qual é a política de devolução?</Accordion.Header>
+        <Accordion.Body>
+          <span>
+            Nossa política de devolução permite que você devolva produtos dentro
+            de 7 dias a partir da data da entrega, desde que estejam em
+            condições originais. Entre em contato com nosso suporte ao cliente
+            para iniciar o processo de devolução.
+          </span>
         </Accordion.Body>
       </Accordion.Item>
     </Accordion>
