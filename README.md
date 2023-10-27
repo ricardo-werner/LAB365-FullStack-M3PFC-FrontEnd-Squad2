@@ -61,14 +61,34 @@ Tela Cadastro e listagem de Usuário
 
 ### Comprador
 
-Tela do Comprador Inicial - Listagem de Medicamentos  
+Tela Cadastro de Novo Usuário  
 <p align="center">
-  <img width="400" src="src/assets/to_readme/medicamentoTable.jpg">
+  <img width="400" src="src/assets/to_readme/Comprador/caduser.JPG">
 </p>
 
-Tela do Comprador - Minhas Vendas 
+Tela Inicial - Listagem de Medicamentos  
 <p align="center">
-    <!--img width="480" src="src/assets/to_readme/PharmaCentralSystem.gif"-->
+  <img width="400" src="src/assets/to_readme/Comprador/cmed.JPG">
+</p>
+
+Tela Carrinho de Compras
+<p align="center">
+    <img width="400" src="src/assets/to_readme/Comprador/cart.JPG>
+</p>
+
+Telas Pagamento
+<p align="center">
+    <img width="400" src="src/assets/to_readme/Comprador/FProdutos.jpg>
+</p>
+
+Tela Minhas Compras
+<p align="center">
+    <img width="400" src="src/assets/to_readme/Comprador/crealizada.JPG>
+</p>
+
+Tela FAQ
+<p align="center">
+    <img width="400" src="src/assets/to_readme/Comprador/faq.JPG>
 </p>
 
 ### O Desafio
