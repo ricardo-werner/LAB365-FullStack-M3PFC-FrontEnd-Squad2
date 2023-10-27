@@ -1,5 +1,5 @@
 # M3P-FrontEnd-Squad2
-# LAB365-FullStack-M03-ProjFinal-Marketplace
+# LAB365-FullStack-M03-ProjetoFinal-Marketplace de Medicamentos
 ## Projeto Avaliativo do Módulo3
 ## LAB365- FullStack - Itaguaçu
 ### Projeto realizado em squad, formado pelos alunos desenvolvedores:
@@ -62,35 +62,43 @@ Estrutura geral do back-end do Gateway de Pagamento
 </p>
 
 ### O Desafio
-Neste projeto foi proposto criar um sistema completo, com front-end e back-end,  para administrarmos um app de Marketplace(E-Commerce) de forma online, codificado em React.JS e Node.JS
+Neste projeto, desenvolvemos um sistema completo de Marketplace para produtos farmacêuticos, gerenciando múltiplos vendedores, clientes e vendas de forma online, utilizando React.JS e Node.JS.
 
 ### Requisitos da Aplicação
 
-| Item | Descrição                                                              |
-| ---- | ---------------------------------------------------------------------- |
-| 1    | O sistema deverá ser desenvolvido em React.                            |
-| 2    | O sistema deverá seguir o Roteiro da Aplicação.                        |
-| 3    | Modelagem do layout, formatos, tipografias. cores e organização livre. |
-| 3.1  | Opcional a utilização do Bootstrap ou Style components.                |
-| 4    | Será definido uma data para apresentação do projeto ao LAB365          |
+| Item | Descrição                                                                    |
+| ---- | ---------------------------------------------------------------------------- |
+| 1    | O sistema deverá ser desenvolvido em React.                                  |
+| 2    | O sistema deverá seguir o Roteiro da Aplicação.                              |
+| 3    | Modelagem do layout, formatos, tipografias. cores e organização livre.       |
+| 3.1  | Opcional a utilização do Bootstrap ou Style components.                      |
+| 4    | Ser planejado utilizando o modelo Kanban na ferramenta Trello.               |
+| 5    | Ser versionado no GitHub, possuindo uma documentação detalhada no readme.md. |
+| 6    | Deverá ser criado um pith de apresentação de 15 minutos.                     |
 
 ### Formato do Sistema
 
 #### Front-end
 
-| Item                  | Descrição                                                                          |
-| --------------------- | ---------------------------------------------------------------------------------- |
-| Login                 | Pág. com email e senha obrigatórios.                                               |
-| Cad. Farmácia         | Pág. com os principais dados da farmácia e cep.                                    |
-| Cad. Medicamento      | Pág. com as principais informações e tipo.                                         |
-| Lista de Farmácias    | Pág. com uma tabela com modal para exibição de todas as farmácias                  |
-| Lista de Madicamentos | Pág. com cards com modal para a exibição de todos os medicamentos.                 |
-| Mapa com as farmácias | Pág. com um mapa da região de Florianópolis-SC,                                    |
-|                       | com as localidades georeferênciadas das farmácias                                  |
-| Menu Navegação        | Barra superior da página com logo e links para todas as páginas acima.             |
-| Rodapé                | Barra inferior da página com informações de propriedade intectual e desenvolvedor. |
-| Extra                 | Pág. de cadastro de usuário.                                                       |
-| Extra                 | Pág. de FAQ                                                                        |
+| Item                       | Descrição                                                                                                                                |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Login                      | Pág. de acesso do Administrador e Comprador, com email e senha obrigatórios.                                                             |
+| Dashboard                  | Pág. inicial de usuário Administrador logado.                                                                                            |
+| Sidebar                    | Pág. com menu lateral de acesso exclusivo do Administrador logado.                                                                       |
+| Menu Sidebar               | Itens de acesso rápido para páginas de cadastro de medicamento, lista de vendas, dashboard e cadastro de novo usuário                    |
+| Menu Cadastrar Medicamento | Pág. do Administrador para cadastro de novo medicamento, com dados completos e a possibilidade de editar medicamento cadastrado.         |
+| Menu Lista de Vendas       | Pág. do Administrador para visualização das vendas realizadas por produto e quantidade.                                                  |
+| Menu Usuários              | Pág. do Administrador para o cadastro de novo usuário, com listagem de todos os usuários cadastrados no sistema.                         |
+| Navbar                     | Barra superior da página com logo e links para as principais página do usuário Comprador logado.                                         |
+| Menu Minhas Compras        | Pág. contendo todas as compras realizadas pelo usuário, mostradas pelo dia da compra com detalhamento ao se clicar sobre o dia da compra |
+| Menu Medicamentos          | Pág. contendo a listagem dos medicamentos disponíveis no estoque, com acesso ao carrinho de compras e pagamento                          |
+| Menu FAQ (Extra)           | Pág. de Perguntas mais frequentes para se utilizar o sistema                                                                             |
+| Deploy                     | Serviço de implementação de uma aplicação em ambiente de produção, de forma confiável, segura e eficiente para uso real.                 |
+
+###Link de acesso:
+- Deploy
+- Front: https://projeto03front.onrender.com/
+
 
 ### Plano do Projeto
 
@@ -125,7 +133,6 @@ Clone o projeto para a sua máquina
 ```bash
 git@github.com:FullStack-Itaguacu/M3P-FrontEnd-Squad2.git
 ```
-Obs: necessário configurar SSH [(veja como clicando aqui)](https://www.youtube.com/watch?v=n-H1eFSsugo)
 
 Instale as dependências.
 
