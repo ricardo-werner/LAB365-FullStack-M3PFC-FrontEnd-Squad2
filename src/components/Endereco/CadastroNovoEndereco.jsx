@@ -20,12 +20,12 @@ const formDadosIniciais = {
 };
 
 const camposForm = [
-  { name: "cep", label: "CEP", type: "text" },
-  { name: "estado", label: "Estado", type: "text" },
-  { name: "cidade", label: "Cidade", type: "text" },
-  { name: "bairro", label: "Bairro", type: "text" },
-  { name: "logradouro", label: "Logradouro", type: "text" },
-  { name: "numero", label: "Número", type: "text" },
+  { name: "cep", label: "CEP *", type: "text" },
+  { name: "estado", label: "Estado *", type: "text" },
+  { name: "cidade", label: "Cidade *", type: "text" },
+  { name: "bairro", label: "Bairro *", type: "text" },
+  { name: "logradouro", label: "Logradouro *", type: "text" },
+  { name: "numero", label: "Número *", type: "text" },
   { name: "complemento", label: "Complemento", type: "text" },
   { name: "lat", label: "Latitude", type: "text" },
   { name: "long", label: "Longitude", type: "text" },
@@ -87,6 +87,19 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Verifique se os campos obrigatórios estão preenchidos
+    if (
+      !formData.cep ||
+      !formData.estado ||
+      !formData.cidade ||
+      !formData.bairro ||
+      !formData.logradouro ||
+      !formData.numero
+    ) {
+      toast.error("Preencha todos os campos obrigatórios.");
+      return;
+    }
+
     const formDataemMascaras = {
       ...formData,
       cep: formData.cep.replace(/\D/g, ""),
@@ -139,7 +152,11 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated, onClose }) => {
             ))}
           </div>
         </div>
-
+        <div className="mt-4">
+          <p className="text-gray-600">
+            Os campos que possuem * ao lado são obrigatórios
+          </p>
+        </div>
         <div className="flex justify-center items-center mt-10">
           <button
             type="button"
