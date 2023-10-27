@@ -95,7 +95,11 @@ export function Endereco() {
           </Grid>
         ))}
       </Grid>
-            <Dialog open={openModal} onClose={handleCloseModal}>
+      <Dialog
+        open={openModal}
+        onClose={handleCloseModal}
+        maxWidth="md"
+      >
         <DialogTitle>Cadastrar Novo Endereço</DialogTitle>
         <DialogContent>
           <FormCadastrarNovoEndereco

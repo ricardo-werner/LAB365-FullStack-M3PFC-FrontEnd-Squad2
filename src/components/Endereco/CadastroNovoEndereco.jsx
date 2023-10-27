@@ -114,7 +114,7 @@ export const FormCadastrarNovoEndereco = ({ onAdressCreated, onClose }) => {
     <section className=" flex py-20 px-20">
       <form onSubmit={handleSubmit} className="mx-auto w-full">
         <h4 className="text-slate-700 text-3xl font-semibold mb-10  text-center">
-          Cadastrar Endereço
+          Cadastrar Novo Endereço
         </h4>
         <div>
           <div className="endereco-section grid grid-cols-1 md:grid-cols-2 gap-3 lg:grid-cols-3">
