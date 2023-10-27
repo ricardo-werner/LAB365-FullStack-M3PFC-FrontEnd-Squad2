@@ -25,9 +25,9 @@ Status - Finalizado
 
 ### Demonstração
 
-Estrutura geral do front-end do "SISTEMA"
+Estrutura geral do front-end do PharmaSellticos Marketplace
 
-Tela do FrontEnd do "SISTEMA"
+Tela do FrontEnd Inicial
 <p align="center">
   <img width="400" src="src/assets/to_readme/telaSistema.JPG">
 </p>
@@ -44,7 +44,7 @@ Tela do Administrador Inicial - Dashboard
 
 Telas do Administrador - Cadastro e Listagem de Medicamentos
 <p align="center">
-  <img width="480" src="src/assets/to_readme/admincadmed.jpg">
+  <img width="480" src="src/assets/to_readme/admincadmed.png">
 </p>
 
 Tela do Adminstrador - Listagem de Vendas
@@ -52,7 +52,7 @@ Tela do Adminstrador - Listagem de Vendas
   <img width="400" src="src/assets/to_readme/listavendacad.JPG">
 </p>
 
-Tela do Adminstrador - Cadastro de Usuário
+Tela do Adminstrador - Cadastro e listagem de Usuário
 <p align="center">
   <img width="480" src="src/assets/to_readme/admincaduser.png">
 </p>
