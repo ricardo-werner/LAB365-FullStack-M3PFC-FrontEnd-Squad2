@@ -110,11 +110,19 @@ export const Navbar = ({ children }) => {
             >
               <ListItem
                 component={Link}
+                to="/comprador/minhas-compras"
+                style={{ cursor: "pointer" }}
+              >
+                <ListItemText primary="Minhas Compras" />
+              </ListItem>
+              <ListItem
+                component={Link}
                 to="/comprador/medicamentos"
                 style={{ cursor: "pointer" }}
               >
                 <ListItemText primary="Fazer Pedido" />
               </ListItem>
+
               {tipoUsuario ? (
                 <>
                   <ListItem
@@ -162,26 +170,6 @@ export const Navbar = ({ children }) => {
           setState={setDrawerState}
           toggleDrawer={toggleDrawer}
         ></Sidebar>
-        <Menu
-          anchorEl={profileMenuAnchor}
-          open={Boolean(profileMenuAnchor)}
-          onClose={handleCloseProfileMenu}
-        >
-          <MenuItem
-            component={Link}
-            to="/meus-dados" // Adicione a rota correta para "Meus Dados"
-            onClick={handleCloseProfileMenu}
-          >
-            Meus Dados
-          </MenuItem>
-          <MenuItem
-            component={Link}
-            to="/comprador/minhas-compras" // Adicione a rota correta para "Minhas Compras"
-            onClick={handleCloseProfileMenu}
-          >
-            Minhas Compras
-          </MenuItem>
-        </Menu>
       </Box>
       <>{children}</>
     </>
