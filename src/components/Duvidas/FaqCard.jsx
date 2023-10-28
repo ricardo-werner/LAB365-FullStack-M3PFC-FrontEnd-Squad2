@@ -22,7 +22,7 @@ export const DuvidasCard = () => {
             </span>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="2" className="mt-3 mb-6 p-4">
+        <Accordion.Item eventKey="2" className="mt-3 p-4">
           <Accordion.Header>Não lembra quais medicamentos comprou?</Accordion.Header>
           <Accordion.Body>
             <span>Na PharmaSellticos Marketplace, você pode realizar o seu login e
